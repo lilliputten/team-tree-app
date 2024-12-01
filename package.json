@@ -1,7 +1,7 @@
 {
-  "name": "minimal-iisnode-nextjs-app",
-  "description": "The minmal nextjs setup for IIS iisnode produciton environment",
-  "changed": "2024.12.01, 07:58",
+  "name": "team-tree-app",
+  "description": "Team tree edit NodeJS application for IIS/iisnode production environment",
+  "changed": "2024.12.01, 08:12",
   "version": "0.0.0",
   "private": false,
   "dependencies": {

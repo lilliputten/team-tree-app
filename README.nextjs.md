@@ -3,7 +3,7 @@
 This project was bootstrapped with create-next-app:
 
 ```bash
-pnpx create-next-app@latest minimal-iisnode-nextjs-app --ts --eslint --tailwind --src-dir --import-alias --use-pnpm
+pnpx create-next-app@latest team-tree-app --ts --eslint --tailwind --src-dir --import-alias --use-pnpm
 ```
 
 ## Original NextJS readme:
