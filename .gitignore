@@ -39,10 +39,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# .vscode
 .contentlayer
 
 # Temporariy, swap & ignored files
+/bin
 /log*.txt
 /config-local.*
 /*.session
