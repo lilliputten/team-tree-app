@@ -38,3 +38,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# .vscode
+.contentlayer
+
+# Temporariy, swap & ignored files
+/log*.txt
+/config-local.*
+/*.session
+*UNUSED
+*~
+*_
+.*.sw?
+*.tmp
+*.zip
+*.tgz
+*.log
+
+iisnode

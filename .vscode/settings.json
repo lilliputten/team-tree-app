@@ -1,0 +1,21 @@
+{
+  "search.exclude": {
+    "*.session": true,
+    "tsconfig.tsbuildinfo": true,
+    "pnpm-lock.yaml": true,
+    "preview-public": true,
+    "compiled-assets": true,
+    "static": true,
+    "build": true,
+    "node_modules": true,
+    "patches": true,
+    "publish": true
+  },
+  "files.exclude": {
+    "**/*.tmp": true,
+    "**/.*.sw?": true
+  },
+  "git.ignoreLimitWarning": true,
+  "CodeGPT.apiKey": "CodeGPT Plus Beta",
+  "findUnusedExports.detectCircularImports": true
+}
