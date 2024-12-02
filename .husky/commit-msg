@@ -1,1 +1,3 @@
-pnpm exec commitlint --edit $1
+# ex: ft=bash :
+# NOTE: Temporarily disable commit checks in favor of usage github 'Issue #XXX' messages.
+# pnpm exec commitlint --edit $1
