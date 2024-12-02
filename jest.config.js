@@ -8,11 +8,12 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 const customJestConfig = {
   setupFilesAfterEnv: [
-    // '<rootDir>/src/jest/jestSetup.js',
+    // Generic tests setup
+    '<rootDir>/src/jest/jestCommonSetup.js',
   ],
-  testEnvironment: 'jsdom',
+  // // NOTE: This doesn't work for prisma tests, will got error: "PrismaClient is unable to run in this browser environment..."
+  // testEnvironment: 'jsdom',
   moduleNameMapper: {
-    // ...
     '^@/(.*)$': '<rootDir>/src/$1',
   },
 };

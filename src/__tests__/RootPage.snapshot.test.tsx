@@ -1,6 +1,9 @@
 /**
  * @jest-environment jsdom
  */
+
+import '@/jest/jestDomSetup';
+
 import { render } from '@testing-library/react';
 
 import RootPage from '@/app/page';

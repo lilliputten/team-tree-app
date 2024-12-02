@@ -10,13 +10,7 @@ declare global {
 export let prisma: PrismaClient;
 
 const isJest = process.env.JEST_WORKER_ID !== undefined;
-const isProduction = process.env.NODE_ENV === 'production';
-
-console.log('YYY', {
-  isJest,
-  isProduction,
-  window: typeof window,
-});
+const isProduction = process.env.NODE_ENV !== 'development';
 
 if (isProduction || isJest) {
   prisma = new PrismaClient();

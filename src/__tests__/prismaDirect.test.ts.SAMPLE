@@ -1,0 +1,20 @@
+import { prisma } from '@/lib/db';
+import { addRecord } from '@/features/records/actions';
+
+beforeEach(async () => {
+  await prisma.record.deleteMany({});
+});
+
+test('should create new record with a new id', async () => {
+  const newRecord = {
+    name: 'Test record',
+    parentId: null,
+  };
+  const result = await addRecord(newRecord);
+  /* console.log('[prismaDirect.test] result', {
+   *   result,
+   *   newRecord,
+   * });
+   */
+  expect(result).toHaveProperty('id');
+});
