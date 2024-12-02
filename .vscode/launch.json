@@ -73,6 +73,12 @@
       "skipFiles": ["${workspaceFolder}/node_modules/**/*.js", "<node_internals>/**/*.js"]
     },
     {
+      "name": "jest",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "pnpm exec jest addRecord.test"
+    },
+    {
       "name": "Next.js: debug server-side",
       "type": "node-terminal",
       "request": "launch",
