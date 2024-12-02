@@ -77,7 +77,7 @@
     "check-all": "echo --Run all pre-commit check-ups-- && npm-run-all check-editorconfig prettier lint-all && echo --All check-ups passed--",
     "clear-cache": "echo --Clear caches-- && rimraf node_modules/.cache .next && echo Cleared webpack and next cache",
     "dev-entry": "echo --Run nextjs server in iisnode mode-- && node iisnode-nextjs-entry.js",
-    "dev": "echo --Run nextjs server in develment mode-- && next dev",
+    "dev": "echo --Run nextjs server in development mode-- && next dev",
     "build": "echo --Build the project-- && next build",
     "start": "echo --Start the project-- && next start",
     "lint": "next lint",
@@ -85,7 +85,7 @@
     "prisma-generate": "prisma generate",
     "prisma-studio": "prisma studio",
     "husky-init": "husky init",
-    "postinstall": "prisma-generate",
+    "postinstall": "prisma generate",
     "prepare": "husky",
     "scripts-help": "echo --List all available script commands-- && npm-package-user-scripts-list"
   }
