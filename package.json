@@ -52,11 +52,6 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pnpm lint-all"
-    }
-  },
   "scripts": {
     "prettier": "echo --Run prettier-- && prettier --write --cache . | grep -v '(cached)' || true",
     "stylelint": "echo --Lint styles-- && stylelint --allow-empty-input ./**/*.{css,scss,less}",
@@ -75,7 +70,10 @@
     "start": "echo --Start the project-- && next start",
     "lint": "next lint",
     "preview": "next build && next start",
-    "postinstall": "prisma generate",
+    "prisma-generate": "prisma generate",
+    "husky-init": "husky init",
+    "postinstall": "npm-run-all prisma-generate",
+    "prepare": "husky",
     "scripts-help": "echo --List all available script commands-- && npm-package-user-scripts-list"
   }
 }
