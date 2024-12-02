@@ -1,8 +1,8 @@
 {
   "name": "team-tree-app",
   "description": "Team tree editor NodeJS application for IIS/iisnode production environment",
-  "version": "0.0.1",
-  "timestamp": "2024.12.02 12:57:47 +0300",
+  "version": "0.0.2",
+  "timestamp": "2024.12.02 20:01:56 +0300",
   "changed": "2024.12.02, 04:55",
   "private": false,
   "dependencies": {
