@@ -2,8 +2,8 @@ import { siteConfig } from '@/config/site';
 import { constructMetadata } from '@/lib/utils';
 import {
   // Some methods are used for manual tests only
-  // addRecord,
-  // deleteRecord,
+  addRecord,
+  deleteRecord,
   fetchRecords,
 } from '@/features/records/actions';
 import { RecordsList } from '@/features/records/components';

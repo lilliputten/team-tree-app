@@ -3,7 +3,7 @@
 import { DatabaseError } from '@/shared/types/errors';
 import { prisma } from '@/lib/db';
 import { getErrorText } from '@/lib/helpers/strings';
-import { TNewRecord, TRecord } from '@/features/records/types';
+import { TRecord, TRecordWithoutId } from '@/features/records/types';
 
 export type TAddRecordAction = typeof addRecord;
 
@@ -13,7 +13,7 @@ export type TAddRecordAction = typeof addRecord;
 // - https://www.prisma.io/docs/orm/prisma-client/queries
 // - https://www.prisma.io/docs/orm/prisma-client/queries/crud
 
-export async function addRecord(record: TNewRecord) {
+export async function addRecord(record: TRecordWithoutId) {
   try {
     const addedRecord = await prisma.record.create({
       data: record,

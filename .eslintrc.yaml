@@ -12,6 +12,7 @@ extends:
   # - 'plugin:jest/recommended'
 plugins:
   - tailwindcss
+  - jest
 rules:
   # "@next/next/no-html-link-for-pages": off
   react/jsx-key: off
@@ -45,7 +46,6 @@ env:
   es6: true
   # jest: true
   # jest/globals: true
-  # amd: true
   commonjs: true
 
 overrides:
@@ -241,6 +241,17 @@ overrides:
       semi:
         - 'warn'
         - 'always'
+  - # Tests...
+    files: 'test/**'
+    env:
+      jest: true
+      jest/globals: true
+    plugins:
+      - jest
+    extends:
+      - 'plugin:jest/recommended'
+    rules:
+      jest/prefer-expect-assertions: 'off'
 
   # - # Raw js project files...
   #   files: '**/*.js'

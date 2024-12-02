@@ -17,5 +17,6 @@
   },
   "git.ignoreLimitWarning": true,
   "CodeGPT.apiKey": "CodeGPT Plus Beta",
-  "findUnusedExports.detectCircularImports": true
+  "findUnusedExports.detectCircularImports": true,
+  "search.useGlobalIgnoreFiles": true
 }

@@ -1,11 +1,8 @@
-import { PartialBy } from '@/lib/ts';
+import { Record } from '@prisma/client';
 
-export type TRecordId = number;
+export type TRecord = Record;
 
-export interface TRecord {
-  id: TRecordId;
-  name: string;
-  parentId?: TRecordId | null;
-}
+export type TRecordId = TRecord['id'];
 
-export type TNewRecord = PartialBy<TRecord, 'id'>;
+/** New record shouldn't contain id */
+export type TRecordWithoutId = Omit<TRecord, 'id'>;
