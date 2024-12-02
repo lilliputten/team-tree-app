@@ -52,6 +52,11 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pnpm lint-all"
+    }
+  },
   "scripts": {
     "prettier": "echo --Run prettier-- && prettier --write --cache . | grep -v '(cached)' || true",
     "stylelint": "echo --Lint styles-- && stylelint --allow-empty-input ./**/*.{css,scss,less}",
