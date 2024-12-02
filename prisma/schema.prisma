@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// See for `DATABASE_URL` parameter in the environment for the sqlite file location (under the `prisma` folder).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Record {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  // @see https://github.com/prisma/prisma/issues/4562#issuecomment-860176071
+  children Record[] @relation("SubRecords")
+  parent   Record?  @relation("SubRecords", fields: [parentId], references: [id])
+  parentId Int?
+
+  @@map("Records")
+}

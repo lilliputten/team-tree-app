@@ -31,6 +31,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env*.SAMPLE
 
 # vercel
 .vercel
@@ -55,4 +56,5 @@ next-env.d.ts
 *.tgz
 *.log
 
-iisnode
+/iisnode
+/prisma/.data

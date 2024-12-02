@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+pnpm exec editorconfig-checker
+pnpm exec pretty-quick --staged
+pnpm exec lint-staged
