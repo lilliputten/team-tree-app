@@ -10,6 +10,7 @@ module.exports = {
   importOrder: [
     '^(react/(.*)$)|^(react$)',
     '^(next/(.*)$)|^(next$)',
+    '^(jest/(.*)$)|^(jest)',
     '<BUILTIN_MODULES>', // Node.js built-in modules
     '<THIRD_PARTY_MODULES>',
     '',

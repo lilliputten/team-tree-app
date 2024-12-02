@@ -12,6 +12,9 @@ export default function Home() {
           height={38}
           priority
         />
+        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        </h1>
         <ol className="list-inside list-decimal text-center font-[family-name:var(--font-geist-mono)] text-sm sm:text-left">
           <li className="mb-2">
             Get started by editing{' '}
