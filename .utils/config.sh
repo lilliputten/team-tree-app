@@ -26,3 +26,4 @@ TIMEZONE="Europe/Moscow"
 
 VERSION_FILE="version.txt"
 PROJECT_INFO_FILE="public/app-info.txt"
+PROJECT_INFO_JSON_FILE="src/app-info.json"

@@ -28,6 +28,11 @@ if [ ! -z "${PROJECT_INFO_FILE}" ]; then
   echo "$PROJECT_INFO" > $PROJECT_INFO_FILE
 fi
 
+if [ ! -z "${PROJECT_INFO_JSON_FILE}" ]; then
+  echo "Creating '$PROJECT_INFO_JSON_FILE' file..."
+  echo "{ \"versionInfo\": \"$PROJECT_INFO\" }" > $PROJECT_INFO_JSON_FILE
+fi
+
 UPDATE_FILE() {
   FILE=$1
   if [ ! -f $FILE ]; then
