@@ -16,6 +16,7 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@next/eslint-plugin-next": "^14.2.8",
+    "@prisma/client": "^6.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -37,6 +38,7 @@
     "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",
+    "prisma": "^6.0.0",
     "rimraf": "^6.0.1",
     "stylelint": "^16.9.0",
     "stylelint-config-recommended": "^14.0.1",
@@ -59,10 +61,13 @@
     "lint-all": "echo --Run all pre-commit check-ups-- && npm-run-all stylelint eslint type-check && echo --All check-ups passed--",
     "check-all": "echo --Run all pre-commit check-ups-- && npm-run-all check-editorconfig prettier lint-all && echo --All check-ups passed--",
     "clear-cache": "echo --Clear caches-- && rimraf node_modules/.cache .next && echo Cleared webpack and next cache",
-    "dev-entry": "node iisnode-nextjs-entry.js",
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev-entry": "echo --Run nextjs server in iisnode mode-- && node iisnode-nextjs-entry.js",
+    "dev": "echo --Run nextjs server in develment mode-- && next dev",
+    "build": "echo --Build the project-- && next build",
+    "start": "echo --Start the project-- && next start",
+    "lint": "next lint",
+    "preview": "next build && next start",
+    "postinstall": "prisma generate",
+    "scripts-help": "echo --List all available script commands-- && npm-package-user-scripts-list"
   }
 }
