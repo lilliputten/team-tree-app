@@ -1,6 +1,8 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// See for `DATABASE_URL` parameter in the environment for the sqlite file location (under the `prisma` folder).
+
 generator client {
   provider = "prisma-client-js"
 }
