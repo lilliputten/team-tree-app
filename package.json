@@ -85,7 +85,7 @@
     "prisma-generate": "prisma generate",
     "prisma-studio": "prisma studio",
     "husky-init": "husky init",
-    "postinstall": "npm-run-all prisma-generate",
+    "postinstall": "prisma-generate",
     "prepare": "husky",
     "scripts-help": "echo --List all available script commands-- && npm-package-user-scripts-list"
   }
