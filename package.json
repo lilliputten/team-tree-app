@@ -82,10 +82,10 @@
     "start": "echo --Start the project-- && next start",
     "lint": "next lint",
     "preview": "next build && next start",
-    "prisma-generate": "prisma generate",
+    "prisma-generate": "node prisma-switch.mjs && prisma generate",
     "prisma-studio": "prisma studio",
     "husky-init": "husky init",
-    "postinstall": "prisma generate",
+    "postinstall": "pnpm run prisma-generate",
     "prepare": "husky",
     "scripts-help": "echo --List all available script commands-- && npm-package-user-scripts-list"
   }

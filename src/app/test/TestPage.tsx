@@ -25,7 +25,7 @@ export async function TestPage() {
   const firstRecord = allRecords[0];
   const parentId = firstRecord?.id;
   const checkAddRecord = allRecordsCount <= 2;
-  const checkDeleteRecord = false && allRecordsCount > 2;
+  const checkDeleteRecord = allRecordsCount > 2;
   const checkChildrenRecords = allRecordsCount > 1;
   const newRecord = {
     name: allRecordsCount ? 'Child record ' + allRecordsCount : 'Parent record',
