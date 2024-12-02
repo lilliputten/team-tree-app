@@ -83,6 +83,7 @@
     "lint": "next lint",
     "preview": "next build && next start",
     "prisma-generate": "prisma generate",
+    "prisma-studio": "prisma studio",
     "husky-init": "husky init",
     "postinstall": "npm-run-all prisma-generate",
     "prepare": "husky",

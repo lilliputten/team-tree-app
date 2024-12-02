@@ -14,7 +14,7 @@ datasource db {
 
 model Record {
   id   Int    @id @default(autoincrement())
-  text String
+  name String
 
   // @see https://github.com/prisma/prisma/issues/4562#issuecomment-860176071
   children Record[] @relation("SubRecords")
