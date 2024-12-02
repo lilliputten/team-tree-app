@@ -1,7 +1,7 @@
 #!/bin/sh
 # vim: ft=sh
 # @desc Config variables (common version -- stored in repository)
-# @changed 2024.12.01, 08:37
+# @changed 2024.12.02, 12:54
 
 IS_WINDOWS=`echo "${OS}" | grep -i windows`
 IS_CYGWIN=`uname | grep -i "CYGWIN"`
@@ -24,4 +24,5 @@ fi
 # Timezone for timestamps (GMT, Europe/Moscow, Asia/Bangkok, Asia/Tashkent, etc)
 TIMEZONE="Europe/Moscow"
 
-PROJECT_INFO_FILE="public/project-info.txt"
+VERSION_FILE="version.txt"
+PROJECT_INFO_FILE="public/app-info.txt"

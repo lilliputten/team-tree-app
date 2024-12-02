@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Update version number & build timestamps
-# @changed 2024.11.28, 23:31
+# @changed 2024.12.02, 12:54
 
 scriptsPath=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
 rootPath=`dirname "$scriptsPath"`
@@ -14,9 +14,10 @@ test -f "$scriptsPath/config-local.sh" && . "$scriptsPath/config-local.sh"
 # test -f "$rootPath/config-check.sh" && . "$rootPath/config-check.sh" --omit-publish-folder-check
 
 # Read (and derive) variables from changed files...
-VERSION=`cat $rootPath/VERSION`
-TIMESTAMP=`date -r $rootPath/VERSION "+%Y.%m.%d %H:%M:%S %z"`
-TIMETAG=`date -r $rootPath/VERSION "+%y%m%d-%H%M"`
+VERSION_PATH="$rootPath/${VERSION_FILE}"
+VERSION=`cat $VERSION_PATH`
+TIMESTAMP=`date -r $VERSION_PATH "+%Y.%m.%d %H:%M:%S %z"`
+TIMETAG=`date -r $VERSION_PATH "+%y%m%d-%H%M"`
 PROJECT_INFO="v.$VERSION / $TIMESTAMP"
 PROJECT_INFO_REP=`echo "$PROJECT_INFO" | sed 's,/,\\\\/,g'` # Quoted for replace, see below
 
