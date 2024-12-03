@@ -8,7 +8,7 @@ beforeEach(async () => {
   await prisma.record.deleteMany({});
 });
 
-test('should return all available records', async () => {
+test('should return all available records with undefined parentId', async () => {
   await Promise.all([
     addRecord({ name: 'First record', parentId: null }),
     addRecord({ name: 'Second record', parentId: null }),
@@ -21,7 +21,7 @@ test('should return all available records', async () => {
   expect(results.length).toBe(2);
 });
 
-test('should return all chidren records', async () => {
+test('should return all chidren records with parentId', async () => {
   const parentRecord = await addRecord({ name: 'Parent record', parentId: null });
   const parentId = parentRecord.id;
   // Add extra record to provide clear test results
@@ -39,4 +39,27 @@ test('should return all chidren records', async () => {
    * });
    */
   expect(results.length).toBe(2);
+});
+
+test('should return root records with parentId = null', async () => {
+  const parentRecord = await addRecord({ name: 'Parent record', parentId: null });
+  const parentId = parentRecord.id;
+  // Add extra record to provide clear test results
+  await addRecord({ name: 'Orphan record', parentId: null });
+  await Promise.all([
+    addRecord({ name: 'First child', parentId }),
+    addRecord({ name: 'Second child', parentId }),
+  ]);
+  // Find parent's children records (only)
+  const allRecords = await fetchRecords();
+  const parentRecords = await fetchRecords(null);
+  /* console.log('[fetchRecords.test] 3: result', {
+   *   parentRecord,
+   *   parentId,
+   *   allRecords,
+   *   parentRecords,
+   * });
+   */
+  expect(parentRecords.length).toBe(2);
+  expect(allRecords.length).toBe(4);
 });

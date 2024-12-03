@@ -2,8 +2,8 @@ import { siteConfig } from '@/config/site';
 import { constructMetadata } from '@/lib/utils';
 import {
   // Some methods are used for manual tests only
-  addRecord,
-  deleteRecord,
+  // addRecord,
+  // deleteRecord,
   fetchRecords,
 } from '@/features/records/actions';
 import { RecordsList } from '@/features/records/components';
@@ -17,8 +17,9 @@ export const metadata = constructMetadata({
 });
 
 export async function TestPage() {
-  const allRecords = await fetchRecords();
+  const rootRecords = await fetchRecords(null);
   /* // Tests:
+   * const allRecords = await fetchRecords();
    * const allRecordsCount = allRecords.length;
    * const firstRecord = allRecords[0];
    * const parentId = firstRecord?.id;
@@ -56,12 +57,12 @@ export async function TestPage() {
    * }
    */
   console.log('[TestPage]', {
-    allRecords,
+    rootRecords,
   });
   return (
     <div>
       <div>Application: {siteConfig.versionInfo}</div>
-      <RecordsList records={allRecords} />
+      <RecordsList records={rootRecords} />
     </div>
   );
 }

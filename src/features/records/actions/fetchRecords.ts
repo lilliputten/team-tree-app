@@ -7,7 +7,7 @@ import { TRecord, TRecordId } from '@/features/records/types';
 
 export type TFetchWordsSetsAction = typeof fetchRecords;
 
-export async function fetchRecords(parentId?: TRecordId) {
+export async function fetchRecords(parentId?: TRecordId | null) {
   try {
     const records: TRecord[] = await prisma.record.findMany({
       where: {
