@@ -64,15 +64,6 @@
       "args": ["build"]
     },
     {
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["jest", "${file}", "--no-cache", "--watchAll=false", "--runInBand"],
-      "console": "integratedTerminal",
-      "protocol": "inspector",
-      "skipFiles": ["${workspaceFolder}/node_modules/**/*.js", "<node_internals>/**/*.js"]
-    },
-    {
       "name": "Run jest test",
       "type": "node-terminal",
       "request": "launch",

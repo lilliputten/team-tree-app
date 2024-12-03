@@ -31,13 +31,15 @@ export async function addRecord(record: TRecordWithoutId) {
     const nextText = 'Error adding record';
     const errorMessage = getErrorText(error);
     const nextMessage = [nextText, errorMessage].filter(Boolean).join(': ');
+    const nextError = new DatabaseError(nextMessage);
     // eslint-disable-next-line no-console
     console.error('[addRecord]', nextMessage, {
+      nextError,
       errorMessage,
       error,
     });
     debugger; // eslint-disable-line no-debugger
     // NOTE: Re-throw an error
-    throw new DatabaseError(nextMessage);
+    throw nextError;
   }
 }
