@@ -7,7 +7,7 @@ function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>)
         // prettier-ignore
         '__Skeleton',
         className,
-        'bg-muted animate-pulse rounded-md',
+        'animate-pulse rounded-md bg-muted',
       )}
       {...props}
     />

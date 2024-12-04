@@ -27,7 +27,7 @@ code[data-theme*=' '] span {
 }
 
 [data-line-numbers] > [data-line]::before {
-  @apply text-muted-foreground text-xs;
+  @apply text-xs text-muted-foreground;
   counter-increment: line;
   content: counter(line);
   display: inline-block;

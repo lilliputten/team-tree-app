@@ -27,15 +27,12 @@ export function constructMetadata({
     title,
     description,
     keywords: [
+      // ...
       'Next.js',
       'React',
       'Prisma',
-      'Neon',
-      'Auth.js',
       'shadcn ui',
       'Resend',
-      'React Email',
-      'Stripe',
     ],
     authors: [
       {
@@ -45,7 +42,7 @@ export function constructMetadata({
     creator: 'lilliputten',
     openGraph: {
       type: 'website',
-      locale: 'en_US',
+      locale: siteConfig.locale, // 'en_US',
       url: siteConfig.url,
       title,
       description,
