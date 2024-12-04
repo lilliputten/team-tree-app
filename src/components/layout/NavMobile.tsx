@@ -73,7 +73,8 @@ export function NavMobile() {
           'pb-5',
           'pt-32',
           'lg:hidden',
-          open && 'block',
+          // Forcibly hide on wider screens (max-md)
+          open && 'max-md:block',
         )}
       >
         <ul className="grid divide-y divide-muted">

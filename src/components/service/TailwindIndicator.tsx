@@ -7,6 +7,8 @@ export function TailwindIndicator() {
 
   return (
     <div
+      role="status"
+      // var(--color-background);
       className={cn(
         'fixed',
         'bottom-4',
@@ -17,8 +19,11 @@ export function TailwindIndicator() {
         'items-center',
         'justify-center',
         'rounded-full',
-        'bg-gray-800',
-        'p-3',
+        // 'bg-background',
+        'bg-[rgb(28,28,30)]',
+        'border',
+        'border-white/15',
+        'p-3.5',
         'font-mono',
         'text-xs',
         'text-white',

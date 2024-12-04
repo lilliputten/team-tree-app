@@ -21,7 +21,6 @@ export function SiteFooter(props: SiteFooterProps) {
     >
       <MaxWidthWrapper
         className={cn(
-          // prettier-ignore
           'flex',
           'justify-between',
           'py-1',
@@ -33,7 +32,7 @@ export function SiteFooter(props: SiteFooterProps) {
         )}
         large={large}
       >
-        <div className="font-bold">{siteConfig.name}</div>
+        <div className="font-normal">{siteConfig.name}</div>
         <div className="text-xs">{siteConfig.versionInfo}</div>
       </MaxWidthWrapper>
     </div>

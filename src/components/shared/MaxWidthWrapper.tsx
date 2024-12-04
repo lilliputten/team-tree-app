@@ -17,7 +17,7 @@ export function MaxWidthWrapper({
         '__MaxWidthWrapper', // DEBUG
         className,
         'container',
-        large ? 'max-w-screen-2xl' : 'max-w-5xl',
+        large ? 'max-w-screen-2xl' : 'max-w-6xl',
       )}
     >
       {children}

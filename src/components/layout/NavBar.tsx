@@ -31,16 +31,11 @@ export function NavBar(props: NavBarProps) {
         commonXPaddingTwStyle,
         'justify-center',
         'transition-all',
-        // 'h-14',
-        // 'lg:h-[60px]',
-        // 'xl:px-8',
       )}
     >
       <MaxWidthWrapper
         className={cn(
           // prettier-ignore
-          // 'flex max-w-7xl items-center gap-x-3 px-0',
-          // 'h-24',
           'flex',
           'items-center',
           'justify-between',

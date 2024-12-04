@@ -13,7 +13,6 @@ function BrandWrapper(props: TPropsWithChildrenAndClassName) {
   const pathname = usePathname();
   const isRoot = !pathname || pathname === '/';
   const className = cn(
-    // prettier-ignore
     '__BrandWrapper', // DEBUG
     parentClassName,
     'flex',
@@ -42,7 +41,6 @@ export function NavBarBrand() {
         role="heading"
         data-testid="NavBarBrandTitle"
         className={cn(
-          // prettier-ignore
           'font-urban',
           'text-xl',
           'text-primary-foreground',
@@ -50,7 +48,6 @@ export function NavBarBrand() {
           'whitespace-nowrap',
           'overflow-hidden',
           'text-ellipsis',
-          // 'mr-5',
         )}
       >
         {siteConfig.name}

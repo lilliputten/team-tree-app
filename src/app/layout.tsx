@@ -12,7 +12,7 @@ import { NavBar } from '@/components/layout/NavBar';
 import { NavMobile } from '@/components/layout/NavMobile';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 // import ModalProvider from '@/components/modals/providers';
-import { TailwindIndicator } from '@/components/tailwindIndicator';
+import { TailwindIndicator } from '@/components/service/TailwindIndicator';
 import { fontDefault, fontHeading, fontMono } from '@/assets/fonts';
 
 export const metadata = constructMetadata();
@@ -33,6 +33,7 @@ export default function RootLayout({
           fontHeading.variable,
           fontMono.variable,
         )}
+        data-layout="clippable" // Default layout mode, could casue flickering
       >
         {/* <SessionProvider> */}
         <ThemeProvider
