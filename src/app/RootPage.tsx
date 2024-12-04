@@ -1,7 +1,9 @@
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { siteConfig } from '@/config/site';
+import { commonXPaddingTwStyle } from '@/config/ui';
 import { cn, constructMetadata } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/ScrollArea';
+import { MaxWidthWrapper } from '@/components/shared/MaxWidthWrapper';
 import { UseScrollableLayout } from '@/components/shared/ScrollableLayout';
 
 export const pageTitle = 'Editor';
@@ -26,6 +28,7 @@ function DemoList(props: TPropsWithClassName) {
         className,
         'flex flex-col',
         'layout-follow',
+        // 'py-4',
       )}
     >
       <h3>List:</h3>
@@ -40,27 +43,40 @@ export function RootPage() {
       className={cn(
         '__RootPage', // DEBUG
         'flex flex-col',
+        'items-center',
         'layout-follow',
+        commonXPaddingTwStyle,
+        // 'py-4',
       )}
     >
       <UseScrollableLayout type="clippable" />
-      <h1
+      <MaxWidthWrapper
         className={cn(
-          'mb-4',
-          'text-4xl',
-          'font-heading',
-          // 'font-extrabold',
-          // 'leading-none',
-          // 'tracking-tight',
-          'text-gray-500',
-          'dark:text-white',
-          'md:text-5xl',
-          'lg:text-6xl',
+          '__RootPage_Wrapper', // DEBUG
+          'flex flex-col',
+          // 'items-center',
+          'layout-follow',
         )}
       >
-        ПРОБА Welcome to <a href="https://nextjs.org">Next.js!</a>
-      </h1>
-      <DemoList />
+        <h1
+          className={cn(
+            'my-4',
+            'text-3xl',
+            'font-heading',
+            // 'font-extrabold',
+            // 'leading-none',
+            // 'tracking-tight',
+            'text-gray-500',
+            'dark:text-white',
+            'md:text-4xl',
+            'lg:text-5xl',
+            // commonXPaddingTwStyle,
+          )}
+        >
+          ПРОБА Welcome to <a href="https://nextjs.org">Next.js!</a>
+        </h1>
+        <DemoList />
+      </MaxWidthWrapper>
     </div>
   );
 }

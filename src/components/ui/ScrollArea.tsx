@@ -7,9 +7,12 @@ import { cn } from '@/lib/utils';
 
 // @see https://www.radix-ui.com/primitives/docs/components/scroll-area
 
+type ExtraProps = { areaClassName?: string };
+type RootComponentType = typeof ScrollAreaPrimitive.Root; // & ExtraProps;
+
 const ScrollArea = React.forwardRef<
-  React.ElementRef<typeof ScrollAreaPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
+  React.ElementRef<RootComponentType & ExtraProps>,
+  React.ComponentPropsWithoutRef<RootComponentType & ExtraProps>
 >(({ className, children, ...props }, ref) => (
   <ScrollAreaPrimitive.Root
     ref={ref}

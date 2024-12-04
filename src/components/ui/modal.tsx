@@ -7,7 +7,7 @@ import { X } from 'lucide-react';
 import { Drawer } from 'vaul';
 
 import { cn } from '@/lib/utils';
-import { useMediaQuery } from '@/hooks/use-media-query';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 interface ModalProps {

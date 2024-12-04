@@ -9,9 +9,10 @@ import { siteConfig } from '@/config/site';
 import { cn, constructMetadata } from '@/lib/utils';
 import { Toaster } from '@/components/ui/sonner';
 import { NavBar } from '@/components/layout/NavBar';
+import { NavMobile } from '@/components/layout/NavMobile';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 // import ModalProvider from '@/components/modals/providers';
-import { TailwindIndicator } from '@/components/tailwind-indicator';
+import { TailwindIndicator } from '@/components/tailwindIndicator';
 import { fontDefault, fontHeading, fontMono } from '@/assets/fonts';
 
 export const metadata = constructMetadata();
@@ -41,6 +42,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {/* <ModalProvider> */}
+          <NavMobile />
           <NavBar />
           {children}
           <SiteFooter />
