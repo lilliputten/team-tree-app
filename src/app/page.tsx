@@ -1,11 +1,4 @@
-// import Image from 'next/image';
+import { metadata, RootPage } from './RootPage';
 
-export default function Home() {
-  return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-      <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-500 dark:text-white md:text-5xl lg:text-6xl">
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
-      </h1>
-    </div>
-  );
-}
+export { metadata };
+export default RootPage;

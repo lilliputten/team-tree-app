@@ -1,4 +1,4 @@
-import localFont from 'next/font/local';
+// import localFont from 'next/font/local';
 // import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 
@@ -10,19 +10,11 @@ import { siteConfig } from '@/config/site';
 import { tailwindClippingLayout } from '@/lib/helpers/tailwind';
 import { cn, constructMetadata } from '@/lib/utils';
 import { Toaster } from '@/components/ui/sonner';
+import { NavBar } from '@/components/layout/NavBar';
+import { SiteFooter } from '@/components/layout/SiteFooter';
 // import ModalProvider from '@/components/modals/providers';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
-
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-});
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-});
+import { fontDefault, fontHeading, fontMono } from '@/assets/fonts';
 
 export const metadata = constructMetadata();
 
@@ -37,10 +29,11 @@ export default function RootLayout({
       <body
         className={cn(
           'max-w-screen max-h-screen min-h-screen',
-          'bg-background font-sans antialiased',
+          'bg-background font-default antialiased',
+          fontDefault.variable,
+          fontHeading.variable,
+          fontMono.variable,
           tailwindClippingLayout({ vertical: true }),
-          geistSans.variable,
-          geistMono.variable,
         )}
       >
         {/* <SessionProvider> */}
@@ -51,7 +44,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {/* <ModalProvider> */}
+          <NavBar />
           {children}
+          <SiteFooter />
           {/* </ModalProvider> */}
           {/* <Analytics /> */}
           <Toaster richColors closeButton />

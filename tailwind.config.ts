@@ -93,10 +93,11 @@ export default {
         sm: 'calc(var(--borderRadiusSize) - 4px)',
       },
       fontFamily: {
-        sans: ['var(--font-sans)', ...fontFamily.sans],
-        urban: ['var(--font-urban)', ...fontFamily.sans],
+        default: ['var(--font-default)', ...fontFamily.sans],
         heading: ['var(--font-heading)', ...fontFamily.sans],
-        geist: ['var(--font-geist)', ...fontFamily.sans],
+        // sans: ['var(--font-sans)', ...fontFamily.sans],
+        // urban: ['var(--font-urban)', ...fontFamily.sans],
+        // mono: ['var(--font-mono)', ...fontFamily.mono],
       },
       keyframes: {
         'accordion-down': {
