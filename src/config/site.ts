@@ -1,4 +1,4 @@
-import { env } from '@/env.mjs';
+import { env } from '@/env';
 import { SiteConfig } from '@/shared/types/site/SiteConfig';
 import appInfoModule from '@/app-info.json';
 

@@ -67,7 +67,7 @@
       "name": "Run jest test",
       "type": "node-terminal",
       "request": "launch",
-      "command": "pnpm exec jest fetchRecords.test"
+      "command": "pnpm exec jest NavBarBrand.test"
     },
     {
       "name": "Next.js: debug server-side",

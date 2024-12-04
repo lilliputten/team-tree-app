@@ -1,69 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
-import { TPropsWithChildrenAndClassName } from '@/shared/types/generic';
 import { siteConfig } from '@/config/site';
 import { siteMenu } from '@/config/siteMenu';
 import { commonXPaddingTwStyle } from '@/config/ui';
 import { cn } from '@/lib/utils';
 import { ModeToggle } from '@/components/layout/ModeToggle';
+import { NavBarBrand } from '@/components/layout/NavBarBrand';
 import { Icons } from '@/components/shared/icons';
-import { Logo } from '@/components/shared/Logo';
 import { MaxWidthWrapper } from '@/components/shared/MaxWidthWrapper';
 
 interface NavBarProps {
   large?: boolean;
-}
-
-function BrandWrapper(props: TPropsWithChildrenAndClassName) {
-  const { children, className: parentClassName } = props;
-  const pathname = usePathname();
-  const isRoot = !pathname || pathname === '/';
-  const className = cn(
-    // prettier-ignore
-    '__BrandWrapper', // DEBUG
-    parentClassName,
-    'flex',
-    'items-center',
-    'space-x-1.5',
-    'gap-2',
-    'transition-all',
-    'mr-10',
-    !isRoot && 'hover:opacity-80',
-  );
-  if (isRoot) {
-    return <div className={className}>{children}</div>;
-  }
-  return (
-    <Link href="/" className={className}>
-      {children}
-    </Link>
-  );
-}
-
-function Brand() {
-  return (
-    <BrandWrapper>
-      <Logo size="lg" className="size-12" />
-      <span
-        className={cn(
-          // prettier-ignore
-          'font-urban',
-          'text-xl',
-          'text-primary-foreground',
-          'font-bold',
-          'whitespace-nowrap',
-          'overflow-hidden',
-          'text-ellipsis',
-          // 'mr-5',
-        )}
-      >
-        {siteConfig.name}
-      </span>
-    </BrandWrapper>
-  );
 }
 
 export function NavBar(props: NavBarProps) {
@@ -101,7 +50,7 @@ export function NavBar(props: NavBarProps) {
         large={large}
       >
         <div className="flex gap-6 md:gap-10">
-          <Brand />
+          <NavBarBrand />
           {links && links.length > 0 ? (
             <nav className="hidden gap-6 md:flex">
               {links.map((item, index) => (
