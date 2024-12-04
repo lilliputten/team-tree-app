@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 interface TTailwindClippingLayoutParams {
   className?: string;
   clippingLayout?: boolean;
-  vertical?: boolean;
+  horizontal?: boolean;
   fullSize?: boolean;
 }
 export function tailwindClippingLayout(params: TTailwindClippingLayoutParams = {}) {
@@ -13,7 +13,7 @@ export function tailwindClippingLayout(params: TTailwindClippingLayoutParams = {
     // prettier-ignore
     clippingLayout = true,
     className,
-    vertical,
+    horizontal,
     fullSize,
   } = params;
   return cn(
@@ -30,7 +30,7 @@ export function tailwindClippingLayout(params: TTailwindClippingLayoutParams = {
         'size-full',
         // 'h-full',
         'overflow-hidden',
-        vertical && 'flex-col',
+        !horizontal && 'flex-col',
       ]
         .filter(Boolean)
         .join(' '),

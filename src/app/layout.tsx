@@ -28,12 +28,13 @@ export default function RootLayout({
       <head />
       <body
         className={cn(
+          // 'flex flex-col',
           'max-w-screen max-h-screen min-h-screen',
           'bg-background font-default antialiased',
           fontDefault.variable,
           fontHeading.variable,
           fontMono.variable,
-          tailwindClippingLayout({ vertical: true }),
+          tailwindClippingLayout(),
         )}
       >
         {/* <SessionProvider> */}

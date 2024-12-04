@@ -1,5 +1,9 @@
+import { TPropsWithClassName } from '@/shared/types/generic';
 import { siteConfig } from '@/config/site';
+import { tailwindClippingLayout } from '@/lib/helpers/tailwind';
 import { cn, constructMetadata } from '@/lib/utils';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { UseScrollableLayout } from '@/components/shared/ScrollableLayout';
 
 export const pageTitle = 'Editor';
 export const pageDescription = 'Editor page';
@@ -9,21 +13,25 @@ export const metadata = constructMetadata({
   description: pageDescription,
 });
 
+function DemoList(props: TPropsWithClassName) {
+  const { className } = props;
+  const itemsCount = 50;
+  const items = Array.from(Array(itemsCount)).map((_none, no) => {
+    const key = String(no);
+    return <li key={key}>Item {no + 1}</li>;
+  });
+  return (
+    <ScrollArea className={cn('__RootPage_DemoList', className, tailwindClippingLayout())}>
+      <h3>List:</h3>
+      <ul>{items}</ul>
+    </ScrollArea>
+  );
+}
+
 export function RootPage() {
   return (
-    <div
-      className={cn(
-        '__RootPage',
-        // 'grid',
-        // 'min-h-screen',
-        // 'grid-rows-[20px_1fr_20px] items-center',
-        // 'justify-items-center',
-        // 'gap-16',
-        // 'p-8',
-        // 'pb-20',
-        // 'font-[family-name:var(--font-sans)] sm:p-20',
-      )}
-    >
+    <div className={cn('__RootPage', tailwindClippingLayout())}>
+      <UseScrollableLayout type="clippable" />
       <h1
         className={cn(
           'mb-4',
@@ -38,8 +46,9 @@ export function RootPage() {
           'lg:text-6xl',
         )}
       >
-        Тест Welcome to <a href="https://nextjs.org">Next.js!</a>
+        ПРОБА Welcome to <a href="https://nextjs.org">Next.js!</a>
       </h1>
+      <DemoList />
     </div>
   );
 }
