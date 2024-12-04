@@ -11,6 +11,8 @@ module.exports = {
     '^(react/(.*)$)|^(react$)',
     '^(next/(.*)$)|^(next$)',
     '^(jest/(.*)$)|^(jest)',
+    '@testing-library',
+    '@[A-Za-z]',
     '<BUILTIN_MODULES>', // Node.js built-in modules
     '<THIRD_PARTY_MODULES>',
     '',

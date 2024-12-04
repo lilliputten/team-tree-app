@@ -1,2 +1,3 @@
 #!/usr/bin/env sh
+# NOTE: It's started to be broken on 'Issue #4: Fixed...' commit texts. (It seems to not allowed to have words 'Fixed' in th messages. To use prefix 'fix:'?)
 pnpm exec commitlint --edit $1

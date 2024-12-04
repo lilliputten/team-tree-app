@@ -7,19 +7,13 @@ extends:
   - next/core-web-vitals
   - prettier
   - plugin:tailwindcss/recommended
-  # - 'next/core-web-vitals'
-  # - 'eslint:recommended'
-  # - 'plugin:jest/recommended'
 plugins:
   - tailwindcss
   - jest
 rules:
-  # "@next/next/no-html-link-for-pages": off
   react/jsx-key: off
   tailwindcss/no-custom-classname: off
   tailwindcss/classnames-order: warn
-  # XXX
-  # curly: warn
   no-console: warn
   no-debugger: warn
   no-extra-semi: warn
@@ -57,9 +51,7 @@ overrides:
       - 'plugin:prettier/recommended' # prettier: Slighly slower (+0.3s)
       - 'plugin:react/recommended'
       - 'plugin:react/jsx-runtime'
-      # - 'plugin:react-hooks/recommended'
       - 'plugin:@typescript-eslint/recommended'
-      # - 'plugin:@next/next/recommended'
     settings:
       react:
         version: 'detect'
@@ -241,8 +233,9 @@ overrides:
       semi:
         - 'warn'
         - 'always'
+
   - # Tests...
-    files: 'test/**'
+    files: '**/(__test__|jest)/**'
     env:
       jest: true
       jest/globals: true

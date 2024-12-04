@@ -3,7 +3,6 @@ import { ClassValue, clsx } from 'clsx';
 import ms from 'ms';
 import { twMerge } from 'tailwind-merge';
 
-import { env } from '@/env.mjs';
 import { siteConfig } from '@/config/site';
 
 export function cn(...inputs: ClassValue[]) {
@@ -27,15 +26,12 @@ export function constructMetadata({
     title,
     description,
     keywords: [
+      // ...
       'Next.js',
       'React',
       'Prisma',
-      'Neon',
-      'Auth.js',
       'shadcn ui',
       'Resend',
-      'React Email',
-      'Stripe',
     ],
     authors: [
       {
@@ -45,7 +41,7 @@ export function constructMetadata({
     creator: 'lilliputten',
     openGraph: {
       type: 'website',
-      locale: 'en_US',
+      locale: siteConfig.locale, // 'en_US',
       url: siteConfig.url,
       title,
       description,
@@ -80,7 +76,7 @@ export function formatDate(input: string | number): string {
 }
 
 export function absoluteUrl(path: string) {
-  return `${env.NEXT_PUBLIC_APP_URL}${path}`;
+  return `${siteConfig.url}${path}`;
 }
 
 // Utils from precedent.dev

@@ -22,13 +22,15 @@ export async function fetchRecords(parentId?: TRecordId | null) {
     const nextText = 'Error fetching records';
     const errorMessage = getErrorText(error);
     const nextMessage = [nextText, errorMessage].filter(Boolean).join(': ');
+    const nextError = new DatabaseError(nextMessage);
     // eslint-disable-next-line no-console
     console.error('[fetchRecords]', nextMessage, {
+      nextError,
       errorMessage,
       error,
     });
     debugger; // eslint-disable-line no-debugger
     // NOTE: Re-throw an error
-    throw new DatabaseError(nextMessage);
+    throw nextError;
   }
 }
