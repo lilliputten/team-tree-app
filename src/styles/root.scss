@@ -2,25 +2,4 @@
 @use 'utils' as *;
 @use 'variables' as *;
 
-body {
-  // @see tailwindClippingLayout, ScrollableLayout
-  &[data-layout='scrollable'] {
-    // border: 3px dashed red; // DEBUG
-    overflow: auto;
-    display: flex;
-  }
-  &[data-layout='clippable'] {
-    // border: 3px dashed blue; // DEBUG
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    &,
-    .Clippable {
-      overflow: hidden;
-      width: 100%;
-      height: 100%;
-      display: flex;
-    }
-  }
-}
+@use 'root-layout';

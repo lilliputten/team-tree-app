@@ -1,8 +1,7 @@
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { siteConfig } from '@/config/site';
-import { tailwindClippingLayout } from '@/lib/helpers/tailwind';
 import { cn, constructMetadata } from '@/lib/utils';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { ScrollArea } from '@/components/ui/ScrollArea';
 import { UseScrollableLayout } from '@/components/shared/ScrollableLayout';
 
 export const pageTitle = 'Editor';
@@ -21,7 +20,14 @@ function DemoList(props: TPropsWithClassName) {
     return <li key={key}>Item {no + 1}</li>;
   });
   return (
-    <ScrollArea className={cn('__RootPage_DemoList', className, tailwindClippingLayout())}>
+    <ScrollArea
+      className={cn(
+        '__RootPage_DemoList', // DEBUG
+        className,
+        'flex flex-col',
+        'layout-follow',
+      )}
+    >
       <h3>List:</h3>
       <ul>{items}</ul>
     </ScrollArea>
@@ -30,7 +36,13 @@ function DemoList(props: TPropsWithClassName) {
 
 export function RootPage() {
   return (
-    <div className={cn('__RootPage', tailwindClippingLayout())}>
+    <div
+      className={cn(
+        '__RootPage', // DEBUG
+        'flex flex-col',
+        'layout-follow',
+      )}
+    >
       <UseScrollableLayout type="clippable" />
       <h1
         className={cn(

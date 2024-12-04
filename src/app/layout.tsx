@@ -2,12 +2,10 @@
 // import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 
-// import Router from 'next/router'
-
 import '@/styles/globals.scss';
+import '@/styles/root.scss';
 
 import { siteConfig } from '@/config/site';
-import { tailwindClippingLayout } from '@/lib/helpers/tailwind';
 import { cn, constructMetadata } from '@/lib/utils';
 import { Toaster } from '@/components/ui/sonner';
 import { NavBar } from '@/components/layout/NavBar';
@@ -28,13 +26,11 @@ export default function RootLayout({
       <head />
       <body
         className={cn(
-          // 'flex flex-col',
-          'max-w-screen max-h-screen min-h-screen',
+          'flex flex-col',
           'bg-background font-default antialiased',
           fontDefault.variable,
           fontHeading.variable,
           fontMono.variable,
-          tailwindClippingLayout(),
         )}
       >
         {/* <SessionProvider> */}
