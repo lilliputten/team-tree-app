@@ -4,7 +4,8 @@ import {
   // Some methods are used for manual tests only
   // addRecord,
   // deleteRecord,
-  fetchRecords,
+  // fetchRecordsByParent,
+  fetchRecordsByParentWithChildrenCount,
 } from '@/features/records/actions';
 import { RecordsList } from '@/features/records/components';
 
@@ -17,9 +18,9 @@ export const metadata = constructMetadata({
 });
 
 export async function TestPage() {
-  const rootRecords = await fetchRecords(null);
+  const rootRecords = await fetchRecordsByParentWithChildrenCount(null);
   /* // Tests:
-   * const allRecords = await fetchRecords();
+   * const allRecords = await fetchRecordsByParent();
    * const allRecordsCount = allRecords.length;
    * const firstRecord = allRecords[0];
    * const parentId = firstRecord?.id;
@@ -31,7 +32,7 @@ export async function TestPage() {
    *   parentId,
    * };
    * if (checkChildrenRecords) {
-   *   const childrenRecords = parentId ? await fetchRecords(parentId) : undefined;
+   *   const childrenRecords = parentId ? await fetchRecordsByParent(parentId) : undefined;
    *   console.log('[TestPage] checkChildrenRecords', {
    *     childrenRecords,
    *   });
