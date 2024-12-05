@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/db';
 
-import { deleteRecordWithChidren } from '../deleteRecordWithChidren';
+import { deleteRecordsWithChidren } from '../deleteRecordsWithChidren';
 
 test('should delete particular record', async () => {
   // Create and receive created record ids...
@@ -52,17 +52,18 @@ test('should delete particular record', async () => {
     ...subSubChildrenRecords.map(({ id }) => id),
   ];
   // Records expected to remain in the database...
-  const remainingIds = [rootId, asideId];
+  const remainingIds = [rootId];
   // Records expected to be deleted (parent one and all it's children)...
   const deletedIds = [
     parentId,
+    asideId,
     ...childrenRecords.map(({ id }) => id),
     ...subChildrenRecords.map(({ id }) => id),
     ...subSubChildrenRecords.map(({ id }) => id),
   ];
   try {
     // Do delete...
-    await deleteRecordWithChidren(parentId);
+    await deleteRecordsWithChidren([parentId, asideId]);
     // Check remaining records...
     const remainingCount = await prisma.record.count({
       where: {
@@ -83,7 +84,7 @@ test('should delete particular record', async () => {
     await prisma.record.deleteMany({ where: { id: { in: allCreatedIds } } });
     /* // DEBUG: Check the database state after the test...
      * const allRecords = await prisma.record.findMany({});
-     * console.log('[deleteRecordWithChidren.test] clean-up result', {
+     * console.log('[deleteRecordsWithChidren.test] clean-up result', {
      *   allCreatedIds,
      *   allRecords,
      * });
