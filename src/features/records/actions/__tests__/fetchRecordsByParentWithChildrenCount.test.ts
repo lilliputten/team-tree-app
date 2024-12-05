@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/db';
 
-import { fetchRecordsByParentWithChildrenCount } from '../fetchRecordsByParent';
+import { fetchRecordsByParentWithChildrenCount } from '../fetchRecordsByParentWithChildrenCount';
 
 test('should return records with chidlren count', async () => {
   // Create parent...

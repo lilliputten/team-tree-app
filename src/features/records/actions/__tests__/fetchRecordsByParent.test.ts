@@ -7,7 +7,7 @@ test('should return all available records with undefined parentId', async () => 
     data: { name: 'First record (1)', parentId: null },
   });
   try {
-    const allRecords = await fetchRecordsByParent();
+    const allRecords = await fetchRecordsByParent(null);
     const allRecordIds = allRecords.map(({ id }) => id);
     expect(allRecordIds.includes(createdRecord.id)).toBe(true);
   } finally {
@@ -16,7 +16,7 @@ test('should return all available records with undefined parentId', async () => 
   }
 });
 
-test('should return all chidren records with parentId', async () => {
+it('should return all chidren records with parentId', async () => {
   const parentRecord = await prisma.record.create({
     data: { name: 'Parent record (2)', parentId: null },
   });

@@ -3,28 +3,27 @@
 import { DatabaseError } from '@/shared/types/errors';
 import { prisma } from '@/lib/db';
 import { getErrorText } from '@/lib/helpers/strings';
-import { TRecordId } from '@/features/records/types';
+import { TFetchParentId, TRecordWithChildren } from '@/features/records/types';
 
-export type TDeleteRecordAction = typeof deleteRecord;
-
-export async function deleteRecord(recordId: TRecordId) {
+export async function fetchRecordsByParentWithChildren(parentId: TFetchParentId) {
   try {
-    const removedRecord = await prisma.record.delete({
+    const records: TRecordWithChildren[] = await prisma.record.findMany({
       where: {
-        id: recordId,
+        parentId: parentId,
       },
+      include: { children: true },
     });
     /* // DEBUG: Delay
      * await new Promise((resolve) => setTimeout(resolve, 1000));
      */
-    return removedRecord;
+    return records;
   } catch (error) {
-    const nextText = 'Error deleting record';
+    const nextText = 'Error fetching records';
     const errorMessage = getErrorText(error);
     const nextMessage = [nextText, errorMessage].filter(Boolean).join(': ');
     const nextError = new DatabaseError(nextMessage);
     // eslint-disable-next-line no-console
-    console.error('[deleteRecord]', nextMessage, {
+    console.error('[fetchRecordsByParentWithChildren]', nextMessage, {
       nextError,
       errorMessage,
       error,

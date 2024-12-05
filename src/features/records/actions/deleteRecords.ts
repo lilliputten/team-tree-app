@@ -5,26 +5,26 @@ import { prisma } from '@/lib/db';
 import { getErrorText } from '@/lib/helpers/strings';
 import { TRecordId } from '@/features/records/types';
 
-export type TDeleteRecordAction = typeof deleteRecord;
+export type TDeleteRecordsAction = typeof deleteRecords;
 
-export async function deleteRecord(recordId: TRecordId) {
+export async function deleteRecords(recordIds: TRecordId[]) {
   try {
-    const removedRecord = await prisma.record.delete({
+    const result = await prisma.record.deleteMany({
       where: {
-        id: recordId,
+        id: { in: recordIds },
       },
     });
     /* // DEBUG: Delay
      * await new Promise((resolve) => setTimeout(resolve, 1000));
      */
-    return removedRecord;
+    return result;
   } catch (error) {
-    const nextText = 'Error deleting record';
+    const nextText = 'Error deleting records';
     const errorMessage = getErrorText(error);
     const nextMessage = [nextText, errorMessage].filter(Boolean).join(': ');
     const nextError = new DatabaseError(nextMessage);
     // eslint-disable-next-line no-console
-    console.error('[deleteRecord]', nextMessage, {
+    console.error('[deleteRecords]', nextMessage, {
       nextError,
       errorMessage,
       error,
