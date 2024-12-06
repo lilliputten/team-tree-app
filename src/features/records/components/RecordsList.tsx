@@ -1,21 +1,19 @@
-import { TRecord } from '@/features/records/types';
+import { TRecordWithChildrenOrCount } from '@/features/records/types';
+
+import { RecordItem } from './RecordItem';
 
 interface TRecordsListProps {
-  records: TRecord[];
+  initialRecords: TRecordWithChildrenOrCount[];
 }
 
 export function RecordsList(props: TRecordsListProps) {
-  const { records } = props;
+  const { initialRecords } = props;
   return (
     <div>
       <div className="__RecordsList">Records:</div>
       <ul>
-        {records.map(({ id, name }) => {
-          return (
-            <li key={id}>
-              {id}: {name}
-            </li>
-          );
+        {initialRecords.map((record) => {
+          return <RecordItem key={record.id} record={record} />;
         })}
       </ul>
     </div>
