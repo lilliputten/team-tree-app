@@ -10,10 +10,6 @@ export interface TVariables {
   primaryForegroundColor: string;
   secondaryColor: string;
   secondaryForegroundColor: string;
-  appOrangeColor: string;
-  appOrangeForegroundColor: string;
-  appBlueColor: string;
-  appBlueForegroundColor: string;
   appDestructiveColor: string;
   appDestructiveForegroundColor: string;
 
@@ -91,10 +87,6 @@ const {
   primaryForegroundColor,
   secondaryColor,
   secondaryForegroundColor,
-  appOrangeColor,
-  appOrangeForegroundColor,
-  appBlueColor,
-  appBlueForegroundColor,
   appDestructiveColor,
   appDestructiveForegroundColor,
 
@@ -171,10 +163,6 @@ export {
   primaryForegroundColor,
   secondaryColor,
   secondaryForegroundColor,
-  appOrangeColor,
-  appOrangeForegroundColor,
-  appBlueColor,
-  appBlueForegroundColor,
   appDestructiveColor,
   appDestructiveForegroundColor,
 

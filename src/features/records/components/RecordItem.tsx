@@ -6,50 +6,39 @@ import { toast } from 'sonner';
 import { getErrorText } from '@/lib/helpers/strings';
 import { cn } from '@/lib/utils';
 
-import { fetchRecordsByParentWithChildrenCount } from '../actions';
-import { TFetchParentId, TRecordWithChildrenOrCount } from '../types';
+import { addRecord, fetchRecordsByParentWithChildrenCount } from '../actions';
+import { TFetchParentId, TRecordWithChildrenOrCount, TRecordWithoutId } from '../types';
+import { useAddRecordModal } from './AddRecord';
 import { RecordChildren } from './RecordChildren';
 import { RecordHeader } from './RecordHeader';
 
 interface TRecordItemProps {
   record: TRecordWithChildrenOrCount;
   isUpdating?: boolean;
-  // childrenRecords?: TRecordWithChildrenOrCount[];
+  handleDelete: (record: TRecordWithChildrenOrCount) => void;
 }
 
 export function RecordItem(props: TRecordItemProps) {
-  const {
-    // ...
-    record,
-    isUpdating: isParentUpdating,
-  } = props;
-  const {
-    id,
-    // name,
-    // _count, // : { children: childrenCount },
-    children: initialChildren, // NOTE: Allow to use pre-fetched children data
-  } = record;
+  const { record, isUpdating: isParentUpdating, handleDelete } = props;
+  const { id } = record;
+  const [isOpen, setOpen] = React.useState(false);
   const [isUpdating, startUpdating] = React.useTransition();
   const [childrenRecords, setChildren] = React.useState<TRecordWithChildrenOrCount[] | undefined>(
-    initialChildren,
+    record.children,
   );
-  // const childrenCount = childrenRecords ? childrenRecords.length : _count ? _count.children : 0;
-  // const hasChildren = !!childrenCount;
+  React.useEffect(() => {
+    setChildren(record.children);
+    if (!record.children) {
+      setOpen(false);
+    }
+  }, [record]);
   const hasLoaded = childrenRecords != undefined;
-  const [isOpen, setOpen] = React.useState(false);
   const handleOpen = React.useCallback(() => setOpen(true), []);
   const handleClose = React.useCallback(() => setOpen(false), []);
 
-  /* // Effect: Initial state
-   * React.useEffect(() => {
-   *   console.log('[RecordItem] Effect: Initial state', {
-   *     hasLoaded,
-   *     initialChildren,
-   *     childrenRecords,
-   *     record,
-   *   });
-   * }, [hasLoaded, initialChildren, record, childrenRecords]);
-   */
+  const handleUpdatedRecords = React.useCallback((records: TRecordWithChildrenOrCount[]) => {
+    setChildren(records);
+  }, []);
 
   const handleLoadChildrenForParent = React.useCallback((parentId: TFetchParentId) => {
     return new Promise<TRecordWithChildrenOrCount[]>((resolve, reject) => {
@@ -78,6 +67,53 @@ export function RecordItem(props: TRecordItemProps) {
     });
   }, []);
 
+  const onAddRecord = React.useCallback(
+    (newRecord: TRecordWithoutId) => {
+      return new Promise<Awaited<ReturnType<typeof addRecord>>>((resolve, reject) => {
+        startUpdating(async () => {
+          try {
+            const promises = [
+              // Add record...
+              addRecord(newRecord),
+              // Fetch records if hasn't been fetched yet...
+              !childrenRecords ? fetchRecordsByParentWithChildrenCount(record.id) : undefined,
+            ].filter(Boolean);
+            const results = await Promise.all(promises);
+            const addedRecord = results[0] as TRecordWithChildrenOrCount;
+            const addedId = addedRecord.id;
+            const fetchedRecords = (results[1] as TRecordWithChildrenOrCount[]) || childrenRecords;
+            const containsAdded = fetchedRecords.find(({ id }) => id === addedId);
+            const updatedRecords = containsAdded
+              ? fetchedRecords
+              : fetchedRecords.concat(addedRecord);
+            setChildren(updatedRecords);
+            toast.success('Record successfully added');
+            // Open children if had been closed before
+            setOpen(true);
+            resolve(addedRecord);
+          } catch (error) {
+            const description = getErrorText(error);
+            // eslint-disable-next-line no-console
+            console.error('[RecordItem:onAddRecord]', description, {
+              error,
+            });
+            debugger; // eslint-disable-line no-debugger
+            const nextMsg = 'Error adding record';
+            const nextError = new Error(nextMsg);
+            toast.error(nextMsg, {
+              description,
+            });
+            // Re-throw?
+            reject(nextError);
+          }
+        });
+      });
+    },
+    [childrenRecords, record],
+  );
+
+  const { invokeAddRecordModal, addRecordModalElement } = useAddRecordModal({ onAddRecord });
+
   return (
     <div
       // ...
@@ -99,14 +135,18 @@ export function RecordItem(props: TRecordItemProps) {
         handleLoadChildrenForParent={handleLoadChildrenForParent}
         isUpdating={isUpdating || isParentUpdating}
         hasLoaded={hasLoaded}
+        handleDelete={handleDelete}
+        handleAdd={invokeAddRecordModal}
       />
       <RecordChildren
-        record={record}
+        parentId={record.id}
         childrenRecords={childrenRecords}
         isOpen={isOpen}
+        handleUpdatedRecords={handleUpdatedRecords}
         isUpdating={isUpdating || isParentUpdating}
-        hasLoaded={hasLoaded}
+        // hasLoaded={hasLoaded}
       />
+      {addRecordModalElement}
     </div>
   );
 }

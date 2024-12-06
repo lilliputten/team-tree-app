@@ -32,8 +32,13 @@ export function SiteFooter(props: SiteFooterProps) {
         )}
         large={large}
       >
-        <div className="font-normal">{siteConfig.name}</div>
+        <div className="flex flex-row items-center gap-3 gap-y-0 max-sm:flex-col">
+          <span className="font-normal">{siteConfig.name} </span>
+          <span className="text-xs opacity-50">{siteConfig.versionInfo}</span>
+        </div>
+        {/* // Right side
         <div className="text-xs">{siteConfig.versionInfo}</div>
+        */}
       </MaxWidthWrapper>
     </div>
   );

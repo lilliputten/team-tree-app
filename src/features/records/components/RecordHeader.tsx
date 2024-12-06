@@ -3,8 +3,9 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/shared/icons';
+import { isDev } from '@/constants';
 
-import { TGenericFetchRecordsByParent, TRecordWithChildrenOrCount } from '../types';
+import { TGenericFetchRecordsByParent, TRecordId, TRecordWithChildrenOrCount } from '../types';
 
 interface TRecordHeaderProps {
   record: TRecordWithChildrenOrCount;
@@ -15,6 +16,8 @@ interface TRecordHeaderProps {
   handleOpen: () => void;
   handleClose: () => void;
   handleLoadChildrenForParent: TGenericFetchRecordsByParent;
+  handleDelete: (record: TRecordWithChildrenOrCount) => void;
+  handleAdd: (parentId: TRecordId | null) => void;
 }
 
 export function RecordHeader(props: TRecordHeaderProps) {
@@ -30,6 +33,8 @@ export function RecordHeader(props: TRecordHeaderProps) {
     handleClose,
     handleLoadChildrenForParent,
     isUpdating,
+    handleDelete,
+    handleAdd,
   } = props;
   // const isUpdating = true;
   const {
@@ -96,7 +101,6 @@ export function RecordHeader(props: TRecordHeaderProps) {
               'hover:text-blue-500/80',
               'flex flex-row items-center justify-center',
               isUpdating && 'border-transparent',
-              // 'relative',
             )}
           >
             <Icon
@@ -138,7 +142,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
           variant="ghostBlue"
           className="text-blue-500 hover:bg-blue-400/10 hover:text-blue-700 active:bg-blue-500 active:text-blue-100"
           size="icon"
-          onClick={() => true}
+          disabled
         >
           <Icons.edit className="size-5" />
         </Button>
@@ -148,6 +152,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
           variant="ghostBlue"
           className="text-green-500 hover:bg-green-400/10 hover:text-green-700 active:bg-green-500 active:text-green-100"
           size="icon"
+          onClick={() => handleAdd(record.id)}
         >
           <Icons.add className="size-7" />
         </Button>
@@ -157,12 +162,13 @@ export function RecordHeader(props: TRecordHeaderProps) {
           variant="ghostBlue"
           className="text-red-500 hover:bg-red-400/10 hover:text-red-700 active:bg-red-500 active:text-red-100"
           size="icon"
+          onClick={() => handleDelete(record)}
         >
           <Icons.trash className="size-5" />
         </Button>
       </>
     );
-  }, []);
+  }, [handleDelete, handleAdd, record]);
   return (
     <div
       className={cn(
@@ -175,7 +181,6 @@ export function RecordHeader(props: TRecordHeaderProps) {
         isUpdating && 'opacity-50',
         isUpdating && 'cursor-not-allowed',
         isUpdating && 'pointer-events-none',
-        // isUpdating && 'animate-pulse',
         'transition-all',
         isOpen && 'bg-blue-400/10',
       )}
@@ -214,7 +219,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
               // 'whitespace-nowrap', // NOTE: It's possible to use one-line mode
             )}
           >
-            {id} {name}
+            {isDev && <span className="opacity-20">[{id}]</span>} {name}
           </span>
         </div>
       </div>

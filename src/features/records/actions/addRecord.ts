@@ -18,11 +18,6 @@ export async function addRecord(record: TRecordWithoutId) {
     const addedRecord = await prisma.record.create({
       data: record,
     });
-    /* console.log('[addRecord] done', {
-     *   record,
-     *   addedRecord,
-     * });
-     */
     /* // DEBUG: Delay
      * await new Promise((resolve) => setTimeout(resolve, 1000));
      */

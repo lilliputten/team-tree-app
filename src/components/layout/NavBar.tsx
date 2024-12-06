@@ -2,13 +2,11 @@
 
 import Link from 'next/link';
 
-import { siteConfig } from '@/config/site';
 import { siteMenu } from '@/config/siteMenu';
 import { commonXPaddingTwStyle } from '@/config/ui';
 import { cn } from '@/lib/utils';
 import { ModeToggle } from '@/components/layout/ModeToggle';
 import { NavBarBrand } from '@/components/layout/NavBarBrand';
-import { Icons } from '@/components/shared/icons';
 import { MaxWidthWrapper } from '@/components/shared/MaxWidthWrapper';
 
 interface NavBarProps {
@@ -63,7 +61,6 @@ export function NavBar(props: NavBarProps) {
                     'opacity-100',
                     'hover:opacity-80',
                     'sm:text-sm',
-                    // item.href.startsWith(`/${selectedLayout}`) && 'text-app-orange',
                     item.disabled && 'cursor-not-allowed opacity-50',
                   )}
                 >
@@ -83,6 +80,7 @@ export function NavBar(props: NavBarProps) {
           )}
         >
           {/* Right header for extra stuff */}
+          {/* TODO: Put github link to the footer
           <Link
             href={siteConfig.links.github}
             target="_blank"
@@ -98,6 +96,7 @@ export function NavBar(props: NavBarProps) {
             <Icons.github className="size-6" />
             <span className="sr-only">GitHub</span>
           </Link>
+          */}
           <ModeToggle onRed />
         </div>
       </MaxWidthWrapper>
