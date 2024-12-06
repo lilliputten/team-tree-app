@@ -61,7 +61,6 @@ export function NavBar(props: NavBarProps) {
                     'opacity-100',
                     'hover:opacity-80',
                     'sm:text-sm',
-                    // item.href.startsWith(`/${selectedLayout}`) && 'text-app-orange',
                     item.disabled && 'cursor-not-allowed opacity-50',
                   )}
                 >
@@ -81,7 +80,7 @@ export function NavBar(props: NavBarProps) {
           )}
         >
           {/* Right header for extra stuff */}
-          {/*
+          {/* TODO: Put github link to the footer
           <Link
             href={siteConfig.links.github}
             target="_blank"

@@ -5,22 +5,13 @@ import { fontFamily } from 'tailwindcss/defaultTheme';
 
 import { getColorSpread } from './build-utils/getColorSpread';
 // NOTE: It's not possible to export css modules on this stage
-import {
-  // appBlueColor,
-  // appDestructiveColor,
-  // appOrangeColor,
-  primaryColor,
-  secondaryColor,
-} from './src/config/theme';
+import { primaryColor, secondaryColor } from './src/config/theme';
 
 // Core app color definitions
 // UNUSED? Construct primary/secondary colors spread tables
 // (with keys 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950) from key colors.
 const primaryColorSpread = getColorSpread('primary', primaryColor);
 const secondaryColorSpread = getColorSpread('secondary', secondaryColor);
-// const appOrangeColorSpread = getColorSpread('app-orange', appOrangeColor);
-// const appBlueColorSpread = getColorSpread('app-blue', appBlueColor);
-// const appDestructiveColorSpread = getColorSpread('app-destructive', appDestructiveColor);
 
 export default {
   darkMode: ['class'],
@@ -37,25 +28,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        // background: 'var(--background)',
-        // foreground: 'var(--foreground)',
         background: 'var(--backgroundColor)',
         foreground: 'var(--foregroundColor)',
         ...primaryColorSpread,
         ...secondaryColorSpread,
-        // ...appOrangeColorSpread,
-        // ...appBlueColorSpread,
-        // ...appDestructiveColorSpread,
-        /* // UNUSED, see spreads above
-         * primary: {
-         *   DEFAULT: 'rgb(var(--primaryColorRGB))',
-         *   foreground: 'rgb(var(--primaryForegroundColorRGB))',
-         * },
-         * secondary: {
-         *   DEFAULT: 'rgb(var(--secondaryColorRGB))',
-         *   foreground: 'rgb(var(--secondaryForegroundColorRGB))',
-         * },
-         */
         border: 'var(--borderColor)',
         input: 'var(--inputColor)',
         ring: 'var(--ringColor)',

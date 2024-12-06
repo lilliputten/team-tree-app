@@ -169,7 +169,6 @@ export function RecordHeader(props: TRecordHeaderProps) {
       </>
     );
   }, [handleDelete, handleAdd, record]);
-  // const isDev = false;
   return (
     <div
       className={cn(
@@ -220,7 +219,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
               // 'whitespace-nowrap', // NOTE: It's possible to use one-line mode
             )}
           >
-            {isDev && <span className="opacity-50">[{id}]</span>} {name}
+            {isDev && <span className="opacity-20">[{id}]</span>} {name}
           </span>
         </div>
       </div>

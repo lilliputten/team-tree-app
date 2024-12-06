@@ -39,16 +39,6 @@
     --secondaryForegroundColor: #{$secondaryForegroundColor};
     --secondaryForegroundColorRGB: #{rgbComponents($secondaryForegroundColor)};
 
-    --appOrangeColor: #{$appOrangeColor};
-    --appOrangeColorRGB: #{rgbComponents($appOrangeColor)};
-    --appOrangeForegroundColor: #{$appOrangeForegroundColor};
-    --appOrangeForegroundColorRGB: #{rgbComponents($appOrangeForegroundColor)};
-
-    --appBlueColor: #{$appBlueColor};
-    --appBlueColorRGB: #{rgbComponents($appBlueColor)};
-    --appBlueForegroundColor: #{$appBlueForegroundColor};
-    --appBlueForegroundColorRGB: #{rgbComponents($appBlueForegroundColor)};
-
     --appDestructiveColor: #{$appDestructiveColor};
     --appDestructiveColorRGB: #{rgbComponents($appDestructiveColor)};
     --appDestructiveForegroundColor: #{$appDestructiveForegroundColor};

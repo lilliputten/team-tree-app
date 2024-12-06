@@ -31,6 +31,10 @@ export function RecordsList(props: TRecordsListProps) {
   React.useEffect(() => setChildren(initialRecords), [initialRecords]);
   const hasRecords = !!childrenRecords?.length;
 
+  const handleUpdatedRecords = React.useCallback((records: TRecordWithChildrenOrCount[]) => {
+    setChildren(records);
+  }, []);
+
   const onReloadRecords = React.useCallback(() => {
     return new Promise<TRecordWithChildrenOrCount[]>((resolve, reject) => {
       startUpdating(async () => {
@@ -141,19 +145,20 @@ export function RecordsList(props: TRecordsListProps) {
             'flex flex-col',
             'layout-follow',
             'm-auto',
-            'my-4',
+            'my-3',
+            isUpdating && 'opacity-50',
+            isUpdating && 'cursor-not-allowed',
+            isUpdating && 'pointer-events-none',
+            'transition-all',
           )}
         >
           {hasRecords ? (
             <RecordChildren
               className={cn(
                 '__RecordsList_ContainerChildren', // DEBUG
-                isUpdating && 'opacity-50',
-                isUpdating && 'cursor-not-allowed',
-                isUpdating && 'pointer-events-none',
-                'transition-all',
               )}
               childrenRecords={childrenRecords}
+              handleUpdatedRecords={handleUpdatedRecords}
               // isUpdating={isUpdating}
             />
           ) : (
