@@ -14,7 +14,7 @@ import { RecordHeader } from './RecordHeader';
 interface TRecordItemProps {
   record: TRecordWithChildrenOrCount;
   isUpdating?: boolean;
-  // childrenRecords?: TRecordWithChildrenOrCount[];
+  handleDelete: (record: TRecordWithChildrenOrCount) => void;
 }
 
 export function RecordItem(props: TRecordItemProps) {
@@ -22,34 +22,27 @@ export function RecordItem(props: TRecordItemProps) {
     // ...
     record,
     isUpdating: isParentUpdating,
+    handleDelete,
   } = props;
-  const {
-    id,
-    // name,
-    // _count, // : { children: childrenCount },
-    children: initialChildren, // NOTE: Allow to use pre-fetched children data
-  } = record;
+  const { id } = record;
+  const [isOpen, setOpen] = React.useState(false);
   const [isUpdating, startUpdating] = React.useTransition();
   const [childrenRecords, setChildren] = React.useState<TRecordWithChildrenOrCount[] | undefined>(
-    initialChildren,
+    record.children,
   );
-  // const childrenCount = childrenRecords ? childrenRecords.length : _count ? _count.children : 0;
-  // const hasChildren = !!childrenCount;
+  React.useEffect(() => {
+    setChildren(record.children);
+    if (!record.children) {
+      setOpen(false);
+    }
+  }, [record]);
   const hasLoaded = childrenRecords != undefined;
-  const [isOpen, setOpen] = React.useState(false);
   const handleOpen = React.useCallback(() => setOpen(true), []);
   const handleClose = React.useCallback(() => setOpen(false), []);
 
-  /* // Effect: Initial state
-   * React.useEffect(() => {
-   *   console.log('[RecordItem] Effect: Initial state', {
-   *     hasLoaded,
-   *     initialChildren,
-   *     childrenRecords,
-   *     record,
-   *   });
-   * }, [hasLoaded, initialChildren, record, childrenRecords]);
-   */
+  const handleUpdatedRecords = React.useCallback((records: TRecordWithChildrenOrCount[]) => {
+    setChildren(records);
+  }, []);
 
   const handleLoadChildrenForParent = React.useCallback((parentId: TFetchParentId) => {
     return new Promise<TRecordWithChildrenOrCount[]>((resolve, reject) => {
@@ -99,13 +92,15 @@ export function RecordItem(props: TRecordItemProps) {
         handleLoadChildrenForParent={handleLoadChildrenForParent}
         isUpdating={isUpdating || isParentUpdating}
         hasLoaded={hasLoaded}
+        handleDelete={handleDelete}
       />
       <RecordChildren
-        record={record}
+        parentId={record.id}
         childrenRecords={childrenRecords}
         isOpen={isOpen}
+        handleUpdatedRecords={handleUpdatedRecords}
         isUpdating={isUpdating || isParentUpdating}
-        hasLoaded={hasLoaded}
+        // hasLoaded={hasLoaded}
       />
     </div>
   );

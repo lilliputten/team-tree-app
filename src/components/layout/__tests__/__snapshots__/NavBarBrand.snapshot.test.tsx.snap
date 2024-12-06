@@ -3,7 +3,7 @@
 exports[`NavBarBrand snapshot 1`] = `
 <div>
   <div
-    class="__BrandWrapper flex items-center space-x-1.5 gap-2 transition-all mr-10"
+    class="__BrandWrapper flex items-center space-x-1.5 gap-2 transition-all mr-10 select-none"
   >
     <img
       alt="Logo"

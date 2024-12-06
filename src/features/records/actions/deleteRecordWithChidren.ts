@@ -18,9 +18,8 @@ export async function deleteRecordWithChidren(recordId: TRecordId) {
         id: { in: allRecordIds },
       },
     });
-    /* // DEBUG: Delay
-     * await new Promise((resolve) => setTimeout(resolve, 1000));
-     */
+    // DEBUG: Delay
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     return deleteResult;
   } catch (error) {
     const nextText = 'Error deleting record with children';

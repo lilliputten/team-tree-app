@@ -19,9 +19,16 @@ export const metadata = constructMetadata({
 });
 
 export async function RootPage() {
-  const rootRecords = (await fetchRecordsByParentWithChildrenCount(
-    null,
-  )) as TRecordWithChildrenOrCount[];
+  async function loadRecords() {
+    return (await fetchRecordsByParentWithChildrenCount(null)) as TRecordWithChildrenOrCount[];
+  }
+  const rootRecords: TRecordWithChildrenOrCount[] = await loadRecords();
+  // async function handleReloadRecords() {
+  //   'use server';
+  //   return (await fetchRecordsByParentWithChildrenCount(
+  //     null,
+  //   )) as TRecordWithChildrenOrCount[];
+  // }
   return (
     <div
       className={cn(
@@ -32,7 +39,10 @@ export async function RootPage() {
       )}
     >
       <UseScrollableLayout type="clippable" />
-      <RecordsList initialRecords={rootRecords} />
+      <RecordsList
+        initialRecords={rootRecords}
+        // handleReloadRecords={handleReloadRecords}
+      />
     </div>
   );
 }

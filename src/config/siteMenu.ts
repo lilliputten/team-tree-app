@@ -7,14 +7,6 @@ export type SiteMenu = {
 export const siteMenu: SiteMenu = {
   mainNav: [
     {
-      title: 'Pricing',
-      href: '/pricing',
-    },
-    {
-      title: 'Blog',
-      href: '/blog',
-    },
-    {
       title: 'Documentation',
       href: '/docs',
     },
