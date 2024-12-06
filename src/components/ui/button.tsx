@@ -34,6 +34,9 @@ const buttonVariants = cva(
         orange: 'bg-app-orange text-app-orange-foreground hover:bg-app-orange/90',
         blue: 'bg-app-blue text-app-blue-foreground hover:bg-app-blue/90',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
+        ghostBlue: 'hover:bg-blue-300/20 active:bg-blue-500 hover:text-accent-foreground',
+        ghostDark: 'hover:bg-black/20 hover:text-accent-foreground',
+        ghostGray: 'hover:bg-gray-500/15 hover:text-accent-foreground',
         ghostOnPrimary: 'text-primary-foreground hover:bg-primary-400/50',
         link: 'underline-offset-4 hover:underline text-primary',
         disable: 'border border-input bg-transparent text-neutral-600 cursor-not-allowed',
@@ -43,6 +46,7 @@ const buttonVariants = cva(
         sm: 'h-9 px-3',
         lg: 'h-11 px-8',
         icon: 'size-10 [&>svg]:m-auto',
+        iconSm: 'size-8 [&>svg]:m-auto',
       },
       rounded: {
         default: 'rounded-md',

@@ -5,14 +5,14 @@ import { prisma } from '@/lib/db';
 import { getErrorText } from '@/lib/helpers/strings';
 import { TRecordId } from '@/features/records/types';
 
-import { getAllChidrenRecursive } from '../helpers';
+import { getAllChidrenRecursiveForList } from '../helpers';
 
-export type TDeleteRecordWithChidrenAction = typeof deleteRecordWithChidren;
+export type TDeleteRecordWithChidrenAction = typeof deleteRecordsWithChidren;
 
-export async function deleteRecordWithChidren(recordId: TRecordId) {
+export async function deleteRecordsWithChidren(recordIds: TRecordId[]) {
   try {
-    const childrenRecords = await getAllChidrenRecursive(recordId);
-    const allRecordIds = [recordId].concat(childrenRecords.map(({ id }) => id));
+    const childrenRecords = await getAllChidrenRecursiveForList(recordIds);
+    const allRecordIds = recordIds.concat(childrenRecords.map(({ id }) => id));
     const deleteResult = await prisma.record.deleteMany({
       where: {
         id: { in: allRecordIds },
@@ -28,7 +28,7 @@ export async function deleteRecordWithChidren(recordId: TRecordId) {
     const nextMessage = [nextText, errorMessage].filter(Boolean).join(': ');
     const nextError = new DatabaseError(nextMessage);
     // eslint-disable-next-line no-console
-    console.error('[deleteRecordWithChidren]', nextMessage, {
+    console.error('[deleteRecordsWithChidren]', nextMessage, {
       nextError,
       errorMessage,
       error,

@@ -1,5 +1,6 @@
 import { siteConfig } from '@/config/site';
 import { constructMetadata } from '@/lib/utils';
+import { DemoList } from '@/components/debug/DemoList';
 import {
   // Some methods are used for manual tests only
   // addRecord,
@@ -7,7 +8,6 @@ import {
   // fetchRecordsByParent,
   fetchRecordsByParentWithChildrenCount,
 } from '@/features/records/actions';
-import { RecordsList } from '@/features/records/components';
 
 export const pageTitle = 'Test';
 export const pageDescription = 'Test page';
@@ -63,7 +63,7 @@ export async function TestPage() {
   return (
     <div>
       <div>Application: {siteConfig.versionInfo}</div>
-      <RecordsList records={rootRecords} />
+      <DemoList count={50} />
     </div>
   );
 }

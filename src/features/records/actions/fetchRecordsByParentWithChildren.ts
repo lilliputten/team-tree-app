@@ -14,7 +14,7 @@ export async function fetchRecordsByParentWithChildren(parentId: TFetchParentId)
       include: { children: true },
     });
     /* // DEBUG: Delay
-     * await new Promise((resolve) => setTimeout(resolve, 1000));
+     * await new Promise((resolve) => setTimeout(resolve, 5000));
      */
     return records;
   } catch (error) {

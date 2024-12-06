@@ -16,3 +16,6 @@ export type TRecordWithoutId = Omit<TRecord, 'id'>;
 
 export type TRecordWithChildren = TRecord & { children: TRecord[] };
 export type TRecordWithChildrenCount = TRecord & { _count: { children: number } };
+export type TRecordWithChildrenOrCount = TRecord & { children?: TRecord[] } & {
+  _count?: { children: number };
+};
