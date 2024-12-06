@@ -1,2 +1,1 @@
-export * from './ConfirmDeleteRecordBlock';
-export * from './ConfirmDeleteRecordModal';
+export * from './useConfirmDeleteRecordModal';

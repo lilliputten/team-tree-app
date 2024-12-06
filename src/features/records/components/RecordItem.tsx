@@ -6,8 +6,9 @@ import { toast } from 'sonner';
 import { getErrorText } from '@/lib/helpers/strings';
 import { cn } from '@/lib/utils';
 
-import { fetchRecordsByParentWithChildrenCount } from '../actions';
-import { TFetchParentId, TRecordWithChildrenOrCount } from '../types';
+import { addRecord, fetchRecordsByParentWithChildrenCount } from '../actions';
+import { TFetchParentId, TRecordWithChildrenOrCount, TRecordWithoutId } from '../types';
+import { useAddRecordModal } from './AddRecord';
 import { RecordChildren } from './RecordChildren';
 import { RecordHeader } from './RecordHeader';
 
@@ -18,12 +19,7 @@ interface TRecordItemProps {
 }
 
 export function RecordItem(props: TRecordItemProps) {
-  const {
-    // ...
-    record,
-    isUpdating: isParentUpdating,
-    handleDelete,
-  } = props;
+  const { record, isUpdating: isParentUpdating, handleDelete } = props;
   const { id } = record;
   const [isOpen, setOpen] = React.useState(false);
   const [isUpdating, startUpdating] = React.useTransition();
@@ -71,6 +67,53 @@ export function RecordItem(props: TRecordItemProps) {
     });
   }, []);
 
+  const onAddRecord = React.useCallback(
+    (newRecord: TRecordWithoutId) => {
+      return new Promise<Awaited<ReturnType<typeof addRecord>>>((resolve, reject) => {
+        startUpdating(async () => {
+          try {
+            const promises = [
+              // Add record...
+              addRecord(newRecord),
+              // Fetch records if hasn't been fetched yet...
+              !childrenRecords ? fetchRecordsByParentWithChildrenCount(record.id) : undefined,
+            ].filter(Boolean);
+            const results = await Promise.all(promises);
+            const addedRecord = results[0] as TRecordWithChildrenOrCount;
+            const addedId = addedRecord.id;
+            const fetchedRecords = (results[1] as TRecordWithChildrenOrCount[]) || childrenRecords;
+            const containsAdded = fetchedRecords.find(({ id }) => id === addedId);
+            const updatedRecords = containsAdded
+              ? fetchedRecords
+              : fetchedRecords.concat(addedRecord);
+            setChildren(updatedRecords);
+            toast.success('Record successfully added');
+            // Open children if had been closed before
+            setOpen(true);
+            resolve(addedRecord);
+          } catch (error) {
+            const description = getErrorText(error);
+            // eslint-disable-next-line no-console
+            console.error('[RecordItem:onAddRecord]', description, {
+              error,
+            });
+            debugger; // eslint-disable-line no-debugger
+            const nextMsg = 'Error adding record';
+            const nextError = new Error(nextMsg);
+            toast.error(nextMsg, {
+              description,
+            });
+            // Re-throw?
+            reject(nextError);
+          }
+        });
+      });
+    },
+    [childrenRecords, record],
+  );
+
+  const { invokeAddRecordModal, addRecordModalElement } = useAddRecordModal({ onAddRecord });
+
   return (
     <div
       // ...
@@ -93,6 +136,7 @@ export function RecordItem(props: TRecordItemProps) {
         isUpdating={isUpdating || isParentUpdating}
         hasLoaded={hasLoaded}
         handleDelete={handleDelete}
+        handleAdd={invokeAddRecordModal}
       />
       <RecordChildren
         parentId={record.id}
@@ -102,6 +146,7 @@ export function RecordItem(props: TRecordItemProps) {
         isUpdating={isUpdating || isParentUpdating}
         // hasLoaded={hasLoaded}
       />
+      {addRecordModalElement}
     </div>
   );
 }

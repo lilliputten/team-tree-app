@@ -1,13 +1,14 @@
 import { siteConfig } from '@/config/site';
 import { constructMetadata } from '@/lib/utils';
 import { DemoList } from '@/components/debug/DemoList';
-import {
-  // Some methods are used for manual tests only
-  // addRecord,
-  // deleteRecord,
-  // fetchRecordsByParent,
-  fetchRecordsByParentWithChildrenCount,
-} from '@/features/records/actions';
+
+// import {
+//   // Some methods are used for manual tests only
+//   // addRecord,
+//   // deleteRecord,
+//   // fetchRecordsByParent,
+//   fetchRecordsByParentWithChildrenCount,
+// } from '@/features/records/actions';
 
 export const pageTitle = 'Test';
 export const pageDescription = 'Test page';
@@ -18,8 +19,8 @@ export const metadata = constructMetadata({
 });
 
 export async function TestPage() {
-  const rootRecords = await fetchRecordsByParentWithChildrenCount(null);
   /* // Tests:
+   * const rootRecords = await fetchRecordsByParentWithChildrenCount(null);
    * const allRecords = await fetchRecordsByParent();
    * const allRecordsCount = allRecords.length;
    * const firstRecord = allRecords[0];
@@ -56,10 +57,10 @@ export async function TestPage() {
    *     deletedRecord,
    *   });
    * }
+   * console.log('[TestPage]', {
+   *   rootRecords,
+   * });
    */
-  console.log('[TestPage]', {
-    rootRecords,
-  });
   return (
     <div>
       <div>Application: {siteConfig.versionInfo}</div>

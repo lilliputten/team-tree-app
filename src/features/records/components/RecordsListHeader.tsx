@@ -10,10 +10,11 @@ import { Icons } from '@/components/shared/icons';
 interface TRecordsListHeaderProps extends TPropsWithClassName {
   handleReloadRecords: () => void;
   isUpdating?: boolean;
+  handleRootAdd: () => void;
 }
 
 export function RecordsListHeader(props: TRecordsListHeaderProps) {
-  const { className, handleReloadRecords, isUpdating } = props;
+  const { className, handleReloadRecords, isUpdating, handleRootAdd } = props;
   const rightIcons = React.useMemo(() => {
     return (
       <>
@@ -23,6 +24,7 @@ export function RecordsListHeader(props: TRecordsListHeaderProps) {
           variant="ghostBlue"
           className="text-green-500 hover:bg-green-400/10 hover:text-green-700 active:bg-green-500 active:text-green-100"
           size="icon"
+          onClick={handleRootAdd}
         >
           <Icons.add className="size-7" />
         </Button>
@@ -34,17 +36,11 @@ export function RecordsListHeader(props: TRecordsListHeaderProps) {
           size="icon"
           onClick={handleReloadRecords}
         >
-          <Icons.refresh
-            className={cn(
-              'size-7',
-              //
-              isUpdating && 'animate-spin',
-            )}
-          />
+          <Icons.refresh className={cn('size-7', isUpdating && 'animate-spin')} />
         </Button>
       </>
     );
-  }, [handleReloadRecords, isUpdating]);
+  }, [handleReloadRecords, handleRootAdd, isUpdating]);
   return (
     <div
       className={cn(
