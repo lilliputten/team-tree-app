@@ -52,42 +52,28 @@ export function RecordItem(props: TRecordItemProps) {
    */
 
   const handleLoadChildrenForParent = React.useCallback((parentId: TFetchParentId) => {
-    // if (memo.isUpdating) {
-    //   throw new Error('The data is currently being updated');
-    // }
     return new Promise<TRecordWithChildrenOrCount[]>((resolve, reject) => {
-      startUpdating(() => {
-        /* console.log('[RecordItem:handleLoadChildrenForParent]', {
-         *   parentId,
-         * });
-         */
-        return fetchRecordsByParentWithChildrenCount(parentId)
-          .then((fetchedRecords: TRecordWithChildrenOrCount[]) => {
-            /* console.log('[RecordItem:handleLoadChildrenForParent] done', {
-             *   fetchedRecords,
-             *   parentId,
-             * });
-             */
-            setChildren(fetchedRecords);
-            toast.success('Records has been loaded');
-            resolve(fetchedRecords);
-          })
-          .catch((error) => {
-            const description = getErrorText(error);
-            // eslint-disable-next-line no-console
-            console.error('[RecordItem:handleLoadChildrenForParent]', description, {
-              error,
-            });
-            debugger; // eslint-disable-line no-debugger
-            const nextMsg = 'Error loading children records';
-            const nextError = new Error(nextMsg);
-            // TODO: To show message here?
-            toast.error(nextMsg, {
-              description,
-            });
-            // Re-throw?
-            reject(nextError);
+      startUpdating(async () => {
+        try {
+          const fetchedRecords = await fetchRecordsByParentWithChildrenCount(parentId);
+          setChildren(fetchedRecords);
+          toast.success('Records has been loaded');
+          resolve(fetchedRecords);
+        } catch (error) {
+          const description = getErrorText(error);
+          // eslint-disable-next-line no-console
+          console.error('[RecordItem:handleLoadChildrenForParent]', description, {
+            error,
           });
+          debugger; // eslint-disable-line no-debugger
+          const nextMsg = 'Error loading children records';
+          const nextError = new Error(nextMsg);
+          toast.error(nextMsg, {
+            description,
+          });
+          // Re-throw?
+          reject(nextError);
+        }
       });
     });
   }, []);
@@ -97,6 +83,10 @@ export function RecordItem(props: TRecordItemProps) {
       // ...
       className={cn(
         '__RecordItem', // DEBUG
+        'transition-all',
+        'rounded p-2 pr-0',
+        'active:bg-blue-400/10',
+        'hover:bg-blue-400/5',
       )}
       data-record-id={id}
     >

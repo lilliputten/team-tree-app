@@ -26,23 +26,13 @@ export async function RootPage() {
     <div
       className={cn(
         '__RootPage', // DEBUG
-        'flex flex-1 flex-col',
-        'items-center',
+        'flex flex-1 flex-col items-center',
         'layout-follow',
-        commonXPaddingTwStyle,
+        // commonXPaddingTwStyle,
       )}
     >
       <UseScrollableLayout type="clippable" />
-      <MaxWidthWrapper
-        className={cn(
-          '__RootPage_Wrapper', // DEBUG
-          'flex flex-col',
-          'layout-follow',
-        )}
-      >
-        <div>Header</div>
-        <RecordsList initialRecords={rootRecords} />
-      </MaxWidthWrapper>
+      <RecordsList initialRecords={rootRecords} />
     </div>
   );
 }

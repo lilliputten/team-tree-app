@@ -27,6 +27,7 @@ export default {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/features/**/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   future: {
@@ -170,6 +171,9 @@ export default {
         // Fade in and out
         'fade-in': 'fade-in 0.4s',
         'fade-out': 'fade-out 0.4s',
+      },
+      transitionDuration: {
+        '2000': '2000ms',
       },
     },
   },

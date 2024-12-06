@@ -9,8 +9,6 @@ interface TRecordChildrenProps {
   isOpen?: boolean;
   hasLoaded?: boolean;
   isUpdating?: boolean;
-  // handleOpen: () => void;
-  // handleClose: () => void;
 }
 
 export function RecordChildren(props: TRecordChildrenProps) {
@@ -20,14 +18,16 @@ export function RecordChildren(props: TRecordChildrenProps) {
     childrenRecords,
     // TODO: Use these for styles
     isOpen,
-    hasLoaded,
-    isUpdating,
+    // hasLoaded,
+    // isUpdating,
   } = props;
   const {
     id,
     // name,
+    _count, // : { children: childrenCount },
   } = record;
-  const showContent = isOpen && childrenRecords;
+  const childrenCount = childrenRecords ? childrenRecords.length : _count ? _count.children : 0;
+  const showContent = isOpen && !!childrenRecords && !!childrenCount;
   // const childrenCount = getChildrenCount(record);
   return (
     <div
@@ -36,28 +36,17 @@ export function RecordChildren(props: TRecordChildrenProps) {
       )}
       data-record-id={id}
     >
-      {showContent && (
-        <div
-          className={cn(
-            '__RecordChildren_Content', // DEBUG
-          )}
-        >
-          {childrenRecords.map((record) => {
-            return (
-              <RecordItem
-                key={record.id}
-                record={record}
-                // fetchRecordsByParent={fetchRecordsByParentWithChildren}
-              />
-            );
-          })}
-          {/*
-          {hasLoaded ? 'OK ' : '? '}
-          {isUpdating && '(...) '}
-          Children ({childrenCount}): {id} {name}
-          */}
-        </div>
-      )}
+      <div
+        className={cn(
+          '__RecordChildren_Content', // DEBUG
+          'pl-7 pt-2',
+          !showContent && 'hidden',
+        )}
+      >
+        {childrenRecords?.map((record) => {
+          return <RecordItem key={record.id} record={record} />;
+        })}
+      </div>
     </div>
   );
 }

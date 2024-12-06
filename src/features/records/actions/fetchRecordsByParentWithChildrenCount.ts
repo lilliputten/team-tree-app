@@ -13,8 +13,9 @@ export async function fetchRecordsByParentWithChildrenCount(parentId: TFetchPare
       },
       include: { _count: { select: { children: true } } },
     });
-    // DEBUG: Delay
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    /* // DEBUG: Delay
+     * await new Promise((resolve) => setTimeout(resolve, 1000));
+     */
     return records;
   } catch (error) {
     const nextText = 'Error fetching records';

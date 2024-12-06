@@ -21,6 +21,7 @@ function BrandWrapper(props: TPropsWithChildrenAndClassName) {
     'gap-2',
     'transition-all',
     'mr-10',
+    'select-none',
     !isRoot && 'hover:opacity-80',
   );
   if (isRoot) {

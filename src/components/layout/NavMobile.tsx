@@ -36,7 +36,7 @@ export function NavMobile() {
         className={cn(
           '__NavMobile', // DEBUG
           'fixed',
-          'right-0',
+          'right-3',
           'top-3.5',
           'z-50',
           'rounded-full',
