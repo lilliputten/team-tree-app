@@ -70,11 +70,14 @@ export function Modal({
         <Drawer.Portal>
           <Drawer.Content
             className={cn(
+              '__modal_Drawer_Content',
               'fixed',
               'inset-x-0',
               'inset-y-0',
               // 'bottom-0 top-0 mt-24',
-              'z-50 overflow-hidden rounded-t-[10px] border bg-background',
+              'z-50 overflow-hidden',
+              // 'rounded-t-[10px]',
+              'border bg-background',
               className,
             )}
           >

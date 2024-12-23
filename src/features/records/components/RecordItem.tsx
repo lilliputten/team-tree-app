@@ -6,9 +6,9 @@ import { toast } from 'sonner';
 import { getErrorText } from '@/lib/helpers/strings';
 import { cn } from '@/lib/utils';
 
-import { addRecord, fetchRecordsByParentWithChildrenCount } from '../actions';
-import { TFetchParentId, TRecordWithChildrenOrCount, TRecordWithoutId } from '../types';
-import { useAddRecordModal } from './AddRecord';
+import { addRecord, fetchRecordsByParentWithChildrenCount, updateRecord } from '../actions';
+import { TFetchParentId, TRecord, TRecordWithChildrenOrCount, TRecordWithoutId } from '../types';
+import { useEditRecordModal } from './EditRecord';
 import { RecordChildren } from './RecordChildren';
 import { RecordHeader } from './RecordHeader';
 
@@ -16,10 +16,11 @@ interface TRecordItemProps {
   record: TRecordWithChildrenOrCount;
   isUpdating?: boolean;
   handleDelete: (record: TRecordWithChildrenOrCount) => void;
+  handleUpdate: (record: TRecordWithChildrenOrCount) => void;
 }
 
 export function RecordItem(props: TRecordItemProps) {
-  const { record, isUpdating: isParentUpdating, handleDelete } = props;
+  const { record, isUpdating: isParentUpdating, handleUpdate, handleDelete } = props;
   const { id } = record;
   const [isOpen, setOpen] = React.useState(false);
   const [isUpdating, startUpdating] = React.useTransition();
@@ -36,7 +37,7 @@ export function RecordItem(props: TRecordItemProps) {
   const handleOpen = React.useCallback(() => setOpen(true), []);
   const handleClose = React.useCallback(() => setOpen(false), []);
 
-  const handleUpdatedRecords = React.useCallback((records: TRecordWithChildrenOrCount[]) => {
+  const handleUpdatedChildRecords = React.useCallback((records: TRecordWithChildrenOrCount[]) => {
     setChildren(records);
   }, []);
 
@@ -67,7 +68,7 @@ export function RecordItem(props: TRecordItemProps) {
     });
   }, []);
 
-  const onAddRecord = React.useCallback(
+  const addChildRecord = React.useCallback(
     (newRecord: TRecordWithoutId) => {
       return new Promise<Awaited<ReturnType<typeof addRecord>>>((resolve, reject) => {
         startUpdating(async () => {
@@ -112,7 +113,40 @@ export function RecordItem(props: TRecordItemProps) {
     [childrenRecords, record],
   );
 
-  const { invokeAddRecordModal, addRecordModalElement } = useAddRecordModal({ onAddRecord });
+  const editThisRecord = React.useCallback(
+    (record: TRecord) => {
+      return new Promise<Awaited<ReturnType<typeof updateRecord>>>((resolve, reject) => {
+        startUpdating(async () => {
+          try {
+            const updatedRecord = await updateRecord(record);
+            handleUpdate(updatedRecord);
+            toast.success('Record has been successfully updated');
+            resolve(updatedRecord);
+          } catch (error) {
+            const description = getErrorText(error);
+            // eslint-disable-next-line no-console
+            console.error('[RecordItem:onEditRecord]', description, {
+              error,
+            });
+            debugger; // eslint-disable-line no-debugger
+            const nextMsg = 'Error editing record';
+            const nextError = new Error(nextMsg);
+            toast.error(nextMsg, {
+              description,
+            });
+            // Re-throw?
+            reject(nextError);
+          }
+        });
+      });
+    },
+    [childrenRecords, handleUpdate],
+  );
+
+  const { invokeEditRecordModal, editRecordModalElement } = useEditRecordModal({
+    onEditRecord: editThisRecord,
+    onAddRecord: addChildRecord,
+  });
 
   return (
     <div
@@ -136,17 +170,17 @@ export function RecordItem(props: TRecordItemProps) {
         isUpdating={isUpdating || isParentUpdating}
         hasLoaded={hasLoaded}
         handleDelete={handleDelete}
-        handleAdd={invokeAddRecordModal}
+        handleAdd={invokeEditRecordModal}
+        handleEdit={invokeEditRecordModal}
       />
       <RecordChildren
         parentId={record.id}
         childrenRecords={childrenRecords}
         isOpen={isOpen}
-        handleUpdatedRecords={handleUpdatedRecords}
+        handleUpdatedRecords={handleUpdatedChildRecords}
         isUpdating={isUpdating || isParentUpdating}
-        // hasLoaded={hasLoaded}
       />
-      {addRecordModalElement}
+      {editRecordModalElement}
     </div>
   );
 }

@@ -1,4 +1,5 @@
 export * from './addRecord';
+export * from './updateRecord';
 export * from './deleteRecord';
 export * from './deleteRecords';
 export * from './deleteRecordsWithChidren';
