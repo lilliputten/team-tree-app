@@ -140,7 +140,7 @@ export function RecordItem(props: TRecordItemProps) {
         });
       });
     },
-    [childrenRecords, handleUpdate],
+    [handleUpdate],
   );
 
   const { invokeEditRecordModal, editRecordModalElement } = useEditRecordModal({

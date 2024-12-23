@@ -75,7 +75,7 @@ export function RecordChildren(props: TRecordChildrenProps) {
             // Re-throw?
             reject(nextError);
           } finally {
-            memo.removingRecords = memo.removingRecords.filter((id_1) => id_1 !== recordId);
+            memo.removingRecords = memo.removingRecords.filter((id) => id !== recordId);
           }
         });
       });

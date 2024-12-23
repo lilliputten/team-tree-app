@@ -14,7 +14,7 @@ import { MaxWidthWrapper } from '@/components/shared/MaxWidthWrapper';
 import { TRecordWithChildrenOrCount, TRecordWithoutId } from '@/features/records/types';
 
 import { addRecord, fetchRecordsByParentWithChildrenCount } from '../actions';
-import { useAddRecordModal } from './AddRecord';
+import { useEditRecordModal } from './EditRecord';
 import { RecordChildren } from './RecordChildren';
 import { RecordsListHeader } from './RecordsListHeader';
 
@@ -91,11 +91,17 @@ export function RecordsList(props: TRecordsListProps) {
     });
   }, []);
 
-  const { invokeAddRecordModal, addRecordModalElement } = useAddRecordModal({
+  // const { invokeAddRecordModal, addRecordModalElement } = useAddRecordModal({
+  //   onAddRecord: onAddRootRecord,
+  // });
+  const { invokeEditRecordModal, editRecordModalElement } = useEditRecordModal({
+    // onEditRecord: editThisRecord,
     onAddRecord: onAddRootRecord,
   });
 
-  const addRootRecord = React.useCallback(() => invokeAddRecordModal(null), [invokeAddRecordModal]);
+  const addRootRecord = React.useCallback(() => {
+    invokeEditRecordModal({ name: '', parentId: null });
+  }, [invokeEditRecordModal]);
 
   return (
     <div
@@ -188,7 +194,7 @@ export function RecordsList(props: TRecordsListProps) {
           )}
         </MaxWidthWrapper>
       </ScrollArea>
-      {addRecordModalElement}
+      {editRecordModalElement}
     </div>
   );
 }

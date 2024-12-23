@@ -11,7 +11,7 @@ import { TEditRecordFormData } from './EditRecordBlock';
 import { EditRecordModal } from './EditRecordModal';
 
 interface TUseEditRecordModalProps {
-  onEditRecord: (record: TRecord) => Promise<TRecordWithChildrenOrCount>;
+  onEditRecord?: (record: TRecord) => Promise<TRecordWithChildrenOrCount>;
   onAddRecord: (record: TNewRecord) => Promise<TRecordWithChildrenOrCount>;
 }
 
@@ -29,16 +29,17 @@ export function useEditRecordModal(props: TUseEditRecordModalProps) {
 
   const onSubmit = React.useCallback(
     (formData: TEditRecordFormData) => {
-      return new Promise<Awaited<ReturnType<typeof onEditRecord>>>((resolve, reject) => {
+      return new Promise<Awaited<ReturnType<typeof onAddRecord>>>((resolve, reject) => {
         startTransition(async () => {
           if (!record) {
             // TODO: Switch to add mode then?
             throw new Error('The record should be defined in order to edit it');
           }
           const updatedRecord: TNewOrExistingRecord = { ...record, ...formData };
-          const promise = updatedRecord.id
-            ? onEditRecord(updatedRecord as TRecord)
-            : onAddRecord(updatedRecord);
+          const promise =
+            updatedRecord.id && onEditRecord
+              ? onEditRecord(updatedRecord as TRecord)
+              : onAddRecord(updatedRecord);
           promise
             .then((updatedRecord) => {
               toggle(false);
