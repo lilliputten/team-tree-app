@@ -75,13 +75,23 @@ export function RecordChildren(props: TRecordChildrenProps) {
             // Re-throw?
             reject(nextError);
           } finally {
-            memo.removingRecords = memo.removingRecords.filter((id_1) => id_1 !== recordId);
+            memo.removingRecords = memo.removingRecords.filter((id) => id !== recordId);
           }
         });
       });
     },
     [handleUpdatedRecords, childrenRecords, memo],
   );
+
+  const handleUpdateRecord = React.useCallback((record: TRecordWithChildrenOrCount) => {
+    setChildren((prevChildren) => {
+      if (!prevChildren) {
+        throw new Error('Tried to update child for uninitalized parent');
+      }
+      const updatedChildren = prevChildren.map((it) => (it.id === record.id ? record : it));
+      return updatedChildren;
+    });
+  }, []);
 
   const { invokeConfirmDeleteRecordModal, confirmDeleteRecordModalElement } =
     useConfirmDeleteRecordModal({ onDeleteRecord });
@@ -115,6 +125,7 @@ export function RecordChildren(props: TRecordChildrenProps) {
                 isParentUpdating || (isUpdating && memo.removingRecords.includes(record.id))
               }
               handleDelete={invokeConfirmDeleteRecordModal}
+              handleUpdate={handleUpdateRecord}
             />
           );
         })}

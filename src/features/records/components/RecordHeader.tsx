@@ -5,7 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/shared/icons';
 import { isDev } from '@/constants';
 
-import { TGenericFetchRecordsByParent, TRecordId, TRecordWithChildrenOrCount } from '../types';
+import {
+  TGenericFetchRecordsByParent,
+  TNewOrExistingRecord,
+  TRecordWithChildrenOrCount,
+} from '../types';
 
 interface TRecordHeaderProps {
   record: TRecordWithChildrenOrCount;
@@ -17,7 +21,9 @@ interface TRecordHeaderProps {
   handleClose: () => void;
   handleLoadChildrenForParent: TGenericFetchRecordsByParent;
   handleDelete: (record: TRecordWithChildrenOrCount) => void;
-  handleAdd: (parentId: TRecordId | null) => void;
+  // handleAdd: (parentId: TRecordId | null) => void;
+  handleAdd: (record: TNewOrExistingRecord) => void;
+  handleEdit: (record: TNewOrExistingRecord) => void;
 }
 
 export function RecordHeader(props: TRecordHeaderProps) {
@@ -35,6 +41,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
     isUpdating,
     handleDelete,
     handleAdd,
+    handleEdit,
   } = props;
   // const isUpdating = true;
   const {
@@ -142,7 +149,8 @@ export function RecordHeader(props: TRecordHeaderProps) {
           variant="ghostBlue"
           className="text-blue-500 hover:bg-blue-400/10 hover:text-blue-700 active:bg-blue-500 active:text-blue-100"
           size="icon"
-          disabled
+          // disabled
+          onClick={() => handleEdit(record)}
         >
           <Icons.edit className="size-5" />
         </Button>
@@ -152,7 +160,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
           variant="ghostBlue"
           className="text-green-500 hover:bg-green-400/10 hover:text-green-700 active:bg-green-500 active:text-green-100"
           size="icon"
-          onClick={() => handleAdd(record.id)}
+          onClick={() => handleAdd({ name: '', parentId: record.id })}
         >
           <Icons.add className="size-7" />
         </Button>
@@ -168,7 +176,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
         </Button>
       </>
     );
-  }, [handleDelete, handleAdd, record]);
+  }, [handleEdit, record, handleAdd, handleDelete]);
   return (
     <div
       className={cn(

@@ -11,25 +11,27 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { Input } from '@/components/ui/input';
 import { Icons } from '@/components/shared/icons';
 
-import { TRecordWithChildrenOrCount } from '../../types';
+import { TNewOrExistingRecord, TRecordWithChildrenOrCount } from '../../types';
 
 // import { maxNameLength, minNameLength } from '../constants/inputFields';
 
-export interface TAddRecordFormData {
+export interface TEditRecordFormData {
   name: TRecordWithChildrenOrCount['name'];
 }
 
-export interface TAddRecordBlockProps {
-  onSubmit: (formData: TAddRecordFormData) => Promise<unknown>;
+export interface TEditRecordBlockProps {
+  onSubmit: (formData: TEditRecordFormData) => Promise<unknown>;
   onCancel?: () => void;
   className?: string;
   isPending?: boolean;
+  record?: TNewOrExistingRecord;
 }
 
-export function AddRecordBlock(props: TAddRecordBlockProps) {
+export function EditRecordBlock(props: TEditRecordBlockProps) {
   const {
     // prettier-ignore
     className,
+    record,
     onSubmit,
     onCancel,
     isPending,
@@ -43,14 +45,14 @@ export function AddRecordBlock(props: TAddRecordBlockProps) {
     [],
   );
 
-  const defaultValues: TAddRecordFormData = React.useMemo(() => {
+  const defaultValues: TEditRecordFormData = React.useMemo(() => {
     return {
-      name: '',
+      name: record?.name || '',
     };
-  }, []);
+  }, [record]);
 
   // @see https://react-hook-form.com/docs/useform
-  const form = useForm<TAddRecordFormData>({
+  const form = useForm<TEditRecordFormData>({
     // @see https://react-hook-form.com/docs/useform
     mode: 'onChange', // 'all', // Validation strategy before submitting behaviour.
     criteriaMode: 'all', // Display all validation errors or one at a time.
@@ -78,7 +80,7 @@ export function AddRecordBlock(props: TAddRecordBlockProps) {
 
   const isSubmitEnabled = !isPending && isDirty && isValid;
 
-  const doSubmit = (formData: TAddRecordFormData) => {
+  const doSubmit = (formData: TEditRecordFormData) => {
     onSubmit(formData).then(() => {
       reset();
     });
@@ -91,13 +93,15 @@ export function AddRecordBlock(props: TAddRecordBlockProps) {
     }
   };
 
+  const isExistingRecord = !!record?.id;
+
   return (
     <Form {...form}>
       <form
         onSubmit={handleSubmit(doSubmit)}
         className={cn(
           className,
-          '__AddRecordBlock',
+          '__EditRecordBlock',
           'flex w-full flex-1 flex-col gap-4',
           // isPending && 'pointer-events-none opacity-50',
           'relative',
@@ -131,7 +135,11 @@ export function AddRecordBlock(props: TAddRecordBlockProps) {
             variant={isSubmitEnabled ? 'default' : 'disable'}
             disabled={!isSubmitEnabled}
           >
-            {isPending ? <Icons.spinner className="size-4 animate-spin" /> : <span>Create</span>}
+            {isPending ? (
+              <Icons.spinner className="size-4 animate-spin" />
+            ) : (
+              <span>{isExistingRecord ? 'Update' : 'Create'}</span>
+            )}
           </Button>
           <Button variant="ghost" onClick={doCancel}>
             <span>Cancel</span>
