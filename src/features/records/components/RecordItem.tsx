@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { getErrorText } from '@/lib/helpers/strings';
@@ -20,6 +21,7 @@ interface TRecordItemProps {
 }
 
 export function RecordItem(props: TRecordItemProps) {
+  const t = useTranslations('RecordItem');
   const { record, isUpdating: isParentUpdating, handleUpdate, handleDelete } = props;
   const { id } = record;
   const [isOpen, setOpen] = React.useState(false);
@@ -41,32 +43,35 @@ export function RecordItem(props: TRecordItemProps) {
     setChildren(records);
   }, []);
 
-  const handleLoadChildrenForParent = React.useCallback((parentId: TFetchParentId) => {
-    return new Promise<TRecordWithChildrenOrCount[]>((resolve, reject) => {
-      startUpdating(async () => {
-        try {
-          const fetchedRecords = await fetchRecordsByParentWithChildrenCount(parentId);
-          setChildren(fetchedRecords);
-          toast.success('Records has been loaded');
-          resolve(fetchedRecords);
-        } catch (error) {
-          const description = getErrorText(error);
-          // eslint-disable-next-line no-console
-          console.error('[RecordItem:handleLoadChildrenForParent]', description, {
-            error,
-          });
-          debugger; // eslint-disable-line no-debugger
-          const nextMsg = 'Error loading children records';
-          const nextError = new Error(nextMsg);
-          toast.error(nextMsg, {
-            description,
-          });
-          // Re-throw?
-          reject(nextError);
-        }
+  const handleLoadChildrenForParent = React.useCallback(
+    (parentId: TFetchParentId) => {
+      return new Promise<TRecordWithChildrenOrCount[]>((resolve, reject) => {
+        startUpdating(async () => {
+          try {
+            const fetchedRecords = await fetchRecordsByParentWithChildrenCount(parentId);
+            setChildren(fetchedRecords);
+            toast.success(t('records-has-been-loaded'));
+            resolve(fetchedRecords);
+          } catch (error) {
+            const description = getErrorText(error);
+            // eslint-disable-next-line no-console
+            console.error('[RecordItem:handleLoadChildrenForParent]', description, {
+              error,
+            });
+            debugger; // eslint-disable-line no-debugger
+            const nextMsg = t('error-loading-children-records');
+            const nextError = new Error(nextMsg);
+            toast.error(nextMsg, {
+              description,
+            });
+            // Re-throw?
+            reject(nextError);
+          }
+        });
       });
-    });
-  }, []);
+    },
+    [t],
+  );
 
   const addChildRecord = React.useCallback(
     (newRecord: TRecordWithoutId) => {
@@ -88,7 +93,7 @@ export function RecordItem(props: TRecordItemProps) {
               ? fetchedRecords
               : fetchedRecords.concat(addedRecord);
             setChildren(updatedRecords);
-            toast.success('Record successfully added');
+            toast.success(t('record-successfully-added'));
             // Open children if had been closed before
             setOpen(true);
             resolve(addedRecord);
@@ -99,7 +104,7 @@ export function RecordItem(props: TRecordItemProps) {
               error,
             });
             debugger; // eslint-disable-line no-debugger
-            const nextMsg = 'Error adding record';
+            const nextMsg = t('error-adding-record');
             const nextError = new Error(nextMsg);
             toast.error(nextMsg, {
               description,
@@ -110,7 +115,7 @@ export function RecordItem(props: TRecordItemProps) {
         });
       });
     },
-    [childrenRecords, record],
+    [childrenRecords, record, t],
   );
 
   const editThisRecord = React.useCallback(
@@ -120,7 +125,7 @@ export function RecordItem(props: TRecordItemProps) {
           try {
             const updatedRecord = await updateRecord(record);
             handleUpdate(updatedRecord);
-            toast.success('Record has been successfully updated');
+            toast.success(t('record-has-been-successfully-updated'));
             resolve(updatedRecord);
           } catch (error) {
             const description = getErrorText(error);
@@ -129,7 +134,7 @@ export function RecordItem(props: TRecordItemProps) {
               error,
             });
             debugger; // eslint-disable-line no-debugger
-            const nextMsg = 'Error editing record';
+            const nextMsg = t('error-editing-record');
             const nextError = new Error(nextMsg);
             toast.error(nextMsg, {
               description,
@@ -140,7 +145,7 @@ export function RecordItem(props: TRecordItemProps) {
         });
       });
     },
-    [handleUpdate],
+    [handleUpdate, t],
   );
 
   const { invokeEditRecordModal, editRecordModalElement } = useEditRecordModal({

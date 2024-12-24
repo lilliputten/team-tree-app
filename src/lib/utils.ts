@@ -4,6 +4,8 @@ import ms from 'ms';
 import { twMerge } from 'tailwind-merge';
 
 import { siteConfig } from '@/config/site';
+import { routing } from '@/i18n/routing';
+import { TLocale } from '@/i18n/types';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -15,12 +17,16 @@ export function constructMetadata({
   image = siteConfig.ogImage,
   icons = '/favicon.ico',
   noIndex = false,
+  locale = routing.defaultLocale,
+  url = siteConfig.url,
 }: {
   title?: string;
   description?: string;
   image?: string;
   icons?: string;
   noIndex?: boolean;
+  locale?: TLocale;
+  url?: string;
 } = {}): Metadata {
   return {
     title,
@@ -30,8 +36,6 @@ export function constructMetadata({
       'Next.js',
       'React',
       'Prisma',
-      'shadcn ui',
-      'Resend',
     ],
     authors: [
       {
@@ -41,8 +45,8 @@ export function constructMetadata({
     creator: 'lilliputten',
     openGraph: {
       type: 'website',
-      locale: siteConfig.locale, // 'en_US',
-      url: siteConfig.url,
+      locale, // 'en',
+      url,
       title,
       description,
       siteName: title,

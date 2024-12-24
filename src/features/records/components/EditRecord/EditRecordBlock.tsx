@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -28,6 +29,7 @@ export interface TEditRecordBlockProps {
 }
 
 export function EditRecordBlock(props: TEditRecordBlockProps) {
+  const t = useTranslations('EditRecordBlock');
   const {
     // prettier-ignore
     className,
@@ -118,7 +120,7 @@ export function EditRecordBlock(props: TEditRecordBlockProps) {
                 <Input
                   type="text"
                   className="flex-1"
-                  placeholder="Name"
+                  placeholder={t('name')}
                   {...field}
                   onChange={(ev) => field.onChange(ev)}
                 />
@@ -138,11 +140,11 @@ export function EditRecordBlock(props: TEditRecordBlockProps) {
             {isPending ? (
               <Icons.spinner className="size-4 animate-spin" />
             ) : (
-              <span>{isExistingRecord ? 'Update' : 'Create'}</span>
+              <span>{isExistingRecord ? t('update') : t('create')}</span>
             )}
           </Button>
           <Button variant="ghost" onClick={doCancel}>
-            <span>Cancel</span>
+            <span>{t('cancel')}</span>
           </Button>
         </div>
       </form>

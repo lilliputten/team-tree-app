@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { TPropsWithClassName } from '@/shared/types/generic';
@@ -23,6 +24,7 @@ interface TRecordsListProps extends TPropsWithClassName {
 }
 
 export function RecordsList(props: TRecordsListProps) {
+  const t = useTranslations('RecordsList');
   const { className, initialRecords } = props;
   const [isUpdating, startUpdating] = React.useTransition();
   const [childrenRecords, setChildren] = React.useState<TRecordWithChildrenOrCount[] | undefined>(
@@ -41,7 +43,7 @@ export function RecordsList(props: TRecordsListProps) {
         try {
           const records = await fetchRecordsByParentWithChildrenCount(null);
           setChildren(records);
-          toast.success('Records data has been successfully reloaded');
+          toast.success(t('records-data-has-been-successfully-reloaded'));
           resolve(records);
         } catch (error) {
           const description = getErrorText(error);
@@ -50,7 +52,7 @@ export function RecordsList(props: TRecordsListProps) {
             error,
           });
           debugger; // eslint-disable-line no-debugger
-          const nextMsg = 'Error reloading data';
+          const nextMsg = t('error-reloading-data');
           const nextError = new Error(nextMsg);
           toast.error(nextMsg, {
             description,
@@ -60,42 +62,41 @@ export function RecordsList(props: TRecordsListProps) {
         }
       });
     });
-  }, []);
+  }, [t]);
 
-  const onAddRootRecord = React.useCallback((newRecord: TRecordWithoutId) => {
-    return new Promise<Awaited<ReturnType<typeof addRecord>>>((resolve, reject) => {
-      startUpdating(async () => {
-        try {
-          const addedRecord = await addRecord(newRecord);
-          setChildren((records) => {
-            return records ? records.concat(addedRecord) : [addedRecord];
-          });
-          toast.success('Record successfully added');
-          resolve(addedRecord);
-        } catch (error) {
-          const description = getErrorText(error);
-          // eslint-disable-next-line no-console
-          console.error('[RecordsList:onAddRootRecord]', description, {
-            error,
-          });
-          debugger; // eslint-disable-line no-debugger
-          const nextMsg = 'Error adding record';
-          const nextError = new Error(nextMsg);
-          toast.error(nextMsg, {
-            description,
-          });
-          // Re-throw?
-          reject(nextError);
-        }
+  const onAddRootRecord = React.useCallback(
+    (newRecord: TRecordWithoutId) => {
+      return new Promise<Awaited<ReturnType<typeof addRecord>>>((resolve, reject) => {
+        startUpdating(async () => {
+          try {
+            const addedRecord = await addRecord(newRecord);
+            setChildren((records) => {
+              return records ? records.concat(addedRecord) : [addedRecord];
+            });
+            toast.success(t('record-successfully-added'));
+            resolve(addedRecord);
+          } catch (error) {
+            const description = getErrorText(error);
+            // eslint-disable-next-line no-console
+            console.error('[RecordsList:onAddRootRecord]', description, {
+              error,
+            });
+            debugger; // eslint-disable-line no-debugger
+            const nextMsg = t('error-adding-record');
+            const nextError = new Error(nextMsg);
+            toast.error(nextMsg, {
+              description,
+            });
+            // Re-throw?
+            reject(nextError);
+          }
+        });
       });
-    });
-  }, []);
+    },
+    [t],
+  );
 
-  // const { invokeAddRecordModal, addRecordModalElement } = useAddRecordModal({
-  //   onAddRecord: onAddRootRecord,
-  // });
   const { invokeEditRecordModal, editRecordModalElement } = useEditRecordModal({
-    // onEditRecord: editThisRecord,
     onAddRecord: onAddRootRecord,
   });
 
@@ -141,6 +142,7 @@ export function RecordsList(props: TRecordsListProps) {
           '__RecordsList_Scroll', // DEBUG
           className,
           'flex flex-col items-center',
+          'justify-center', // Content in the middle of the page
           'layout-follow',
           commonXPaddingTwStyle,
         )}
@@ -176,18 +178,17 @@ export function RecordsList(props: TRecordsListProps) {
                 'flex flex-col items-center gap-4',
               )}
             >
-              <p>No items have been created yet.</p>
+              <p>{t('no-items-have-been-created-yet')}</p>
               <p>
                 <Button
-                  title="Add new top-level record"
+                  title={t('add-new-top-level-record')}
                   data-button-id="add"
                   variant="ghostBlue"
                   className="flex gap-2 text-green-500 hover:bg-green-400/10 hover:text-green-700 active:bg-green-500 active:text-green-100"
-                  // size="icon"
                   onClick={addRootRecord}
                 >
                   <Icons.add className="size-5" />
-                  <span>Add new record</span>
+                  <span>{t('add-new-record')}</span>
                 </Button>
               </p>
             </div>

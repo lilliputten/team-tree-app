@@ -279,7 +279,6 @@ overrides:
   - # json files (@see https://www.npmjs.com/package/eslint-plugin-json)...
     files: '**/*.json'
     extends:
-      # - 'plugin:json/recommended'
       - 'plugin:json/recommended-legacy'
     rules:
       prettier/prettier: warn

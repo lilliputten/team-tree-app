@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { cn } from '@/lib/utils';
@@ -14,12 +15,13 @@ interface TRecordsListHeaderProps extends TPropsWithClassName {
 }
 
 export function RecordsListHeader(props: TRecordsListHeaderProps) {
+  const t = useTranslations('RecordsListHeader');
   const { className, handleReloadRecords, isUpdating, handleRootAdd } = props;
   const rightIcons = React.useMemo(() => {
     return (
       <>
         <Button
-          title="Add new top-level record"
+          title={t('add-new-top-level-record')}
           data-button-id="add"
           variant="ghostBlue"
           className="text-green-500 hover:bg-green-400/10 hover:text-green-700 active:bg-green-500 active:text-green-100"
@@ -29,7 +31,7 @@ export function RecordsListHeader(props: TRecordsListHeaderProps) {
           <Icons.add className="size-7" />
         </Button>
         <Button
-          title="Refresh data"
+          title={t('refresh-data')}
           data-button-id="add"
           variant="ghostBlue"
           className="text-blue-500 hover:bg-blue-400/10 hover:text-blue-700 active:bg-blue-500 active:text-blue-100"
@@ -40,7 +42,7 @@ export function RecordsListHeader(props: TRecordsListHeaderProps) {
         </Button>
       </>
     );
-  }, [handleReloadRecords, handleRootAdd, isUpdating]);
+  }, [handleReloadRecords, handleRootAdd, isUpdating, t]);
   return (
     <div
       className={cn(
@@ -58,7 +60,7 @@ export function RecordsListHeader(props: TRecordsListHeaderProps) {
           'select-none',
         )}
       >
-        Editor statistics coming here...
+        {t('editor-statistics-coming-here')}
       </div>
       <div
         className={cn(

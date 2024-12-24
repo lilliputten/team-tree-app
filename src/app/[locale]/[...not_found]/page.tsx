@@ -11,10 +11,10 @@ export default function NotFound() {
     <div
       className={cn(
         '__NotFoundPage', // DEBUG
+        'layout-follow',
         'gap-6',
         'flex-1',
         'flex flex-col',
-        'layout-follow',
         'justify-center',
         'items-center',
       )}

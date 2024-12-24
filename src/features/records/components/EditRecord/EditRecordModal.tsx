@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
@@ -18,6 +19,7 @@ interface TEditRecordModalProps {
 }
 
 export function EditRecordModal(props: TEditRecordModalProps) {
+  const t = useTranslations('EditRecordModal');
   const { show, toggle, ...restProps } = props;
   const { record } = restProps;
   const { isPending } = restProps;
@@ -43,10 +45,10 @@ export function EditRecordModal(props: TEditRecordModalProps) {
         )}
       >
         <DialogTitle className="DialogTitle">
-          {isExistingRecord ? 'Edit' : 'Create'} Record
+          {isExistingRecord ? t('edit-record') : t('create-record')}
         </DialogTitle>
         <DialogDescription aria-hidden="true" hidden>
-          {isExistingRecord ? 'Edit' : 'Create'} record dialog
+          {isExistingRecord ? t('edit-record-dialog') : t('create-record-dialog')}
         </DialogDescription>
       </div>
       <div
