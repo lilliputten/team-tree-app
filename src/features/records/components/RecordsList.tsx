@@ -91,11 +91,7 @@ export function RecordsList(props: TRecordsListProps) {
     });
   }, []);
 
-  // const { invokeAddRecordModal, addRecordModalElement } = useAddRecordModal({
-  //   onAddRecord: onAddRootRecord,
-  // });
   const { invokeEditRecordModal, editRecordModalElement } = useEditRecordModal({
-    // onEditRecord: editThisRecord,
     onAddRecord: onAddRootRecord,
   });
 
@@ -141,6 +137,7 @@ export function RecordsList(props: TRecordsListProps) {
           '__RecordsList_Scroll', // DEBUG
           className,
           'flex flex-col items-center',
+          'justify-center', // Content in the middle of the page
           'layout-follow',
           commonXPaddingTwStyle,
         )}
@@ -183,7 +180,6 @@ export function RecordsList(props: TRecordsListProps) {
                   data-button-id="add"
                   variant="ghostBlue"
                   className="flex gap-2 text-green-500 hover:bg-green-400/10 hover:text-green-700 active:bg-green-500 active:text-green-100"
-                  // size="icon"
                   onClick={addRootRecord}
                 >
                   <Icons.add className="size-5" />

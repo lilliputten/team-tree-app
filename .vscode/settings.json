@@ -18,5 +18,7 @@
   "git.ignoreLimitWarning": true,
   "CodeGPT.apiKey": "CodeGPT Plus Beta",
   "findUnusedExports.detectCircularImports": true,
-  "search.useGlobalIgnoreFiles": true
+  "search.useGlobalIgnoreFiles": true,
+  "i18n-ally.localesPaths": ["src/i18n", "src/messages"],
+  "i18n-ally.keystyle": "nested"
 }

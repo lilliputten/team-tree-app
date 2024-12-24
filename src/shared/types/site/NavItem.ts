@@ -1,7 +1,7 @@
 import { Icons } from '@/components/shared/icons';
 
 export type NavItem = {
-  title: string;
+  titleId: string; // Id for i18n
   href: string;
   badge?: number;
   disabled?: boolean;

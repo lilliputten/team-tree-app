@@ -4,18 +4,21 @@ import React from 'react';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
-import { siteConfig } from '@/config/site';
 import { siteMenu } from '@/config/siteMenu';
 import { commonXMarginTwStyle } from '@/config/ui';
 import { cn } from '@/lib/utils';
-import { ModeToggle } from '@/components/layout/ModeToggle';
-import { Icons } from '@/components/shared/icons';
+import { Button } from '@/components/ui/button';
+import { NavLocaleSwitcher } from '@/components/layout/NavLocaleSwitcher';
+import { NavModeToggle } from '@/components/layout/NavModeToggle';
 
 export function NavMobile() {
   const [open, setOpen] = React.useState(false);
   const selectedLayout = useSelectedLayoutSegment();
   const documentation = selectedLayout === 'docs';
+
+  const t = useTranslations('SiteMenu');
 
   const links = siteMenu.mainNav;
   const hasLinks = !!links?.length;
@@ -79,22 +82,37 @@ export function NavMobile() {
       >
         <ul className="grid divide-y divide-muted">
           {hasLinks &&
-            links.map(({ title, href }) => (
+            links.map(({ titleId, href }) => (
               <li key={href} className="py-3">
                 <Link
                   href={href}
                   onClick={() => setOpen(false)}
-                  className="flex w-full font-medium capitalize"
+                  className="flex font-medium capitalize"
                 >
-                  {title}
+                  <Button
+                    //
+                    variant="ghost"
+                  >
+                    {t(titleId)}
+                  </Button>
                 </Link>
+                {/*
+                <Link
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className="flex w-full px-3 font-medium capitalize"
+                >
+                  {t(titleId)}
+                </Link>
+                */}
               </li>
             ))}
         </ul>
 
         {documentation ? <div className="mt-8 block md:hidden">DocsSidebarNav</div> : null}
 
-        <div className="mt-5 flex items-center justify-end space-x-4">
+        <div className="mt-5 flex items-center space-x-4">
+          {/*
           <Link
             href={siteConfig.links.github}
             target="_blank"
@@ -104,7 +122,9 @@ export function NavMobile() {
             <Icons.github className="size-6" />
             <span className="sr-only">GitHub</span>
           </Link>
-          <ModeToggle />
+          */}
+          <NavLocaleSwitcher />
+          <NavModeToggle />
         </div>
       </nav>
     </>

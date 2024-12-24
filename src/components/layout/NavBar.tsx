@@ -1,12 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { siteMenu } from '@/config/siteMenu';
 import { commonXPaddingTwStyle } from '@/config/ui';
 import { cn } from '@/lib/utils';
-import { ModeToggle } from '@/components/layout/ModeToggle';
 import { NavBarBrand } from '@/components/layout/NavBarBrand';
+import { NavLocaleSwitcher } from '@/components/layout/NavLocaleSwitcher';
+import { NavModeToggle } from '@/components/layout/NavModeToggle';
 import { MaxWidthWrapper } from '@/components/shared/MaxWidthWrapper';
 
 interface NavBarProps {
@@ -16,6 +18,7 @@ interface NavBarProps {
 export function NavBar(props: NavBarProps) {
   const { large } = props;
   const links = siteMenu.mainNav;
+  const t = useTranslations('SiteMenu');
   return (
     <header
       className={cn(
@@ -64,7 +67,7 @@ export function NavBar(props: NavBarProps) {
                     item.disabled && 'cursor-not-allowed opacity-50',
                   )}
                 >
-                  {item.title}
+                  {t(item.titleId)}
                 </Link>
               ))}
             </nav>
@@ -97,7 +100,8 @@ export function NavBar(props: NavBarProps) {
             <span className="sr-only">GitHub</span>
           </Link>
           */}
-          <ModeToggle onRed />
+          <NavLocaleSwitcher onPrimary />
+          <NavModeToggle onPrimary />
         </div>
       </MaxWidthWrapper>
     </header>

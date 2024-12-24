@@ -1,0 +1,23 @@
+{
+  "NavLocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, ru {ʀᴜ Russian} en {🇺🇸 English} other {Unknown}}"
+  },
+  "NavModeToggle": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggle-theme": "Toggle theme"
+  },
+  "RootPage": {
+    "title": "Editor - Team Tree",
+    "about": "Go to the about page"
+  },
+  "SiteMenu": {
+    "documentation": "Documentation"
+  },
+  "DocumentationPage": {
+    "description": "<p>The pathnames are internationalized too.</p><p>If you're using the default language English, you'll see <code>/en/documentation</code> in the browser address bar on this page.</p><p>If you change the locale to Russian, the URL is localized accordingly (<code>/ru/документация</code>).</p>",
+    "title": "Sample page"
+  }
+}
