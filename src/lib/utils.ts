@@ -28,6 +28,13 @@ export function constructMetadata({
   locale?: TLocale;
   url?: string;
 } = {}): Metadata {
+  console.log('[utils:constructMetadata]', {
+    url,
+    locale,
+    siteConfig,
+    title,
+    description,
+  });
   return {
     title,
     description,
@@ -36,6 +43,10 @@ export function constructMetadata({
       'Next.js',
       'React',
       'Prisma',
+      'Team Tree',
+      'Data',
+      'Editor',
+      'Sample',
     ],
     authors: [
       {
@@ -50,17 +61,18 @@ export function constructMetadata({
       title,
       description,
       siteName: title,
+      images: [image],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
       images: [image],
-      creator: '@miickasmt',
+      creator: '@lilliputten',
     },
     icons,
-    metadataBase: new URL(siteConfig.url),
-    manifest: `${siteConfig.url}/site.webmanifest`,
+    metadataBase: new URL(url),
+    manifest: `${url}/site.webmanifest`,
     ...(noIndex && {
       robots: {
         index: false,
