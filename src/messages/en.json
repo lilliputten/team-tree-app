@@ -4,10 +4,10 @@
     "locale": "{locale, select, ru {ʀᴜ Russian} en {🇺🇸 English} other {Unknown}}"
   },
   "NavModeToggle": {
+    "label": "Toggle theme",
     "light": "Light",
     "dark": "Dark",
-    "system": "System",
-    "toggle-theme": "Toggle theme"
+    "system": "System"
   },
   "RootPage": {
     "title": "Editor - Team Tree",

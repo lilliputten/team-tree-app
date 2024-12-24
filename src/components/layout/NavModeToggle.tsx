@@ -27,13 +27,12 @@ const themeIcons: Record<string, Icon> = {
 
 export function NavModeToggle(props: TNavModeToggleProps) {
   const { onPrimary, className } = props;
-  const { setTheme, theme: currentTheme, resolvedTheme, themes, ...rest } = useTheme();
-  console.log('XXX', {
+  const {
+    theme: currentTheme,
+    // resolvedTheme,
+    themes,
     setTheme,
-    currentTheme,
-    resolvedTheme,
-    rest,
-  });
+  } = useTheme();
   const t = useTranslations('NavModeToggle');
 
   return (
