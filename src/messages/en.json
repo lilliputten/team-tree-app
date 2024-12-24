@@ -19,5 +19,59 @@
   "DocumentationPage": {
     "description": "<p>The pathnames are internationalized too.</p><p>If you're using the default language English, you'll see <code>/en/documentation</code> in the browser address bar on this page.</p><p>If you change the locale to Russian, the URL is localized accordingly (<code>/ru/документация</code>).</p>",
     "title": "Sample page"
+  },
+  "RecordsList": {
+    "add-new-record": "Add new record",
+    "add-new-top-level-record": "Add new top-level record",
+    "error-adding-record": "Error adding record",
+    "error-reloading-data": "Error reloading data",
+    "no-items-have-been-created-yet": "No items have been created yet.",
+    "record-successfully-added": "Record successfully added",
+    "records-data-has-been-successfully-reloaded": "Records data has been successfully reloaded",
+    "refresh-data": "Refresh data"
+  },
+  "RecordsListHeader": {
+    "editor-statistics-coming-here": "Editor statistics coming here...",
+    "refresh-data": "Refresh data",
+    "add-new-top-level-record": "Add new top level record"
+  },
+  "RecordItem": {
+    "error-adding-record": "Error adding record",
+    "error-editing-record": "Error editing record",
+    "error-loading-children-records": "Error loading children records",
+    "record-has-been-successfully-updated": "Record has been successfully updated",
+    "record-successfully-added": "Record successfully added",
+    "records-has-been-loaded": "Records has been loaded"
+  },
+  "RecordHeader": {
+    "add-new-record-under-this-one": "Add new record under this one",
+    "edit-record-name": "Edit record name",
+    "remove-the-record-and-all-its-children": "Remove the record and all its children"
+  },
+  "RecordChildren": {
+    "error-removing-record": "Error removing record",
+    "successfully-removed-records": "Successfully removed records:",
+    "attempt-to-update-a-child-for-the-uninitalized-parent": "Attempt to update a child for the uninitalized parent"
+  },
+  "ConfirmDeleteRecordBlock": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "delete-the-record": "Delete the record"
+  },
+  "ConfirmDeleteRecordModal": {
+    "delete-record": "Delete record",
+    "delete-record-dialog": "Delete record dialog"
+  },
+  "EditRecordBlock": {
+    "create": "Create",
+    "name": "Name",
+    "update": "Update",
+    "cancel": "Cancel"
+  },
+  "EditRecordModal": {
+    "create-record": "Create record",
+    "create-record-dialog": "Create record dialog",
+    "edit-record": "Edit record",
+    "edit-record-dialog": "Edit record dialog"
   }
 }

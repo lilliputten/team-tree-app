@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -16,6 +17,7 @@ export interface TConfirmDeleteRecordBlockProps {
 }
 
 export function ConfirmDeleteRecordBlock(props: TConfirmDeleteRecordBlockProps) {
+  const t = useTranslations('ConfirmDeleteRecordBlock');
   const {
     // prettier-ignore
     className,
@@ -33,7 +35,9 @@ export function ConfirmDeleteRecordBlock(props: TConfirmDeleteRecordBlockProps) 
   }, [submitRef]);
   return (
     <div className={cn(className, '__ConfirmDeleteRecordBlock', 'my-4 flex flex-col gap-6')}>
-      <p className="Text">Delete the record "{name}"?</p>
+      <p className="Text">
+        {t('delete-the-record')} "{name}"?
+      </p>
       <div className="flex w-full gap-4">
         <Button
           type="submit"
@@ -42,10 +46,14 @@ export function ConfirmDeleteRecordBlock(props: TConfirmDeleteRecordBlockProps) 
           disabled={!isSubmitEnabled}
           onClick={() => onConfirm(id)}
         >
-          {isPending ? <Icons.spinner className="size-4 animate-spin" /> : <span>Delete</span>}
+          {isPending ? (
+            <Icons.spinner className="size-4 animate-spin" />
+          ) : (
+            <span>{t('delete')}</span>
+          )}
         </Button>
         <Button variant="ghost" onClick={onCancel}>
-          <span>Cancel</span>
+          <span>{t('cancel')}</span>
         </Button>
       </div>
     </div>

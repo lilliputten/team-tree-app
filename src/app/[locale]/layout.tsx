@@ -38,6 +38,7 @@ async function RootLayout(props: TRootLayoutProps) {
     const error = new Error('Invalid locale: ' + locale);
     // eslint-disable-next-line no-console
     console.error('[layout]', error);
+    debugger; // eslint-disable-line no-debugger
     // TODO? -- Redirect to 'notFound' page?
   }
 
@@ -89,4 +90,3 @@ async function RootLayout(props: TRootLayoutProps) {
 }
 
 export default RootLayout;
-// export default appWithTranslation(RootLayout);

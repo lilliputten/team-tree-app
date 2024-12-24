@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { DialogTitle } from '@radix-ui/react-dialog';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { DialogDescription } from '@/components/ui/dialog';
@@ -20,6 +21,7 @@ interface TConfirmDeleteRecordModalProps /* extends TConfirmDeleteRecordBlockPro
 }
 
 export function ConfirmDeleteRecordModal(props: TConfirmDeleteRecordModalProps) {
+  const t = useTranslations('ConfirmDeleteRecordModal');
   const {
     // prettier-ignore
     show,
@@ -45,9 +47,9 @@ export function ConfirmDeleteRecordModal(props: TConfirmDeleteRecordModalProps) 
           // isPending && 'pointer-events-none opacity-50',
         )}
       >
-        <DialogTitle className="DialogTitle">Delete record</DialogTitle>
+        <DialogTitle className="DialogTitle">{t('delete-record')}</DialogTitle>
         <DialogDescription aria-hidden="true" hidden>
-          Delete record dialog
+          {t('delete-record-dialog')}
         </DialogDescription>
       </div>
       <div

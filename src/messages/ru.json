@@ -19,5 +19,59 @@
   "DocumentationPage": {
     "description": "<p>Пути также интернационализированы.</p><p>Если вы используете английский язык по умолчанию, вы увидите <code>/en/documentation</code> в адресной строке браузера на этой странице. \n</p><p>Если вы измените языковой стандарт на русский, URL-адрес будет локализован соответствующим образом (<code>/ru/документация</code>).</p>",
     "title": "Пример страницы"
+  },
+  "RecordsList": {
+    "add-new-record": "Добавить новую запись",
+    "add-new-top-level-record": "Добавить новую запись верхнего уровня",
+    "error-adding-record": "Ошибка добавления записи",
+    "error-reloading-data": "Ошибка перезагрузки данных",
+    "no-items-have-been-created-yet": "Ни один элемент еще не создан.",
+    "record-successfully-added": "Запись успешно добавлена",
+    "records-data-has-been-successfully-reloaded": "Данные записей успешно перезагружены",
+    "refresh-data": "Обновить данные"
+  },
+  "RecordsListHeader": {
+    "refresh-data": "Обновить данные",
+    "add-new-top-level-record": "Добавить новую запись верхнего уровня",
+    "editor-statistics-coming-here": "Здесь будет статистика редактора..."
+  },
+  "RecordItem": {
+    "error-adding-record": "Ошибка добавления записи",
+    "error-editing-record": "Ошибка редактирования записи.",
+    "error-loading-children-records": "Ошибка при загрузке дочерних записей.",
+    "record-has-been-successfully-updated": "Запись успешно обновлена",
+    "record-successfully-added": "Запись успешно добавлена",
+    "records-has-been-loaded": "Записи загружены"
+  },
+  "RecordHeader": {
+    "edit-record-name": "Изменить имя записи",
+    "add-new-record-under-this-one": "Добавить новую запись под этой",
+    "remove-the-record-and-all-its-children": "Удалить запись и все ее дочерние элементы"
+  },
+  "RecordChildren": {
+    "error-removing-record": "Ошибка удаления записи",
+    "successfully-removed-records": "Успешно удалено записей:",
+    "attempt-to-update-a-child-for-the-uninitalized-parent": "Попытка обновить дочерний элемент для неинициализированного родителя"
+  },
+  "ConfirmDeleteRecordBlock": {
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "delete-the-record": "Удалить запись"
+  },
+  "ConfirmDeleteRecordModal": {
+    "delete-record": "Удалить запись",
+    "delete-record-dialog": "Диалог удаления записи"
+  },
+  "EditRecordBlock": {
+    "name": "Имя",
+    "update": "Обновить",
+    "create": "Создать",
+    "cancel": "Отмена"
+  },
+  "EditRecordModal": {
+    "create-record": "Создать запись",
+    "create-record-dialog": "Диалог создания записи",
+    "edit-record": "Редактировать запись",
+    "edit-record-dialog": "Диалог редактирования записи"
   }
 }

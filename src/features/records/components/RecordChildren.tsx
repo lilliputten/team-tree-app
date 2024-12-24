@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Prisma } from '@prisma/client';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { TPropsWithClassName } from '@/shared/types/generic';
@@ -22,6 +23,7 @@ interface TRecordChildrenProps extends TPropsWithClassName {
 }
 
 export function RecordChildren(props: TRecordChildrenProps) {
+  const t = useTranslations('RecordChildren');
   const {
     className,
     parentId,
@@ -58,7 +60,7 @@ export function RecordChildren(props: TRecordChildrenProps) {
                 setChildren(updatedRecords);
               }
             }
-            toast.success('Successfully removed records: ' + removedRecordsCount);
+            toast.success(t('successfully-removed-records') + removedRecordsCount);
             resolve(payload);
           } catch (error) {
             const description = getErrorText(error);
@@ -67,7 +69,7 @@ export function RecordChildren(props: TRecordChildrenProps) {
               error,
             });
             debugger; // eslint-disable-line no-debugger
-            const nextMsg = 'Error removing record';
+            const nextMsg = t('error-removing-record');
             const nextError = new Error(nextMsg);
             toast.error(nextMsg, {
               description,
@@ -80,18 +82,21 @@ export function RecordChildren(props: TRecordChildrenProps) {
         });
       });
     },
-    [handleUpdatedRecords, childrenRecords, memo],
+    [memo, childrenRecords, t, handleUpdatedRecords],
   );
 
-  const handleUpdateRecord = React.useCallback((record: TRecordWithChildrenOrCount) => {
-    setChildren((prevChildren) => {
-      if (!prevChildren) {
-        throw new Error('Tried to update child for uninitalized parent');
-      }
-      const updatedChildren = prevChildren.map((it) => (it.id === record.id ? record : it));
-      return updatedChildren;
-    });
-  }, []);
+  const handleUpdateRecord = React.useCallback(
+    (record: TRecordWithChildrenOrCount) => {
+      setChildren((prevChildren) => {
+        if (!prevChildren) {
+          throw new Error(t('attempt-to-update-a-child-for-the-uninitalized-parent'));
+        }
+        const updatedChildren = prevChildren.map((it) => (it.id === record.id ? record : it));
+        return updatedChildren;
+      });
+    },
+    [t],
+  );
 
   const { invokeConfirmDeleteRecordModal, confirmDeleteRecordModalElement } =
     useConfirmDeleteRecordModal({ onDeleteRecord });
