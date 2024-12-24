@@ -11,7 +11,7 @@ export const siteConfig: SiteConfig = {
   url: siteUrl,
   ogImage: `/static/opengraph-image.jpg`,
   links: {
-    website: 'https://example.com/',
+    website: siteUrl, // 'https://team-tree-app.vercel.app/',
     github: 'https://github.com/lilliputten/team-tree-app',
   },
   mailSupport: 'support@example.com',

@@ -54,7 +54,22 @@ async function RootLayout(props: TRootLayoutProps) {
       lang={locale}
       suppressHydrationWarning
     >
-      <head />
+      <head>
+        {/*
+        <meta property="og:url" content="https://vanilla-tasks.lilliputten.com/" />
+        <meta property="og:title" content="Vanilla Tasks Tracker" />
+        <meta
+          property="og:description"
+          content="The small application aimed to demonstrate native js and css abilities in browser environment"
+        />
+        <meta property="twitter:image" content="/images/og/og-512.jpg" />
+        <meta property="og:logo" content="/images/og/og-192.jpg" />
+        <meta property="og:image" content="/images/og/og-1200x630.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:type" content="website" />
+        */}
+      </head>
       <body
         className={cn(
           'flex flex-col',
