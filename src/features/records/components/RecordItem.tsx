@@ -7,6 +7,8 @@ import { toast } from 'sonner';
 import { getErrorText } from '@/lib/helpers/strings';
 import { cn } from '@/lib/utils';
 
+// import revalidatePage from '@/features/records/actions/revalidatePage';
+
 import { addRecord, fetchRecordsByParentWithChildrenCount, updateRecord } from '../actions';
 import { TFetchParentId, TRecord, TRecordWithChildrenOrCount, TRecordWithoutId } from '../types';
 import { useEditRecordModal } from './EditRecord';
@@ -127,6 +129,7 @@ export function RecordItem(props: TRecordItemProps) {
             handleUpdate(updatedRecord);
             toast.success(t('record-has-been-successfully-updated'));
             resolve(updatedRecord);
+            // revalidatePage();
           } catch (error) {
             const description = getErrorText(error);
             // eslint-disable-next-line no-console
