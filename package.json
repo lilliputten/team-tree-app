@@ -3,7 +3,7 @@
   "description": "Team tree editor NodeJS application for IIS/iisnode production environment",
   "version": "0.0.6",
   "timestamp": "2024.12.24 22:39:48 +0300",
-  "changed": "2025.05.05, 20:02",
+  "changed": "2025.05.05, 23:35",
   "private": false,
   "lint-staged": {
     "src/**/*.{json,js,jsx,ts,tsx}": [
@@ -147,7 +147,7 @@
     "prisma-db-push-test": "echo --Create test database-- && cross-env DATABASE_URL='file:.data/test.db' prisma db push",
     "prisma-studio": "echo --Run database explorer-- && prisma studio",
     "husky-init": "husky init",
-    "postinstall": "pnpm run prisma-generate",
+    "postinstall": "pnpm run prisma-generate && pnpm run prisma-db-push",
     "prepare": "husky",
     "test": "jest",
     "test-update-snapshot": "jest --updateSnapshot",
