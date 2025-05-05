@@ -13,8 +13,13 @@ export const nextAuthApp = NextAuth({
     // error: "/auth/error",
   },
   callbacks: {
-    async session({ token, session }) {
-      debugger;
+    async session(params) {
+      const { token, session } = params;
+      console.log('[auth:session]', {
+        token,
+        session,
+        params,
+      });
       if (session.user) {
         if (token.sub) {
           session.user.id = token.sub;
@@ -36,8 +41,12 @@ export const nextAuthApp = NextAuth({
       return session;
     },
 
-    async jwt({ token }) {
-      debugger;
+    async jwt(params) {
+      const { token } = params;
+      console.log('[auth:jwt]', {
+        token,
+        params,
+      });
       if (!token.sub) {
         return token;
       }

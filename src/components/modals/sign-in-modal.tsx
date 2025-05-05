@@ -1,6 +1,5 @@
-// import { BuiltInProviderType } from "@auth-core";
 import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react';
-import { signIn } from 'next-auth/react';
+import { signIn, SignInOptions } from 'next-auth/react';
 
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
@@ -13,10 +12,10 @@ type TSignInParameters = Parameters<typeof signIn>;
 type TProvider = TSignInParameters[0];
 
 interface OAuthSignInButtonProps {
-  signInClicked?: boolean;
-  setSignInClicked: Dispatch<SetStateAction<boolean>>;
+  currentProvider?: TProvider;
+  setSignInClicked: Dispatch<SetStateAction<TProvider>>;
   setShowSignInModal: Dispatch<SetStateAction<boolean>>;
-  provider: TProvider; // BuiltInProviderType;
+  provider: TProvider;
   ProviderIcon: IconType; // React.FC;
   text: string;
 }
@@ -24,29 +23,40 @@ interface OAuthSignInButtonProps {
 function OAuthSignInButton(props: OAuthSignInButtonProps) {
   const {
     // prettier-ignore
-    signInClicked,
+    currentProvider,
     setSignInClicked,
     setShowSignInModal,
     provider,
     ProviderIcon,
     text,
   } = props;
+  const isClicked = !!currentProvider;
+  const isThisClicked = currentProvider == provider;
   return (
     <Button
-      className={cn('--sign-in-modal-button--')}
+      className={cn('__sign-in-modal-button')}
       variant="primary"
       rounded="full"
-      disabled={signInClicked}
+      disabled={isClicked}
       onClick={() => {
-        setSignInClicked(true);
-        signIn(provider, { redirect: false }).then(() =>
+        setSignInClicked(provider);
+        console.log('[sign-in-modal:OAuthSignInButtonProps] Sign in button clicked', {
+          provider,
+        });
+        // @see https://next-auth.js.org/getting-started/client#specifying-a-callbackurl
+        signIn(provider /* , { redirect: false, callbackUrl: '/' } */).then((res) => {
+          console.log('[sign-in-modal:OAuthSignInButtonProps] Sign in finished', {
+            res,
+          });
+          debugger;
+          // Hide the modal
           setTimeout(() => {
             setShowSignInModal(false);
-          }, 400),
-        );
+          }, 400);
+        });
       }}
     >
-      {signInClicked ? (
+      {isThisClicked ? (
         <Icons.spinner className="mr-2 size-4 animate-spin" />
       ) : (
         <ProviderIcon className="mr-2 size-4" />
@@ -63,7 +73,7 @@ function SignInModal({
   showSignInModal: boolean;
   setShowSignInModal: Dispatch<SetStateAction<boolean>>;
 }) {
-  const [signInClicked, setSignInClicked] = useState(false);
+  const [currentProvider, setSignInClicked] = useState<TProvider>(undefined);
 
   return (
     <Modal showModal={showSignInModal} setShowModal={setShowSignInModal}>
@@ -89,7 +99,7 @@ function SignInModal({
         >
           <a href={siteConfig.url}>
             <Logo
-              //  size="lg"
+              // size="lg"
               className="size-18"
             />
           </a>
@@ -108,7 +118,6 @@ function SignInModal({
             className={cn(
               // prettier-ignore
               'text-sm',
-              // 'text-gray-500',
             )}
           >
             This is strictly for demo purposes - only your email and profile picture will be stored.
@@ -121,7 +130,6 @@ function SignInModal({
             'flex',
             'flex-col',
             'space-y-4',
-            // 'bg-background',
             'bg-primary-400',
             'px-4',
             'py-8',
@@ -129,7 +137,7 @@ function SignInModal({
           )}
         >
           <OAuthSignInButton
-            signInClicked={signInClicked}
+            currentProvider={currentProvider}
             setSignInClicked={setSignInClicked}
             setShowSignInModal={setShowSignInModal}
             provider="github"
@@ -137,7 +145,7 @@ function SignInModal({
             text="Sign In with Github"
           />
           <OAuthSignInButton
-            signInClicked={signInClicked}
+            currentProvider={currentProvider}
             setSignInClicked={setSignInClicked}
             setShowSignInModal={setShowSignInModal}
             provider="yandex"
@@ -145,7 +153,7 @@ function SignInModal({
             text="Sign In with Yandex"
           />
           <OAuthSignInButton
-            signInClicked={signInClicked}
+            currentProvider={currentProvider}
             setSignInClicked={setSignInClicked}
             setShowSignInModal={setShowSignInModal}
             provider="google"
