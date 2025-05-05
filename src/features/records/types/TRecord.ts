@@ -13,7 +13,9 @@ export type TFetchParentId = TRecordId | null | undefined;
 
 /** New record shouldn't contain id */
 export type TRecordWithoutId = Omit<TRecord, 'id'>;
-export type TNewRecord = { name: TRecord['name']; parentId: TRecord['parentId'] };
+export type TRecordWithoutUserId = Omit<TRecord, 'userId'>;
+export type TRecordWithoutIds = Omit<TRecord, 'id' | 'userId'>;
+export type TNewRecord = TRecordWithoutIds; // { name: TRecord['name']; parentId: TRecord['parentId'] };
 export type TNewOrExistingRecord = TNewRecord & { id?: TRecord['id'] };
 
 export type TRecordWithChildren = TRecord & { children: TRecord[] };

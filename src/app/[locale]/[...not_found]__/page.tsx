@@ -5,8 +5,6 @@ import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 
-// TODO: Force 404 status code for the response
-
 export default function NotFound() {
   const router = useRouter();
   return (

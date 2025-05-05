@@ -1,5 +1,5 @@
 // import localFont from 'next/font/local';
-// import { SessionProvider } from 'next-auth/react';
+import { SessionProvider } from 'next-auth/react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { ThemeProvider } from 'next-themes';
@@ -10,6 +10,7 @@ import '@/styles/root.scss';
 import { cn, constructMetadata } from '@/lib/utils';
 import { Toaster } from '@/components/ui/sonner';
 import { GenericLayout } from '@/components/layout/GenericLayout';
+import ModalProvider from '@/components/modals/providers';
 import { TailwindIndicator } from '@/components/service/TailwindIndicator';
 import { fontDefault, fontHeading, fontMono } from '@/assets/fonts';
 import { routing } from '@/i18n/routing';
@@ -54,10 +55,10 @@ async function RootLayout(props: TRootLayoutProps) {
     const error = new Error(`Invalid locale: ${locale}, using default: ${defaultLocale}`);
     // eslint-disable-next-line no-console
     console.warn('[layout:RootLayout]', error.message, {
-      locale,
-      params,
-      routing,
-      props,
+      // locale,
+      // params,
+      // routing,
+      // props,
       // error,
     });
     // debugger; // eslint-disable-line no-debugger
@@ -104,25 +105,27 @@ async function RootLayout(props: TRootLayoutProps) {
         )}
         data-layout="clippable" // Default layout mode, could casue flickering
       >
-        <NextIntlClientProvider messages={messages}>
-          {/* <SessionProvider> */}
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <GenericLayout>
-              {/* Core content */}
-              {children}
-            </GenericLayout>
-            {/* </ModalProvider> */}
-            {/* <Analytics /> */}
-            <Toaster richColors closeButton />
-            <TailwindIndicator />
-          </ThemeProvider>
-          {/* </SessionProvider> */}
-        </NextIntlClientProvider>
+        <SessionProvider>
+          <NextIntlClientProvider messages={messages}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <ModalProvider>
+                <GenericLayout>
+                  {/* Core content */}
+                  {children}
+                </GenericLayout>
+                {/* </ModalProvider> */}
+                {/* <Analytics /> */}
+                <Toaster richColors closeButton />
+                <TailwindIndicator />
+              </ModalProvider>
+            </ThemeProvider>
+          </NextIntlClientProvider>
+        </SessionProvider>
       </body>
     </html>
   );

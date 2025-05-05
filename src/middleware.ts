@@ -4,8 +4,14 @@ import { routing } from './i18n/routing';
 
 export default createMiddleware(routing);
 
+/* // Using `localesList` to create the i18n prefix regexp
+ * const localizedPathReg = `/(${localesList.join('|')})/:path*`;
+ */
+
 export const config = {
   matcher: [
+    // NOTE: It seems that these values should be hard-coded string literals, so it's impossible to compose it dynamically, from `localesList`
+
     // Enable a redirect to a matching locale at the root
     '/',
 
@@ -15,6 +21,6 @@ export const config = {
 
     // Enable redirects that add missing locales
     // (e.g. `/pathnames` -> `/en/pathnames`)
-    '/((?!_next|_vercel|.*\\..*).*)',
+    '/((?!api|_next|_vercel|.well-known|.*\\..*).*)',
   ],
 };

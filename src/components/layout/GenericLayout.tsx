@@ -1,6 +1,3 @@
-import '@/styles/globals.scss';
-import '@/styles/root.scss';
-
 import { useLocale } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 

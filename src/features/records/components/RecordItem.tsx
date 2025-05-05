@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 // import revalidatePage from '@/features/records/actions/revalidatePage';
 
 import { addRecord, fetchRecordsByParentWithChildrenCount, updateRecord } from '../actions';
-import { TFetchParentId, TRecord, TRecordWithChildrenOrCount, TRecordWithoutId } from '../types';
+import { TFetchParentId, TNewRecord, TRecord, TRecordWithChildrenOrCount } from '../types';
 import { useEditRecordModal } from './EditRecord';
 import { RecordChildren } from './RecordChildren';
 import { RecordHeader } from './RecordHeader';
@@ -76,13 +76,17 @@ export function RecordItem(props: TRecordItemProps) {
   );
 
   const addChildRecord = React.useCallback(
-    (newRecord: TRecordWithoutId) => {
+    (newRecord: TNewRecord) => {
       return new Promise<Awaited<ReturnType<typeof addRecord>>>((resolve, reject) => {
         startUpdating(async () => {
           try {
+            const newRecordWithUser = {
+              ...newRecord,
+              userId: null, // TODO: Add current user id
+            };
             const promises = [
               // Add record...
-              addRecord(newRecord),
+              addRecord(newRecordWithUser),
               // Fetch records if hasn't been fetched yet...
               !childrenRecords ? fetchRecordsByParentWithChildrenCount(record.id) : undefined,
             ].filter(Boolean);

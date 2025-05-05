@@ -13,10 +13,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Applied data scope
+
 model Record {
-  id   Int    @id @default(autoincrement())
+  // Unique id
+  id Int @id @default(autoincrement())
+
+  // Belonged to user (optional)
+  userId String?
+  user   User?  @relation(fields: [userId], references: [id])
+
+  // Custom name
   name String
 
+  // Parent-children relations
   // @see https://github.com/prisma/prisma/issues/4562#issuecomment-860176071
   children Record[] @relation("SubRecords")
   parent   Record?  @relation("SubRecords", fields: [parentId], references: [id])
@@ -24,3 +34,71 @@ model Record {
 
   @@map("Records")
 }
+
+// System scope
+
+model Account {
+  id                String   @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @default(now()) @map("updated_at")
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map("Accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  expires      DateTime
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("Sessions")
+}
+
+model User {
+  // id                     Int       @id @default(autoincrement())
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @default(now()) @map("updated_at")
+  role          String    @default("USER") // "USER" OR "ADMIN", instead of `UserRole` enum (unsupported in sqlite): `role UserRole  @default(USER)`
+  accounts      Account[]
+  sessions      Session[]
+
+  records Record[] // Root records
+
+  @@map("Users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("VerificationTokens")
+}
+
+// enum UserRole {
+//   ADMIN
+//   USER
+// }

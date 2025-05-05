@@ -33,25 +33,6 @@ export function NavLocaleSwitcher(props: TNavLocaleSwitcherProps) {
 
   const [isPending, startTransition] = React.useTransition();
 
-  /* // DEBUG
-   * React.useEffect(() => {
-   *   console.log('[NavLocaleSwitcher]: DEBUG', {
-   *     locale,
-   *     // curLocale,
-   *     // defaultLocale,
-   *     pathname,
-   *     params,
-   *   });
-   * }, [
-   *   // ...
-   *   // curLocale,
-   *   locale,
-   *   // defaultLocale,
-   *   pathname,
-   *   params,
-   * ]);
-   */
-
   function onSelectChange(event: React.MouseEvent<HTMLDivElement>) {
     const target = event.currentTarget as HTMLDivElement;
     const { dataset } = target;

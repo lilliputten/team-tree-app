@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import { Icons } from '@/components/shared/icons';
 import { MaxWidthWrapper } from '@/components/shared/MaxWidthWrapper';
-import { TRecordWithChildrenOrCount, TRecordWithoutId } from '@/features/records/types';
+import { TRecordWithChildrenOrCount, TRecordWithoutIds } from '@/features/records/types';
 
 import { addRecord, fetchRecordsByParentWithChildrenCount } from '../actions';
 import { useEditRecordModal } from './EditRecord';
@@ -65,11 +65,15 @@ export function RecordsList(props: TRecordsListProps) {
   }, [t]);
 
   const onAddRootRecord = React.useCallback(
-    (newRecord: TRecordWithoutId) => {
+    (newRecord: TRecordWithoutIds) => {
       return new Promise<Awaited<ReturnType<typeof addRecord>>>((resolve, reject) => {
         startUpdating(async () => {
           try {
-            const addedRecord = await addRecord(newRecord);
+            const newRecordWithUser = {
+              ...newRecord,
+              userId: null, // TODO: Add current user id
+            };
+            const addedRecord = await addRecord(newRecordWithUser);
             setChildren((records) => {
               return records ? records.concat(addedRecord) : [addedRecord];
             });

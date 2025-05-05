@@ -1,4 +1,5 @@
 {
+  "NavAuthButton": {},
   "NavLocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, ru {ʀᴜ Russian} en {🇺🇸 English} other {Unknown}}"
