@@ -13,6 +13,7 @@ export const routing = defineRouting({
 
   pathnames: {
     '/': '/',
+    // Localized path example
     '/documentation': {
       en: '/documentation',
       ru: '/документация',
@@ -22,6 +23,5 @@ export const routing = defineRouting({
 
 export type Pathnames = keyof typeof routing.pathnames;
 
-// Lightweight wrappers around Next.js' navigation APIs
-// that will consider the routing configuration
+// Lightweight wrappers around Next.js' navigation APIs that will consider the routing configuration
 export const { Link, redirect, usePathname, useRouter, getPathname } = createNavigation(routing);
