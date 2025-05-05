@@ -2,13 +2,13 @@
 
 import { Dispatch, SetStateAction } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { X } from 'lucide-react';
-// import { useRouter } from "next/router";
 import { Drawer } from 'vaul';
 
 import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 
 interface ModalProps {
   children: React.ReactNode;
@@ -18,6 +18,9 @@ interface ModalProps {
   onClose?: () => void;
   desktopOnly?: boolean;
   preventDefaultClose?: boolean;
+  title?: string;
+  hiddenTitle?: boolean;
+  description?: string;
 }
 
 export function Modal({
@@ -28,6 +31,9 @@ export function Modal({
   onClose,
   desktopOnly,
   preventDefaultClose,
+  title,
+  hiddenTitle,
+  description,
 }: ModalProps) {
   // const router = useRouter();
 
@@ -43,10 +49,6 @@ export function Modal({
     if (setShowModal) {
       setShowModal(false);
     }
-    // else, this is intercepting route @modal
-    // else {
-    // router.back();
-    // }
   };
   const { isMobile } = useMediaQuery();
 
@@ -62,7 +64,6 @@ export function Modal({
       >
         <Drawer.Overlay
           className={cn(
-            // 'bg-background/80', // Original backdrop color
             'bg-black/30', // Dark background (should be synced in both dialog and modal)
             'fixed inset-0 z-40 backdrop-blur-sm',
           )}
@@ -74,18 +75,11 @@ export function Modal({
               'fixed',
               'inset-x-0',
               'inset-y-0',
-              // 'bottom-0 top-0 mt-24',
               'z-50 overflow-hidden',
-              // 'rounded-t-[10px]',
               'border bg-background',
               className,
             )}
           >
-            {/* // XXX: ???
-            <div className="sticky top-0 z-20 flex w-full items-center justify-center bg-inherit">
-              <div className="bg-muted-foreground/20 my-3 h-1.5 w-16 rounded-full" />
-            </div>
-            */}
             {children}
             <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
               <X className="size-4" />
@@ -97,6 +91,11 @@ export function Modal({
       </Drawer.Root>
     );
   }
+
+  const titleNode = <DialogTitle>{title}</DialogTitle>;
+  const showTitle = !hiddenTitle && !!title;
+  const descriptionNode = <DialogDescription>{description}</DialogDescription>;
+
   return (
     <Dialog
       open={setShowModal ? showModal : true}
@@ -114,6 +113,11 @@ export function Modal({
           className,
         )}
       >
+        {showTitle && titleNode}
+        <VisuallyHidden>
+          {!showTitle && titleNode}
+          {descriptionNode}
+        </VisuallyHidden>
         {children}
       </DialogContent>
     </Dialog>

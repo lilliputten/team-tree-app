@@ -10,6 +10,7 @@ import { siteMenu } from '@/config/siteMenu';
 import { commonXMarginTwStyle } from '@/config/ui';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { NavAuthButton } from '@/components/layout/NavAuthButton';
 import { NavLocaleSwitcher } from '@/components/layout/NavLocaleSwitcher';
 import { NavModeToggle } from '@/components/layout/NavModeToggle';
 
@@ -123,6 +124,8 @@ export function NavMobile() {
             <span className="sr-only">GitHub</span>
           </Link>
           */}
+          XXX
+          <NavAuthButton />
           <NavLocaleSwitcher />
           <NavModeToggle />
         </div>

@@ -13,6 +13,7 @@ export const routing = defineRouting({
 
   pathnames: {
     '/': '/',
+
     // Localized path example
     '/documentation': {
       en: '/documentation',

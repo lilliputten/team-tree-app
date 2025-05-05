@@ -5,10 +5,7 @@ import { prisma } from '@/lib/db';
 import { getUserById } from '@/lib/user';
 import authConfig from '@/auth.config';
 
-export const {
-  handlers: { GET, POST },
-  auth,
-} = NextAuth({
+export const nextAuthApp = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'jwt' },
   pages: {
@@ -17,6 +14,7 @@ export const {
   },
   callbacks: {
     async session({ token, session }) {
+      debugger;
       if (session.user) {
         if (token.sub) {
           session.user.id = token.sub;
@@ -39,6 +37,7 @@ export const {
     },
 
     async jwt({ token }) {
+      debugger;
       if (!token.sub) {
         return token;
       }
@@ -60,3 +59,8 @@ export const {
   ...authConfig,
   // debug: process.env.NODE_ENV !== "production"
 });
+
+export const {
+  handlers: { GET, POST },
+  auth,
+} = nextAuthApp;

@@ -1,20 +1,21 @@
 'use client';
 
-import { createContext, Dispatch, ReactNode, SetStateAction } from 'react';
+import React from 'react';
 
 import { useSignInModal } from '@/components/modals/sign-in-modal';
 
-export const ModalContext = createContext<{
-  setShowSignInModal: Dispatch<SetStateAction<boolean>>;
+export const ModalContext = React.createContext<{
+  setShowSignInModal: React.Dispatch<React.SetStateAction<boolean>>;
 }>({
   setShowSignInModal: () => {},
 });
 
-export default function ModalProvider({ children }: { children: ReactNode }) {
+export default function ModalProvider({ children }: { children: React.ReactNode }) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
 
   return (
     <ModalContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         setShowSignInModal,
       }}

@@ -1,7 +1,7 @@
 import { EmailConfig } from 'next-auth/providers/email';
 import { Resend } from 'resend';
 
-import { env } from '@/env.mjs';
+import { env } from '@/env';
 import { siteConfig } from '@/config/site';
 import { MagicLinkEmail } from '@/emails/magic-link-email';
 

@@ -1,23 +1,16 @@
 'use client';
 
-import React from 'react';
-import { useParams } from 'next/navigation';
+import { useContext } from 'react';
+import Link from 'next/link';
 import { useSession } from 'next-auth/react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { routing, usePathname, useRouter } from '@/i18n/routing';
-import { TLocale } from '@/i18n/types';
-
-import { Skeleton } from '../ui/skeleton';
+import { Skeleton } from '@/components/ui/skeleton';
+import { ModalContext } from '@/components/modals/providers';
+import { Icons } from '@/components/shared/icons';
 
 interface TNavAuthButtonProps extends TPropsWithClassName {
   onPrimary?: boolean;
@@ -26,13 +19,36 @@ interface TNavAuthButtonProps extends TPropsWithClassName {
 export function NavAuthButton(props: TNavAuthButtonProps) {
   const { onPrimary, className } = props;
   const { data: session, status } = useSession();
+  const { setShowSignInModal } = useContext(ModalContext);
   const t = useTranslations('NavAuthButton');
 
-  // // NOTE: This one doesn't change on real locale change
-  // const locale = useLocale();
-  // const pathname = usePathname();
-  // const router = useRouter();
-  // const params = useParams();
+  const rootClassName = cn(
+    '__NavAuthButton', // DEBUG
+    className,
+    // isPending && 'transition-opacity [&:disabled]:opacity-30',
+  );
 
-  return <Skeleton className="h-9 w-28 rounded-full lg:flex" />;
+  return (
+    <div className={rootClassName}>
+      {session ? (
+        <Link href={session.user.role === 'ADMIN' ? '/admin' : '/dashboard'} className="md:block">
+          <Button className="gap-2 px-5" variant={onPrimary ? 'ghostOnPrimary' : 'ghost'} size="sm">
+            <span>{t('Dashboard')}</span>
+          </Button>
+        </Link>
+      ) : status === 'unauthenticated' ? (
+        <Button
+          className="gap-2 px-5 md:flex"
+          variant={onPrimary ? 'ghostOnPrimary' : 'ghost'}
+          size="sm"
+          onClick={() => setShowSignInModal(true)}
+        >
+          <span>{t('Sign In')}</span>
+          <Icons.arrowRight className="size-4" />
+        </Button>
+      ) : (
+        <Skeleton className="h-9 w-28 rounded-full lg:flex" />
+      )}
+    </div>
+  );
 }

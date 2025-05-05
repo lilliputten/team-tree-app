@@ -1,5 +1,8 @@
 {
-  "NavAuthButton": {},
+  "NavAuthButton": {
+    "Sign In": "Sign In",
+    "Dashboard": "Dashboard"
+  },
   "NavLocaleSwitcher": {
     "label": "Change language",
     "locale": "{locale, select, ru {ʀᴜ Russian} en {🇺🇸 English} other {Unknown}}"
