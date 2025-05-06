@@ -19,10 +19,6 @@ export async function generateMetadata({ params }: TAwaitedLocaleProps) {
 export default async function DefaultRootPage() {
   const prefix = '/' + defaultLocale;
   const user = await getCurrentUser();
-
-  if (!user) {
-    redirect(prefix + welcomeRoute);
-  } else {
-    redirect(prefix + dataRoute);
-  }
+  const route = user ? dataRoute : welcomeRoute;
+  redirect(prefix + route);
 }

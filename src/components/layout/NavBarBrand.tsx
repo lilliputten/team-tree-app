@@ -52,11 +52,6 @@ function BrandWrapper(props: TPropsWithChildrenAndClassName & NavBarBrandProps) 
   );
 }
 
-interface NavBarBrandProps {
-  isUser: boolean;
-  isUserRequired: boolean;
-}
-
 export function NavBarBrand(props: NavBarBrandProps) {
   return (
     <BrandWrapper {...props} className="h-12">

@@ -1,6 +1,5 @@
 'use client';
 
-// import * as React from 'react';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 
@@ -28,12 +27,7 @@ const themeIcons: Record<string, Icon> = {
 
 export function NavModeToggle(props: TNavModeToggleProps) {
   const { onPrimary, className } = props;
-  const {
-    theme: currentTheme,
-    // resolvedTheme,
-    themes,
-    setTheme,
-  } = useTheme();
+  const { theme: currentTheme, themes, setTheme } = useTheme();
   const t = useTranslations('NavModeToggle');
 
   return (

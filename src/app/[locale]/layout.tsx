@@ -13,7 +13,7 @@ import ModalProvider from '@/components/modals/providers';
 import { TailwindIndicator } from '@/components/service/TailwindIndicator';
 import { fontDefault, fontHeading, fontMono } from '@/assets/fonts';
 import { routing } from '@/i18n/routing';
-import { TAwaitedLocaleProps, TLocale, TLocaleParams } from '@/i18n/types';
+import { TAwaitedLocaleProps, TLocale } from '@/i18n/types';
 
 export async function generateMetadata({ params }: TAwaitedLocaleProps) {
   const { locale } = await params;
@@ -35,25 +35,12 @@ async function RootLayout(props: TRootLayoutProps) {
   const params = await paramsPromise;
   const { defaultLocale } = routing;
   let { locale = defaultLocale } = params;
-  /* console.log('[layout:RootLayout]', {
-   *   locale,
-   *   params,
-   *   'routing.locales': routing.locales,
-   *   routing,
-   * });
-   */
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as TLocale)) {
     // NOTE: Sometimes we got `.well-known` value here. TODO?
     const error = new Error(`Invalid locale: ${locale}, using default: ${defaultLocale}`);
     // eslint-disable-next-line no-console
-    console.warn('[layout:RootLayout]', error.message, {
-      // locale,
-      // params,
-      // routing,
-      // props,
-      // error,
-    });
+    console.warn('[layout:RootLayout]', error.message);
     // debugger; // eslint-disable-line no-debugger
     // TODO? -- Redirect to 'notFound' page?
     // Just use the default value
@@ -67,11 +54,7 @@ async function RootLayout(props: TRootLayoutProps) {
   const messages = await getMessages();
 
   return (
-    <html
-      // lang={siteConfig.defaultLang}
-      lang={locale}
-      suppressHydrationWarning
-    >
+    <html lang={locale} suppressHydrationWarning>
       <head>
         {/*
         <meta property="og:url" content="https://vanilla-tasks.lilliputten.com/" />
@@ -111,8 +94,6 @@ async function RootLayout(props: TRootLayoutProps) {
                   {/* Core content */}
                   {children}
                 </GenericLayout>
-                {/* </ModalProvider> */}
-                {/* <Analytics /> */}
                 <Toaster richColors closeButton />
                 <TailwindIndicator />
               </ModalProvider>

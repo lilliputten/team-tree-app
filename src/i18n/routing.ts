@@ -1,6 +1,8 @@
 import { createNavigation } from 'next-intl/navigation';
 import { defineRouting } from 'next-intl/routing';
 
+import { isDev } from '@/constants';
+
 import { defaultLocale, localesList } from './types';
 
 export const pathnames = {
@@ -8,12 +10,13 @@ export const pathnames = {
 
   '/welcome': '/welcome',
 
-  // Localized path example
-  '/info': '/info',
-  // '/info': {
-  //   en: '/info',
-  //   ru: '/информация',
-  // },
+  // Localized path example (for peoduction mode)
+  '/info': isDev
+    ? '/info'
+    : {
+        en: '/info',
+        ru: '/информация',
+      },
 };
 
 // @see https://next-intl.dev/docs/getting-started/app-router/with-i18n-routing

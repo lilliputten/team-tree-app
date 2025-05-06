@@ -44,14 +44,8 @@ function OAuthSignInButton(props: OAuthSignInButtonProps) {
       disabled={isClicked}
       onClick={() => {
         setSignInClicked(provider);
-        console.log('[sign-in-modal:OAuthSignInButtonProps] Sign in button clicked', {
-          provider,
-        });
         // @see https://next-auth.js.org/getting-started/client#specifying-a-callbackurl
-        signIn(provider /* , { redirect: false, callbackUrl: '/' } */).then((res) => {
-          console.log('[sign-in-modal:OAuthSignInButtonProps] Sign in finished', {
-            res,
-          });
+        signIn(provider /* , { redirect: false, callbackUrl: '/' } */).then(() => {
           // Hide the modal
           setTimeout(() => {
             setShowSignInModal(false);
@@ -170,27 +164,6 @@ function SignInModal({
             ProviderIcon={Icons.google}
             text="Sign In with Google"
           />
-          {/*
-          <Button
-            variant="default"
-            disabled={signInClicked}
-            onClick={() => {
-              setSignInClicked(true);
-              signIn("google", { redirect: false }).then(() =>
-                setTimeout(() => {
-                  setShowSignInModal(false);
-                }, 400),
-              );
-            }}
-          >
-            {signInClicked ? (
-              <Icons.spinner className="mr-2 size-4 animate-spin" />
-            ) : (
-              <Icons.google className="mr-2 size-4" />
-            )}{" "}
-            Sign In with Google
-          </Button>
-          */}
         </div>
       </div>
     </Modal>
