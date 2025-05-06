@@ -9,17 +9,18 @@ export const nextAuthApp = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'jwt' },
   pages: {
-    signIn: '/login',
+    signIn: '/login', // TODO: Add login page (see examples in `wordwizzz-saas` project)
     // error: "/auth/error",
   },
   callbacks: {
     async session(params) {
       const { token, session } = params;
-      console.log('[auth:session]', {
-        token,
-        session,
-        params,
-      });
+      /* console.log('[auth:session]', {
+       *   token,
+       *   session,
+       *   params,
+       * });
+       */
       if (session.user) {
         if (token.sub) {
           session.user.id = token.sub;
@@ -43,10 +44,11 @@ export const nextAuthApp = NextAuth({
 
     async jwt(params) {
       const { token } = params;
-      console.log('[auth:jwt]', {
-        token,
-        params,
-      });
+      /* console.log('[auth:jwt]', {
+       *   token,
+       *   params,
+       * });
+       */
       if (!token.sub) {
         return token;
       }

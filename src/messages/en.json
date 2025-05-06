@@ -1,4 +1,18 @@
 {
+  "RootPage": {
+    "title": "Team Tree",
+    "about": "Go to the about page"
+  },
+  "DataPage": {
+    "title": "Data editor - Team Tree"
+  },
+  "WelcomePage": {
+    "title": "Welcome - Team Tree"
+  },
+  "DocumentationPage": {
+    "description": "<p>The pathnames are internationalized too.</p><p>If you're using the default language English, you'll see <code>/en/documentation</code> in the browser address bar on this page.</p><p>If you change the locale to Russian, the URL is localized accordingly (<code>/ru/документация</code>).</p>",
+    "title": "Sample page"
+  },
   "NavAuthButton": {
     "Sign In": "Sign In",
     "Dashboard": "Dashboard"
@@ -13,16 +27,9 @@
     "dark": "Dark",
     "system": "System"
   },
-  "RootPage": {
-    "title": "Editor - Team Tree",
-    "about": "Go to the about page"
-  },
   "SiteMenu": {
+    "dataEditor": "Data",
     "documentation": "Documentation"
-  },
-  "DocumentationPage": {
-    "description": "<p>The pathnames are internationalized too.</p><p>If you're using the default language English, you'll see <code>/en/documentation</code> in the browser address bar on this page.</p><p>If you change the locale to Russian, the URL is localized accordingly (<code>/ru/документация</code>).</p>",
-    "title": "Sample page"
   },
   "RecordsList": {
     "add-new-record": "Add new record",

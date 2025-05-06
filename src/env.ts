@@ -7,6 +7,7 @@ export const env = createEnv({
     // This is optional because it's only used in development.
     // See https://next-auth.js.org/deployment.
     AUTH_SECRET: z.string().min(1),
+    USER_REQUIRED: z.enum(['true', 'false']).transform((v) => v === 'true'), // z.boolean(),
     DATABASE_URL: z.string().min(1),
     EMAIL_FROM: z.string().min(1),
     GITHUB_CLIENT_ID: z.string().min(1),
@@ -25,6 +26,7 @@ export const env = createEnv({
   // Runtime values
   runtimeEnv: {
     AUTH_SECRET: process.env.AUTH_SECRET,
+    USER_REQUIRED: process.env.USER_REQUIRED,
     DATABASE_URL: process.env.DATABASE_URL,
     EMAIL_FROM: process.env.EMAIL_FROM,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,

@@ -6,6 +6,7 @@ import { useSelectedLayoutSegment } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
+import { env } from '@/env';
 import { siteMenu } from '@/config/siteMenu';
 import { commonXMarginTwStyle } from '@/config/ui';
 import { cn } from '@/lib/utils';
@@ -13,8 +14,15 @@ import { Button } from '@/components/ui/button';
 import { NavAuthButton } from '@/components/layout/NavAuthButton';
 import { NavLocaleSwitcher } from '@/components/layout/NavLocaleSwitcher';
 import { NavModeToggle } from '@/components/layout/NavModeToggle';
+import { isDev } from '@/constants';
 
-export function NavMobile() {
+interface NavMobileProps {
+  isUser: boolean;
+  isUserRequired: boolean;
+}
+
+export function NavMobile(props: NavMobileProps) {
+  const { isUser, isUserRequired } = props;
   const [open, setOpen] = React.useState(false);
   const selectedLayout = useSelectedLayoutSegment();
   const documentation = selectedLayout === 'docs';
@@ -38,7 +46,7 @@ export function NavMobile() {
       <button
         onClick={() => setOpen(!open)}
         className={cn(
-          '__NavMobile', // DEBUG
+          isDev && '__NavMobile', // DEBUG
           'fixed',
           'right-3',
           'top-3.5',
@@ -65,7 +73,7 @@ export function NavMobile() {
 
       <nav
         className={cn(
-          '__NavMobile', // DEBUG
+          isDev && '__NavMobile', // DEBUG
           'fixed',
           'inset-0',
           'z-20',
@@ -83,21 +91,23 @@ export function NavMobile() {
       >
         <ul className="grid divide-y divide-muted">
           {hasLinks &&
-            links.map(({ titleId, href }) => (
-              <li key={href} className="py-3">
-                <Link
-                  href={href}
-                  onClick={() => setOpen(false)}
-                  className="flex font-medium capitalize"
-                >
-                  <Button
-                    //
-                    variant="ghost"
+            links
+              .filter((item) => !isUserRequired || !item.userRequiredOnly || isUser)
+              .map(({ titleId, href }) => (
+                <li key={href} className="py-3">
+                  <Link
+                    href={href}
+                    onClick={() => setOpen(false)}
+                    className="flex font-medium capitalize"
                   >
-                    {t(titleId)}
-                  </Button>
-                </Link>
-                {/*
+                    <Button
+                      //
+                      variant="ghost"
+                    >
+                      {t(titleId)}
+                    </Button>
+                  </Link>
+                  {/*
                 <Link
                   href={href}
                   onClick={() => setOpen(false)}
@@ -106,8 +116,8 @@ export function NavMobile() {
                   {t(titleId)}
                 </Link>
                 */}
-              </li>
-            ))}
+                </li>
+              ))}
         </ul>
 
         {documentation ? <div className="mt-8 block md:hidden">DocsSidebarNav</div> : null}
