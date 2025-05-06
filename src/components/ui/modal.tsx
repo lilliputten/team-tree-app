@@ -8,7 +8,14 @@ import { Drawer } from 'vaul';
 
 import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { isDev } from '@/constants';
 
 interface ModalProps {
   children: React.ReactNode;
@@ -71,7 +78,7 @@ export function Modal({
         <Drawer.Portal>
           <Drawer.Content
             className={cn(
-              '__modal_Drawer_Content',
+              isDev && '__modal_Drawer_Content',
               'fixed',
               'inset-x-0',
               'inset-y-0',
@@ -82,7 +89,7 @@ export function Modal({
           >
             {children}
             <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-              <X className="size-4" />
+              <X className="size-4 text-white" />
               <span className="sr-only">Close</span>
             </DialogPrimitive.Close>
           </Drawer.Content>
@@ -109,7 +116,8 @@ export function Modal({
         onOpenAutoFocus={(e) => e.preventDefault()}
         onCloseAutoFocus={(e) => e.preventDefault()}
         className={cn(
-          '__DialogContent overflow-hidden p-0 md:max-w-md md:rounded-2xl md:border',
+          isDev && '__DialogContent',
+          'overflow-hidden p-0 md:max-w-md md:rounded-2xl md:border',
           className,
         )}
       >

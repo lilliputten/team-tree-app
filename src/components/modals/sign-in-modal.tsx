@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Modal } from '@/components/ui/modal';
 import { Icons, IconType } from '@/components/shared/icons';
 import { Logo } from '@/components/shared/Logo';
+import { isDev } from '@/constants';
 
 type TSignInParameters = Parameters<typeof signIn>;
 type TProvider = TSignInParameters[0];
@@ -34,7 +35,10 @@ function OAuthSignInButton(props: OAuthSignInButtonProps) {
   const isThisClicked = currentProvider == provider;
   return (
     <Button
-      className={cn('__sign-in-modal-button')}
+      className={cn(
+        // prettier-ignore
+        isDev && '__sign-in-modal-button',
+      )}
       variant="primary"
       rounded="full"
       disabled={isClicked}
@@ -76,7 +80,16 @@ function SignInModal({
   const [currentProvider, setSignInClicked] = useState<TProvider>(undefined);
 
   return (
-    <Modal showModal={showSignInModal} setShowModal={setShowSignInModal}>
+    <Modal
+      showModal={showSignInModal}
+      setShowModal={setShowSignInModal}
+      className={cn(
+        // prettier-ignore
+        isDev && '__sign-in-modal',
+        'text-center',
+        'text-primary-foreground',
+      )}
+    >
       <div className="w-full bg-primary">
         <div
           className={cn(
@@ -92,8 +105,6 @@ function SignInModal({
             'px-4',
             'py-6',
             'pt-8',
-            'text-center',
-            'text-primary-foreground',
             'md:px-16',
           )}
         >
