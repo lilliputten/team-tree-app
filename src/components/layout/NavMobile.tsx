@@ -124,10 +124,9 @@ export function NavMobile() {
             <span className="sr-only">GitHub</span>
           </Link>
           */}
-          XXX
-          <NavAuthButton />
-          <NavLocaleSwitcher />
           <NavModeToggle />
+          <NavLocaleSwitcher />
+          <NavAuthButton />
         </div>
       </nav>
     </>

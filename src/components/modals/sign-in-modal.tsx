@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react';
-import { signIn, SignInOptions } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
@@ -52,7 +52,6 @@ function OAuthSignInButton(props: OAuthSignInButtonProps) {
           console.log('[sign-in-modal:OAuthSignInButtonProps] Sign in finished', {
             res,
           });
-          debugger;
           // Hide the modal
           setTimeout(() => {
             setShowSignInModal(false);

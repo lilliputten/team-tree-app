@@ -1,7 +1,6 @@
 'use client';
 
 import { useContext } from 'react';
-import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
@@ -11,6 +10,8 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ModalContext } from '@/components/modals/providers';
 import { Icons } from '@/components/shared/icons';
+
+import { NavUserAccount } from './NavUserAccount';
 
 interface TNavAuthButtonProps extends TPropsWithClassName {
   onPrimary?: boolean;
@@ -29,13 +30,25 @@ export function NavAuthButton(props: TNavAuthButtonProps) {
   );
 
   return (
-    <div className={rootClassName}>
+    <div
+      className={cn(
+        // prettier-ignore
+        rootClassName,
+        'flex',
+        'items-center',
+      )}
+    >
       {session ? (
-        <Link href={session.user.role === 'ADMIN' ? '/admin' : '/dashboard'} className="md:block">
-          <Button className="gap-2 px-5" variant={onPrimary ? 'ghostOnPrimary' : 'ghost'} size="sm">
-            <span>{t('Dashboard')}</span>
-          </Button>
-        </Link>
+        <>
+          <NavUserAccount onPrimary={onPrimary} />
+          {/*
+          <Link href={session.user.role === 'ADMIN' ? '/admin' : '/dashboard'} className="md:block">
+            <Button className="gap-2 px-5" variant={onPrimary ? 'ghostOnPrimary' : 'ghost'} size="sm">
+              <span>{t('Dashboard')}</span>
+            </Button>
+          </Link>
+          */}
+        </>
       ) : status === 'unauthenticated' ? (
         <Button
           className="gap-2 px-5 md:flex"

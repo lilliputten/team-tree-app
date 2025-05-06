@@ -14,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Icon, Icons } from '@/components/shared/icons';
+import { isDev } from '@/constants';
 
 interface TNavModeToggleProps extends TPropsWithClassName {
   onPrimary?: boolean;
@@ -42,7 +43,7 @@ export function NavModeToggle(props: TNavModeToggleProps) {
           variant={onPrimary ? 'ghostOnPrimary' : 'ghost'}
           size="sm"
           className={cn(
-            '__NavModeToggle', // DEBUG
+            isDev && '__NavModeToggle', // DEBUG
             className,
             'size-8 px-0',
           )}

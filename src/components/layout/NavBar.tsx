@@ -101,9 +101,9 @@ export function NavBar(props: NavBarProps) {
             <span className="sr-only">GitHub</span>
           </Link>
           */}
-          <NavAuthButton onPrimary />
-          <NavLocaleSwitcher onPrimary />
           <NavModeToggle onPrimary />
+          <NavLocaleSwitcher onPrimary />
+          <NavAuthButton onPrimary />
         </div>
       </MaxWidthWrapper>
     </header>
