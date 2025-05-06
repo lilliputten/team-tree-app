@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 
 import { getErrorText } from '@/lib/helpers/strings';
 import { cn } from '@/lib/utils';
+import { useSessionUser } from '@/hooks/useSessionUser';
 
 // import revalidatePage from '@/features/records/actions/revalidatePage';
 
@@ -24,6 +25,7 @@ interface TRecordItemProps {
 
 export function RecordItem(props: TRecordItemProps) {
   const t = useTranslations('RecordItem');
+  const user = useSessionUser();
   const { record, isUpdating: isParentUpdating, handleUpdate, handleDelete } = props;
   const { id } = record;
   const [isOpen, setOpen] = React.useState(false);
@@ -80,10 +82,15 @@ export function RecordItem(props: TRecordItemProps) {
       return new Promise<Awaited<ReturnType<typeof addRecord>>>((resolve, reject) => {
         startUpdating(async () => {
           try {
+            const userId = user?.id || null; // Current user id
             const newRecordWithUser = {
               ...newRecord,
-              userId: null, // TODO: Add current user id
+              userId,
             };
+            console.log('[RecordItem:addChildRecord]', {
+              userId,
+              newRecordWithUser,
+            });
             const promises = [
               // Add record...
               addRecord(newRecordWithUser),
@@ -121,7 +128,7 @@ export function RecordItem(props: TRecordItemProps) {
         });
       });
     },
-    [childrenRecords, record, t],
+    [childrenRecords, record, t, user],
   );
 
   const editThisRecord = React.useCallback(

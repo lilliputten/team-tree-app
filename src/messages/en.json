@@ -14,7 +14,7 @@
     "title": "Sample page"
   },
   "NavAuthButton": {
-    "Sign In": "Sign In",
+    "sign-in": "Sign In",
     "Dashboard": "Dashboard"
   },
   "NavLocaleSwitcher": {
