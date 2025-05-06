@@ -2,13 +2,7 @@ import createMiddleware from 'next-intl/middleware';
 
 import { routing } from '@/i18n/routing';
 
-// import { localesList } from '@/i18n/types';
-
 export default createMiddleware(routing);
-
-/* // Using `localesList` to create the i18n prefix regexp
- * const localizedPathReg = `/(${localesList.join('|')})/:path*`;
- */
 
 export const config = {
   matcher: [

@@ -17,7 +17,7 @@ type Href = Parameters<typeof getPathname>[0]['href'];
 
 function getRouteEntry(href: Href) {
   return {
-    url: getFullUrl(href, routing.defaultLocale as TLocale),
+    url: getFullUrl(href),
     alternates: {
       languages: Object.fromEntries(
         routing.locales.map((locale) => [locale, getFullUrl(href, locale as TLocale)]),
@@ -26,7 +26,7 @@ function getRouteEntry(href: Href) {
   };
 }
 
-function getFullUrl(href: Href, locale: TLocale) {
-  const pathname = getPathname({ locale, href });
+function getFullUrl(href: Href, locale?: TLocale) {
+  const pathname = locale ? getPathname({ locale, href }) : href;
   return siteConfig.url + pathname;
 }

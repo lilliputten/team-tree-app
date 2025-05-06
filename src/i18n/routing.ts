@@ -9,10 +9,11 @@ export const pathnames = {
   '/welcome': '/welcome',
 
   // Localized path example
-  '/info': {
-    en: '/info',
-    ru: '/информация',
-  },
+  '/info': '/info',
+  // '/info': {
+  //   en: '/info',
+  //   ru: '/информация',
+  // },
 };
 
 // @see https://next-intl.dev/docs/getting-started/app-router/with-i18n-routing
