@@ -18,7 +18,7 @@ export function constructMetadata({
   image = siteConfig.ogImage,
   icons = '/favicon.ico',
   noIndex = false,
-  locale = routing.defaultLocale,
+  locale = routing.defaultLocale as TLocale,
   url = siteConfig.url,
 }: {
   title?: string;

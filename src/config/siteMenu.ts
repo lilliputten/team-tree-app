@@ -12,8 +12,8 @@ export const siteMenu: SiteMenu = {
       userRequiredOnly: true,
     },
     {
-      titleId: 'documentation',
-      href: '/documentation',
+      titleId: 'info',
+      href: '/info',
     },
   ],
 };

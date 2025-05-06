@@ -4,17 +4,19 @@ import React from 'react';
 import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
-import { env } from '@/env';
 import { siteMenu } from '@/config/siteMenu';
 import { commonXMarginTwStyle } from '@/config/ui';
+import { getAllRouteSynonyms } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { NavAuthButton } from '@/components/layout/NavAuthButton';
 import { NavLocaleSwitcher } from '@/components/layout/NavLocaleSwitcher';
 import { NavModeToggle } from '@/components/layout/NavModeToggle';
 import { isDev } from '@/constants';
+import { usePathname } from '@/i18n/routing';
+import { TLocale } from '@/i18n/types';
 
 interface NavMobileProps {
   isUser: boolean;
@@ -25,20 +27,19 @@ export function NavMobile(props: NavMobileProps) {
   const { isUser, isUserRequired } = props;
   const [open, setOpen] = React.useState(false);
   const selectedLayout = useSelectedLayoutSegment();
-  const documentation = selectedLayout === 'docs';
+  const isDocs = selectedLayout === 'docs';
 
   const t = useTranslations('SiteMenu');
+
+  const locale = useLocale() as TLocale;
+  const pathname = decodeURI(usePathname());
 
   const links = siteMenu.mainNav;
   const hasLinks = !!links?.length;
 
   // prevent body scroll when modal is open
   React.useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
+    document.body.style.overflow = open ? 'hidden' : 'auto';
   }, [open]);
 
   return (
@@ -54,7 +55,6 @@ export function NavMobile(props: NavMobileProps) {
           'rounded-full',
           'p-2',
           commonXMarginTwStyle,
-          // 'mx-8',
           'transition-colors',
           'duration-200',
           'text-primary-foreground hover:bg-primary-400/50',
@@ -85,7 +85,7 @@ export function NavMobile(props: NavMobileProps) {
           'pb-5',
           'pt-32',
           'lg:hidden',
-          // Forcibly hide on wider screens (max-md)
+          // Forcibly hide on wider screens (over max-md)
           open && 'max-md:block',
         )}
       >
@@ -93,37 +93,39 @@ export function NavMobile(props: NavMobileProps) {
           {hasLinks &&
             links
               .filter((item) => !isUserRequired || !item.userRequiredOnly || isUser)
-              .map(({ titleId, href }) => (
-                <li key={href} className="py-3">
-                  <Link
-                    href={href}
-                    onClick={() => setOpen(false)}
-                    className="flex font-medium capitalize"
-                  >
-                    <Button
-                      //
-                      variant="ghost"
+              .map((item) => {
+                // Check if it's current item using `getAllRouteSynonyms(item.href, locale)`
+                const allHrefs = getAllRouteSynonyms(item.href, locale);
+                const isCurrent = allHrefs.includes(pathname);
+                const isDisabled = !!item.disabled || isCurrent;
+                return (
+                  <li key={'navbar-' + item.href} className="py-3">
+                    <Link
+                      href={isDisabled ? '#' : item.href}
+                      onClick={() => setOpen(false)}
+                      className={cn(
+                        // prettier-ignore
+                        'flex font-medium capitalize',
+                        isCurrent && 'underline',
+                        isDisabled && 'disabled',
+                      )}
                     >
-                      {t(titleId)}
-                    </Button>
-                  </Link>
-                  {/*
-                <Link
-                  href={href}
-                  onClick={() => setOpen(false)}
-                  className="flex w-full px-3 font-medium capitalize"
-                >
-                  {t(titleId)}
-                </Link>
-                */}
-                </li>
-              ))}
+                      <Button
+                        //
+                        variant="ghost"
+                      >
+                        {t(item.titleId)}
+                      </Button>
+                    </Link>
+                  </li>
+                );
+              })}
         </ul>
 
-        {documentation ? <div className="mt-8 block md:hidden">DocsSidebarNav</div> : null}
+        {isDocs ? <div className="mt-8 block md:hidden">DocsSidebarNav</div> : null}
 
         <div className="mt-5 flex items-center space-x-4">
-          {/*
+          {/* TODO: Put github link to the footer
           <Link
             href={siteConfig.links.github}
             target="_blank"

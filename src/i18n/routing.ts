@@ -3,6 +3,18 @@ import { defineRouting } from 'next-intl/routing';
 
 import { defaultLocale, localesList } from './types';
 
+export const pathnames = {
+  '/': '/',
+
+  '/welcome': '/welcome',
+
+  // Localized path example
+  '/info': {
+    en: '/info',
+    ru: '/информация',
+  },
+};
+
 // @see https://next-intl.dev/docs/getting-started/app-router/with-i18n-routing
 export const routing = defineRouting({
   // A list of all locales that are supported
@@ -11,15 +23,7 @@ export const routing = defineRouting({
   // Used when no locale matches
   defaultLocale,
 
-  pathnames: {
-    '/': '/',
-
-    // Localized path example
-    '/documentation': {
-      en: '/documentation',
-      ru: '/документация',
-    },
-  },
+  pathnames,
 });
 
 export type Pathnames = keyof typeof routing.pathnames;

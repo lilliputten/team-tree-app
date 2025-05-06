@@ -9,8 +9,8 @@
   "WelcomePage": {
     "title": "Welcome - Team Tree"
   },
-  "DocumentationPage": {
-    "description": "<p>The pathnames are internationalized too.</p><p>If you're using the default language English, you'll see <code>/en/documentation</code> in the browser address bar on this page.</p><p>If you change the locale to Russian, the URL is localized accordingly (<code>/ru/документация</code>).</p>",
+  "InfoPage": {
+    "description": "<p>The pathnames are internationalized too.</p><p>If you're using the default language English, you'll see <code>/en/info</code> in the browser address bar on this page.</p><p>If you change the locale to Russian, the URL is localized accordingly (<code>/ru/информация</code>).</p>",
     "title": "Sample page"
   },
   "NavAuthButton": {
@@ -27,9 +27,15 @@
     "dark": "Dark",
     "system": "System"
   },
+  "NavUserAccount": {
+    "Admin": "Administration",
+    "Dashboard": "Dashboard",
+    "Settings": "Settings",
+    "Log out": "Log out"
+  },
   "SiteMenu": {
     "dataEditor": "Data",
-    "documentation": "Documentation"
+    "info": "Information"
   },
   "RecordsList": {
     "add-new-record": "Add new record",

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { LayoutDashboard, Lock, LogOut, Settings } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { cn } from '@/lib/utils';
@@ -28,6 +29,7 @@ export function NavUserAccount(props: TNavUserAccountProps) {
   } = props;
   const { data: session } = useSession();
   const user = session?.user;
+  const t = useTranslations('NavUserAccount');
 
   const [open, setOpen] = useState(false);
 
@@ -67,7 +69,7 @@ export function NavUserAccount(props: TNavUserAccountProps) {
           <div className="flex flex-col space-y-1 leading-none">
             {user.name && <p className="font-medium">{user.name}</p>}
             {user.email && (
-              <p className="w-[200px] truncate text-sm text-muted-foreground">{user?.email}</p>
+              <p className="w-[200px] truncate text-sm text-muted-foreground">{user.email}</p>
             )}
           </div>
         </div>
@@ -85,7 +87,7 @@ export function NavUserAccount(props: TNavUserAccountProps) {
               )}
             >
               <Lock className="size-4" />
-              <p className="text-sm">Admin</p>
+              <p className="text-sm">{t('Admin')}</p>
             </Link>
           </DropdownMenuItem>
         )}
@@ -100,7 +102,7 @@ export function NavUserAccount(props: TNavUserAccountProps) {
             )}
           >
             <LayoutDashboard className="size-4" />
-            <p className="text-sm">Dashboard</p>
+            <p className="text-sm">{t('Dashboard')}</p>
           </Link>
         </DropdownMenuItem>
 
@@ -114,7 +116,7 @@ export function NavUserAccount(props: TNavUserAccountProps) {
             )}
           >
             <Settings className="size-4" />
-            <p className="text-sm">Settings</p>
+            <p className="text-sm">{t('Settings')}</p>
           </Link>
         </DropdownMenuItem>
 
@@ -131,7 +133,7 @@ export function NavUserAccount(props: TNavUserAccountProps) {
         >
           <div className="flex items-center space-x-2.5">
             <LogOut className="size-4" />
-            <p className="text-sm">Log out </p>
+            <p className="text-sm">{t('Log out')}</p>
           </div>
         </DropdownMenuItem>
       </DropdownMenuContent>

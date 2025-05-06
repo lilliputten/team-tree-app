@@ -27,13 +27,7 @@ type TRootLayoutProps = TAwaitedLocaleProps & {
 };
 
 export function generateStaticParams() {
-  const params: TLocaleParams[] = routing.locales.map((locale) => ({ locale }));
-  /* console.log('[layout:generateStaticParams]', {
-   *   params,
-   *   'routing.locales': routing.locales,
-   * });
-   */
-  return params;
+  return routing.locales.map((locale) => ({ locale: locale as TLocale }));
 }
 
 async function RootLayout(props: TRootLayoutProps) {

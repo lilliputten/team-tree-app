@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
-import { env } from '@/env';
 import { siteMenu } from '@/config/siteMenu';
 import { commonXPaddingTwStyle } from '@/config/ui';
+import { getAllRouteSynonyms } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 import { NavAuthButton } from '@/components/layout/NavAuthButton';
 import { NavBarBrand } from '@/components/layout/NavBarBrand';
@@ -13,6 +13,8 @@ import { NavLocaleSwitcher } from '@/components/layout/NavLocaleSwitcher';
 import { NavModeToggle } from '@/components/layout/NavModeToggle';
 import { MaxWidthWrapper } from '@/components/shared/MaxWidthWrapper';
 import { isDev } from '@/constants';
+import { usePathname } from '@/i18n/routing';
+import { TLocale } from '@/i18n/types';
 
 interface NavBarProps {
   large?: boolean;
@@ -22,11 +24,10 @@ interface NavBarProps {
 
 export function NavBar(props: NavBarProps) {
   const { large, isUser, isUserRequired } = props;
-  // const useRequiredOnly = !env.USER_REQUIRED || isUser;
   const links = siteMenu.mainNav;
   const t = useTranslations('SiteMenu');
-  // const user = await getCurrentUser();
-
+  const locale = useLocale() as TLocale;
+  const pathname = decodeURI(usePathname());
   return (
     <header
       className={cn(
@@ -54,32 +55,39 @@ export function NavBar(props: NavBarProps) {
         large={large}
       >
         <div className="flex gap-6 md:gap-10">
-          <NavBarBrand />
+          <NavBarBrand isUser={isUser} isUserRequired={isUserRequired} />
           {links && links.length > 0 ? (
             <nav className="hidden gap-6 md:flex">
               {links
                 .filter((item) => !isUserRequired || !item.userRequiredOnly || isUser)
-                .map((item, index) => (
-                  <Link
-                    key={'navbar-' + String(index)}
-                    href={item.disabled ? '#' : item.href}
-                    prefetch
-                    className={cn(
-                      'flex',
-                      'items-center',
-                      'text-lg',
-                      'font-medium',
-                      'transition-all',
-                      'text-primary-foreground/80',
-                      'opacity-100',
-                      'hover:opacity-80',
-                      'sm:text-sm',
-                      item.disabled && 'cursor-not-allowed opacity-50',
-                    )}
-                  >
-                    {t(item.titleId)}
-                  </Link>
-                ))}
+                .map((item) => {
+                  // Check if it's current item using `getAllRouteSynonyms(item.href, locale)`
+                  const allHrefs = getAllRouteSynonyms(item.href, locale);
+                  const isCurrent = allHrefs.includes(pathname);
+                  const isDisabled = !!item.disabled || isCurrent;
+                  return (
+                    <Link
+                      key={'navbar-' + item.href}
+                      href={isDisabled ? '#' : item.href}
+                      prefetch
+                      className={cn(
+                        'flex',
+                        'items-center',
+                        'text-lg',
+                        'font-medium',
+                        'transition-all',
+                        'text-primary-foreground/80',
+                        'opacity-100',
+                        'hover:opacity-80',
+                        'sm:text-sm',
+                        isCurrent && 'underline',
+                        isDisabled && 'disabled',
+                      )}
+                    >
+                      {t(item.titleId)}
+                    </Link>
+                  );
+                })}
             </nav>
           ) : null}
         </div>

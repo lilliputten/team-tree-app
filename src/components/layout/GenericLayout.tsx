@@ -13,8 +13,7 @@ import { TLocale } from '@/i18n/types';
 function GenericLayoutContent(props: TPropsWithChildren & { user?: TExtendedUser }) {
   const { children, user } = props;
   const isUser = !!user;
-  const defaultLocale = useLocale();
-  const locale = defaultLocale as TLocale;
+  const locale = useLocale() as TLocale;
   const isUserRequired = env.USER_REQUIRED;
   setRequestLocale(locale);
   return (

@@ -150,7 +150,7 @@
     "postinstall": "pnpm run prisma-generate && pnpm run prisma-db-push",
     "prepare": "husky",
     "test": "jest",
-    "test-update-snapshot": "jest --updateSnapshot",
+    "test-update-snapshots": "jest --updateSnapshot",
     "test-watch": "jest --watch",
     "test:ci": "jest --ci",
     "scripts-help": "echo --List all available script commands-- && npm-package-user-scripts-list"
