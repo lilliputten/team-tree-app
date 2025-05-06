@@ -25,6 +25,7 @@
       "@/*": ["./src/*"]
     }
   },
+  "typeRoots": ["src/@types/**/*"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types.d.ts", ".next/types/**/*.ts"],
-  "exclude": ["**/*~", "node_modules", "**/*.tmp", "**/*.bak", "**/.*.sw?"]
+  "exclude": ["**/*~", "node_modules", ".next", "**/*.tmp", "**/*.bak", "**/.*.sw?"]
 }

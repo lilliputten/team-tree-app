@@ -15,8 +15,8 @@ export type TEditRecordAction = typeof updateRecord;
 
 export async function updateRecord(record: TRecordWithChildrenOrCount) {
   try {
-    const { id, name, parentId } = record;
-    const recordData: TRecord = { id, name, parentId };
+    const { userId, id, name, parentId } = record;
+    const recordData: TRecord = { userId, id, name, parentId };
     const editedRecord = await prisma.record.update({
       where: {
         id: record.id,

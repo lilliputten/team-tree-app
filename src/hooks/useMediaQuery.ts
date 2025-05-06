@@ -24,7 +24,7 @@ export function useMediaQuery() {
     // Initial detection
     checkDevice();
 
-    // Listener for windows resize
+    // Listener for windows resize (TODO: add rotate listener?)
     window.addEventListener('resize', checkDevice);
 
     // Cleanup listener

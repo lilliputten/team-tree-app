@@ -6,7 +6,8 @@ export type NavItem = {
   badge?: number;
   disabled?: boolean;
   external?: boolean;
-  // authorizeOnly?: UserRole;
+  userRequiredOnly?: boolean;
+  // authorizedOnly?: UserRole;
   icon?: keyof typeof Icons;
 };
 

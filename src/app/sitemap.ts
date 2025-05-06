@@ -7,25 +7,26 @@ import { TLocale } from '@/i18n/types';
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     // prettier-ignore
-    getEntry('/'),
-    getEntry('/documentation'),
+    getRouteEntry('/'),
+    getRouteEntry('/welcome'),
+    getRouteEntry('/info'),
   ];
 }
 
 type Href = Parameters<typeof getPathname>[0]['href'];
 
-function getEntry(href: Href) {
+function getRouteEntry(href: Href) {
   return {
-    url: getUrl(href, routing.defaultLocale),
+    url: getFullUrl(href),
     alternates: {
       languages: Object.fromEntries(
-        routing.locales.map((locale) => [locale, getUrl(href, locale)]),
+        routing.locales.map((locale) => [locale, getFullUrl(href, locale as TLocale)]),
       ),
     },
   };
 }
 
-function getUrl(href: Href, locale: TLocale) {
-  const pathname = getPathname({ locale, href });
+function getFullUrl(href: Href, locale?: TLocale) {
+  const pathname = locale ? getPathname({ locale, href }) : href;
   return siteConfig.url + pathname;
 }

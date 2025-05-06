@@ -10,7 +10,7 @@ beforeEach(async () => {
 test('should edit particular record', async () => {
   // Create and receive created record ids...
   const testRecord = await prisma.record.create({
-    data: { name: 'Original name', parentId: null },
+    data: { userId: null, name: 'Original name', parentId: null },
   });
   const updatedName = 'Updated name';
   const updatedRecord = { ...testRecord, name: updatedName };

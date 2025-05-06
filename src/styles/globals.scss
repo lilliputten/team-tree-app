@@ -199,3 +199,9 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+.disabled {
+  pointer-events: none;
+  opacity: 50%;
+  cursor: default;
+}

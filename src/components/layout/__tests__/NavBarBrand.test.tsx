@@ -9,12 +9,16 @@ import { getErrorText } from '@/lib/helpers/strings';
 
 import { NavBarBrand } from '../NavBarBrand';
 
+jest.mock('next-intl', () => ({
+  useLocale() {
+    return 'en';
+  },
+}));
+
 describe('NavBarBrand', () => {
   it('renders a heading', () => {
     try {
-      // console.log('XXX', typeof document);
-      // debugger
-      render(<NavBarBrand />);
+      render(<NavBarBrand isUser={false} isUserRequired={false} />);
       const titleNode = screen.getByTestId('NavBarBrandTitle');
       expect(titleNode).toBeInTheDocument();
     } catch (error) {

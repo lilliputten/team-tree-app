@@ -7,8 +7,13 @@ export type SiteMenu = {
 export const siteMenu: SiteMenu = {
   mainNav: [
     {
-      titleId: 'documentation',
-      href: '/documentation',
+      titleId: 'dataEditor',
+      href: '/data',
+      userRequiredOnly: true,
+    },
+    {
+      titleId: 'info',
+      href: '/info',
     },
   ],
 };

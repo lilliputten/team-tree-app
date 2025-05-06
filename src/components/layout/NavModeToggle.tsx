@@ -1,6 +1,5 @@
 'use client';
 
-// import * as React from 'react';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 
@@ -14,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Icon, Icons } from '@/components/shared/icons';
+import { isDev } from '@/constants';
 
 interface TNavModeToggleProps extends TPropsWithClassName {
   onPrimary?: boolean;
@@ -27,12 +27,7 @@ const themeIcons: Record<string, Icon> = {
 
 export function NavModeToggle(props: TNavModeToggleProps) {
   const { onPrimary, className } = props;
-  const {
-    theme: currentTheme,
-    // resolvedTheme,
-    themes,
-    setTheme,
-  } = useTheme();
+  const { theme: currentTheme, themes, setTheme } = useTheme();
   const t = useTranslations('NavModeToggle');
 
   return (
@@ -42,7 +37,7 @@ export function NavModeToggle(props: TNavModeToggleProps) {
           variant={onPrimary ? 'ghostOnPrimary' : 'ghost'}
           size="sm"
           className={cn(
-            '__NavModeToggle', // DEBUG
+            isDev && '__NavModeToggle', // DEBUG
             className,
             'size-8 px-0',
           )}

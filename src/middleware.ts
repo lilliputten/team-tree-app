@@ -1,11 +1,13 @@
 import createMiddleware from 'next-intl/middleware';
 
-import { routing } from './i18n/routing';
+import { routing } from '@/i18n/routing';
 
 export default createMiddleware(routing);
 
 export const config = {
   matcher: [
+    // NOTE: It seems that these values should be hard-coded string literals, so it's impossible to compose it dynamically, from `localesList`
+
     // Enable a redirect to a matching locale at the root
     '/',
 
@@ -15,6 +17,6 @@ export const config = {
 
     // Enable redirects that add missing locales
     // (e.g. `/pathnames` -> `/en/pathnames`)
-    '/((?!_next|_vercel|.*\\..*).*)',
+    '/((?!api|_next|_vercel|favicons|.well-known|.*\\..*).*)',
   ],
 };

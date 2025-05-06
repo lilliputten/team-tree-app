@@ -4,8 +4,8 @@ import { addRecord } from '../addRecord';
 
 test('should create several records', async () => {
   const createdRecords = await Promise.all([
-    addRecord({ name: 'First added record', parentId: null }),
-    addRecord({ name: 'Second added record', parentId: null }),
+    addRecord({ userId: null, name: 'First added record', parentId: null }),
+    addRecord({ userId: null, name: 'Second added record', parentId: null }),
   ]);
   const createdIds = createdRecords.map(({ id }) => id);
   try {
@@ -17,7 +17,7 @@ test('should create several records', async () => {
 });
 
 test('should create new record with a new id', async () => {
-  const createdRecord = await addRecord({ name: 'Test record', parentId: null });
+  const createdRecord = await addRecord({ userId: null, name: 'Test record', parentId: null });
   try {
     expect(createdRecord).toHaveProperty('id');
   } finally {
