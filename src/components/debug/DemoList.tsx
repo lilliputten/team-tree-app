@@ -1,6 +1,6 @@
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { cn } from '@/lib/utils';
-import { ScrollArea } from '@/components/ui/ScrollArea';
+import { isDev } from '@/constants';
 
 export function DemoList(props: TPropsWithClassName & { count?: number }) {
   const { className, count = 10 } = props;
@@ -11,11 +11,10 @@ export function DemoList(props: TPropsWithClassName & { count?: number }) {
   return (
     <div
       className={cn(
-        '__RootPage_DemoList', // DEBUG
+        isDev && '__DemoList', // DEBUG
         className,
         'flex flex-col',
         'layout-follow',
-        // 'py-4',
       )}
     >
       <h3>List:</h3>

@@ -1,9 +1,20 @@
 <!--
  @since 2025.05.02
- @changed 2025.05.07, 16:13
+ @changed 2025.05.07, 23:58
 -->
 
 # CHANGELOG
+
+## [v.0.0.9](https://github.com/lilliputten/team-tree-app/releases/tag/v.0.0.9) - 2025.05.07
+
+- Refactored sign-in modal, extracted sign-in form component (`SignInForm`).
+- Adjusted welcome page layout added info and sign-in blocks.
+- Added content blocks for welcome and info pages, added visual arts, added rich content sections.
+
+See also:
+
+- [Issue #32: Create welcome/info pages](https://github.com/lilliputten/team-tree-app/issues/32)
+- [Compare with the previous version](https://github.com/lilliputten/team-tree-app/compare/v.0.0.8...v.0.0.9)
 
 ## [v.0.0.8](https://github.com/lilliputten/team-tree-app/releases/tag/v.0.0.8) - 2025.05.07
 

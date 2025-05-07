@@ -205,3 +205,38 @@
   opacity: 50%;
   cursor: default;
 }
+
+.text-content {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+  }
+  h1,
+  h2,
+  h3 {
+    color: $primaryColor;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  a {
+    color: $primaryColor;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

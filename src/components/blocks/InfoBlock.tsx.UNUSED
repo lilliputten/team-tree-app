@@ -16,7 +16,7 @@ export function InfoBlock(props: TPropsWithClassName) {
         // 'layout-follow',
       )}
     >
-      Info Block
+      <h2>Info Block</h2>
       {/*
       <DemoList count={50} />
        */}
