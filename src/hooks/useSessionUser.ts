@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 
-import { TOptionalExtendedUser } from '@/shared/types/TUser';
+import { TOptionalExtendedUser } from '@/features/users/types/TUser';
 
 /** Client: Get user from client session.
  * Use `getCurrentUser` fro server components.

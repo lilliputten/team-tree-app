@@ -38,11 +38,5 @@ test('should delete particular record', async () => {
   } finally {
     // Clean up...
     await prisma.record.deleteMany({ where: { id: { in: createdIds } } });
-    /* // DEBUG: Check the database state after the test...
-     * const foundResults = await prisma.record.findMany({});
-     * console.log('[deleteRecord.test] result', {
-     *   foundResults,
-     * });
-     */
   }
 });

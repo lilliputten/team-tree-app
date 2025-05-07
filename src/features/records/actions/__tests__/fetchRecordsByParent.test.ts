@@ -7,7 +7,7 @@ test('should return all available records with undefined parentId', async () => 
     data: { name: 'First record (1)', parentId: null },
   });
   try {
-    const allRecords = await fetchRecordsByParent(null);
+    const allRecords = await fetchRecordsByParent();
     const allRecordIds = allRecords.map(({ id }) => id);
     expect(allRecordIds.includes(createdRecord.id)).toBe(true);
   } finally {
@@ -34,7 +34,7 @@ it('should return all chidren records with parentId', async () => {
     const createdRecordIds = createdRecords.map(({ id }) => id);
     createdIds.push(...createdRecordIds);
     // Find parent's children records (only)
-    const results = await fetchRecordsByParent(parentId);
+    const results = await fetchRecordsByParent({ parentId });
     expect(results.length).toBe(2);
   } finally {
     // Clean up...
@@ -59,7 +59,7 @@ test('should return root records with parentId = null', async () => {
     const createdRecordIds = createdRecords.map(({ id }) => id);
     createdIds.push(...createdRecordIds);
     // Find the parent's children records (only)
-    const foundParentRecords = await fetchRecordsByParent(null);
+    const foundParentRecords = await fetchRecordsByParent();
     const foundParentRecordIds = foundParentRecords.map(({ id }) => id);
     expect(foundParentRecordIds.includes(parentId)).toBeTruthy();
     expect(foundParentRecordIds.includes(createdRecordIds[0])).toBeFalsy();

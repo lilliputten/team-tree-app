@@ -21,7 +21,7 @@ model Record {
 
   // Belonged to user (optional)
   userId String?
-  user   User?  @relation(fields: [userId], references: [id])
+  user   User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // Custom name
   name String

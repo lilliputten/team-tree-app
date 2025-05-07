@@ -43,7 +43,7 @@ export function RecordsList(props: TRecordsListProps) {
     return new Promise<TRecordWithChildrenOrCount[]>((resolve, reject) => {
       startUpdating(async () => {
         try {
-          const records = await fetchRecordsByParentWithChildrenCount(null);
+          const records = await fetchRecordsByParentWithChildrenCount();
           setChildren(records);
           toast.success(t('records-data-has-been-successfully-reloaded'));
           resolve(records);
@@ -76,10 +76,6 @@ export function RecordsList(props: TRecordsListProps) {
               ...newRecord,
               userId,
             };
-            console.log('[RecordsList:onAddRootRecord]', {
-              userId,
-              newRecordWithUser,
-            });
             const addedRecord = await addRecord(newRecordWithUser);
             setChildren((records) => {
               return records ? records.concat(addedRecord) : [addedRecord];
