@@ -14,7 +14,7 @@
     "title": "Пример страницы"
   },
   "NavAuthButton": {
-    "Sign In": "Войти",
+    "sign-in": "Войти",
     "Dashboard": "Панель"
   },
   "NavLocaleSwitcher": {

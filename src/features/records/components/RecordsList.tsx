@@ -8,6 +8,7 @@ import { TPropsWithClassName } from '@/shared/types/generic';
 import { commonXPaddingTwStyle } from '@/config/ui';
 import { getErrorText } from '@/lib/helpers/strings';
 import { cn } from '@/lib/utils';
+import { useSessionUser } from '@/hooks/useSessionUser';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import { Icons } from '@/components/shared/icons';
@@ -25,6 +26,7 @@ interface TRecordsListProps extends TPropsWithClassName {
 
 export function RecordsList(props: TRecordsListProps) {
   const t = useTranslations('RecordsList');
+  const user = useSessionUser();
   const { className, initialRecords } = props;
   const [isUpdating, startUpdating] = React.useTransition();
   const [childrenRecords, setChildren] = React.useState<TRecordWithChildrenOrCount[] | undefined>(
@@ -41,7 +43,7 @@ export function RecordsList(props: TRecordsListProps) {
     return new Promise<TRecordWithChildrenOrCount[]>((resolve, reject) => {
       startUpdating(async () => {
         try {
-          const records = await fetchRecordsByParentWithChildrenCount(null);
+          const records = await fetchRecordsByParentWithChildrenCount();
           setChildren(records);
           toast.success(t('records-data-has-been-successfully-reloaded'));
           resolve(records);
@@ -69,9 +71,10 @@ export function RecordsList(props: TRecordsListProps) {
       return new Promise<Awaited<ReturnType<typeof addRecord>>>((resolve, reject) => {
         startUpdating(async () => {
           try {
+            const userId = user?.id || null; // Current user id
             const newRecordWithUser = {
               ...newRecord,
-              userId: null, // TODO: Add current user id
+              userId,
             };
             const addedRecord = await addRecord(newRecordWithUser);
             setChildren((records) => {
@@ -97,7 +100,7 @@ export function RecordsList(props: TRecordsListProps) {
         });
       });
     },
-    [t],
+    [t, user],
   );
 
   const { invokeEditRecordModal, editRecordModalElement } = useEditRecordModal({

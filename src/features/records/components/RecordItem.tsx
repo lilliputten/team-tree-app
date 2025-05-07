@@ -6,8 +6,7 @@ import { toast } from 'sonner';
 
 import { getErrorText } from '@/lib/helpers/strings';
 import { cn } from '@/lib/utils';
-
-// import revalidatePage from '@/features/records/actions/revalidatePage';
+import { useSessionUser } from '@/hooks/useSessionUser';
 
 import { addRecord, fetchRecordsByParentWithChildrenCount, updateRecord } from '../actions';
 import { TFetchParentId, TNewRecord, TRecord, TRecordWithChildrenOrCount } from '../types';
@@ -24,6 +23,7 @@ interface TRecordItemProps {
 
 export function RecordItem(props: TRecordItemProps) {
   const t = useTranslations('RecordItem');
+  const user = useSessionUser();
   const { record, isUpdating: isParentUpdating, handleUpdate, handleDelete } = props;
   const { id } = record;
   const [isOpen, setOpen] = React.useState(false);
@@ -50,7 +50,10 @@ export function RecordItem(props: TRecordItemProps) {
       return new Promise<TRecordWithChildrenOrCount[]>((resolve, reject) => {
         startUpdating(async () => {
           try {
-            const fetchedRecords = await fetchRecordsByParentWithChildrenCount(parentId);
+            const fetchedRecords = await fetchRecordsByParentWithChildrenCount({
+              parentId,
+              userId: user?.id || null,
+            });
             setChildren(fetchedRecords);
             toast.success(t('records-has-been-loaded'));
             resolve(fetchedRecords);
@@ -72,7 +75,7 @@ export function RecordItem(props: TRecordItemProps) {
         });
       });
     },
-    [t],
+    [t, user],
   );
 
   const addChildRecord = React.useCallback(
@@ -80,15 +83,21 @@ export function RecordItem(props: TRecordItemProps) {
       return new Promise<Awaited<ReturnType<typeof addRecord>>>((resolve, reject) => {
         startUpdating(async () => {
           try {
+            const userId = user?.id || null; // Current user id
             const newRecordWithUser = {
               ...newRecord,
-              userId: null, // TODO: Add current user id
+              userId,
             };
             const promises = [
               // Add record...
               addRecord(newRecordWithUser),
               // Fetch records if hasn't been fetched yet...
-              !childrenRecords ? fetchRecordsByParentWithChildrenCount(record.id) : undefined,
+              !childrenRecords
+                ? fetchRecordsByParentWithChildrenCount({
+                    parentId: record.id,
+                    userId: user?.id || null,
+                  })
+                : undefined,
             ].filter(Boolean);
             const results = await Promise.all(promises);
             const addedRecord = results[0] as TRecordWithChildrenOrCount;
@@ -121,7 +130,7 @@ export function RecordItem(props: TRecordItemProps) {
         });
       });
     },
-    [childrenRecords, record, t],
+    [childrenRecords, record, t, user],
   );
 
   const editThisRecord = React.useCallback(

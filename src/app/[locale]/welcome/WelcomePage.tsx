@@ -61,9 +61,6 @@ export async function WelcomePage({ params }: TWelcomePageProps) {
           {demo}
         </MaxWidthWrapper>
       </ScrollArea>
-      {/*
-      <RecordsList initialRecords={rootRecords} />
-      */}
     </div>
   );
 }

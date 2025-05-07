@@ -7,7 +7,10 @@ import { cn, constructMetadata } from '@/lib/utils';
 import { UseScrollableLayout } from '@/components/shared/ScrollableLayout';
 import { isDev } from '@/constants';
 import { welcomeRoute } from '@/constants/routes';
-import { fetchRecordsByParentWithChildrenCount } from '@/features/records/actions';
+import {
+  fetchRecordsByParentWithChildrenCount,
+  TFetchRecordsByParentWithChildrenCountParams,
+} from '@/features/records/actions';
 import { RecordsList } from '@/features/records/components';
 import { TRecordWithChildrenOrCount } from '@/features/records/types';
 import { TAwaitedLocaleProps } from '@/i18n/types';
@@ -35,8 +38,17 @@ export async function DataPage({ params }: TDataPageProps) {
   // Enable static rendering
   setRequestLocale(locale);
 
+  const fetchParams: TFetchRecordsByParentWithChildrenCountParams = {
+    parentId: null,
+    userId: user?.id || null,
+  };
   const rootRecords: TRecordWithChildrenOrCount[] =
-    await fetchRecordsByParentWithChildrenCount(null);
+    await fetchRecordsByParentWithChildrenCount(fetchParams);
+  console.log('[DataPage]', {
+    user,
+    fetchParams,
+    rootRecords,
+  });
 
   return (
     <div

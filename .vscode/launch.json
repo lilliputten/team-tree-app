@@ -64,10 +64,10 @@
       "args": ["build"]
     },
     {
-      "name": "Run jest test",
+      "name": "Jest single test",
       "type": "node-terminal",
       "request": "launch",
-      "command": "pnpm exec jest editRecord.test"
+      "command": "pnpm exec jest --no-watch --testTimeout=60000 deleteUser.test"
     },
     {
       "name": "Next.js: debug server-side",

@@ -20,7 +20,7 @@ test('should return all chidren records with parentId', async () => {
     const createdRecordIds = createdRecords.map(({ id }) => id);
     createdIds.push(...createdRecordIds);
     // Find records with chidlren count included (in `_count.children`)
-    const records = await fetchRecordsByParentWithChildren(null);
+    const records = await fetchRecordsByParentWithChildren();
     // Find previously created record in all the fetch results...
     const foundRecord = records.find((it) => it.id === parentId);
     expect(typeof foundRecord).toBe('object');

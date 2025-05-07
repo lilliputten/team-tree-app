@@ -20,7 +20,7 @@ export const metadata = constructMetadata({
 
 export async function TestPage() {
   /* // Tests:
-   * const rootRecords = await fetchRecordsByParentWithChildrenCount(null);
+   * const rootRecords = await fetchRecordsByParentWithChildrenCount();
    * const allRecords = await fetchRecordsByParent();
    * const allRecordsCount = allRecords.length;
    * const firstRecord = allRecords[0];
@@ -33,7 +33,7 @@ export async function TestPage() {
    *   parentId,
    * };
    * if (checkChildrenRecords) {
-   *   const childrenRecords = parentId ? await fetchRecordsByParent(parentId) : undefined;
+   *   const childrenRecords = parentId ? await fetchRecordsByParent({ parentId }) : undefined;
    *   console.log('[TestPage] checkChildrenRecords', {
    *     childrenRecords,
    *   });
