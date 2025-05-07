@@ -44,11 +44,6 @@ export async function DataPage({ params }: TDataPageProps) {
   };
   const rootRecords: TRecordWithChildrenOrCount[] =
     await fetchRecordsByParentWithChildrenCount(fetchParams);
-  console.log('[DataPage]', {
-    user,
-    fetchParams,
-    rootRecords,
-  });
 
   return (
     <div

@@ -6,12 +6,23 @@
   "DataPage": {
     "title": "Data editor - Team Tree"
   },
+  "TestPage": {
+    "title": "Test - Team Tree"
+  },
   "WelcomePage": {
     "title": "Welcome - Team Tree"
   },
   "InfoPage": {
-    "description": "<p>The pathnames are internationalized too.</p><p>If you're using the default language English, you'll see <code>/en/info</code> in the browser address bar on this page.</p><p>If you change the locale to Russian, the URL is localized accordingly (<code>/ru/информация</code>).</p>",
+    "description": "<p>The pathnames are internationalized too.</p>\n\n<p>If you're using the default language English, you'll see <code>/en/info</code> in the browser address bar on this page.</p>\n\n<p>If you change the locale to Russian, the URL is localized accordingly (<code>/ru/информация</code>).</p>",
     "title": "Sample page"
+  },
+  "IntroText": {
+    "title": "Welcome!",
+    "content": "<p>This is just a small hierarchical data editor.</p>\n\n<p>Here will be some description and help for the application, a bit later.</p>"
+  },
+  "SmallIntroText": {
+    "content": "<p>This is a small hierarchical data editor. Take a look at a small <infolink>instruction manual</infolink>.</p>",
+    "title": "Welcome!"
   },
   "NavAuthButton": {
     "sign-in": "Sign In",
@@ -75,6 +86,13 @@
     "delete": "Delete",
     "delete-the-record": "Delete the record"
   },
+  "SignInForm": {
+    "sign-in": "Sign In",
+    "sign-in-with-github": "Sign In with GitHub",
+    "sign-in-with-google": "Sign In with Google",
+    "sign-in-with-yandex": "Sign In with Yandex",
+    "intro": "Login to be able editibg your own data."
+  },
   "ConfirmDeleteRecordModal": {
     "delete-record": "Delete record",
     "delete-record-dialog": "Delete record dialog"
@@ -90,5 +108,9 @@
     "create-record-dialog": "Create record dialog",
     "edit-record": "Edit record",
     "edit-record-dialog": "Edit record dialog"
-  }
+  },
+  "sign-in-with-github": "Sign In with Github",
+  "sign-in-with-google": "Sign In with Google",
+  "sign-in-with-yandex": "Sign In with Yandex",
+  "intro": "Log in to be able to edit your own data."
 }

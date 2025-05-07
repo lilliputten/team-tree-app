@@ -4,6 +4,9 @@
 
 body {
   // @see tailwindClippingLayout, ScrollableLayout
+  // .layout-follow {
+  //   position: relative;
+  // }
   &[data-layout='scrollable'] {
     &,
     .layout-follow {

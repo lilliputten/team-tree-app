@@ -11,7 +11,7 @@ import { commonXMarginTwStyle } from '@/config/ui';
 import { getAllRouteSynonyms } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { NavAuthButton } from '@/components/layout/NavAuthButton';
+import { NavUserAuthButton } from '@/components/layout/NavAuthButton';
 import { NavLocaleSwitcher } from '@/components/layout/NavLocaleSwitcher';
 import { NavModeToggle } from '@/components/layout/NavModeToggle';
 import { isDev } from '@/constants';
@@ -138,7 +138,7 @@ export function NavMobile(props: NavMobileProps) {
           */}
           <NavModeToggle />
           <NavLocaleSwitcher />
-          <NavAuthButton />
+          <NavUserAuthButton />
         </div>
       </nav>
     </>

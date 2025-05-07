@@ -33,12 +33,16 @@ export function useMediaQuery() {
     };
   }, []);
 
+  const isMobile = device === 'mobile';
+  const isSm = device === 'sm';
+
   return {
     device,
     width: dimensions?.width,
     height: dimensions?.height,
-    isMobile: device === 'mobile',
-    isSm: device === 'sm',
+    isMobile,
+    isSm,
+    isBelowMd: isMobile || isSm,
     isTablet: device === 'tablet',
     isDesktop: device === 'desktop',
   };

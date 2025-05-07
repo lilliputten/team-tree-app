@@ -1,76 +1,25 @@
-import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react';
-import { signIn } from 'next-auth/react';
+import React, { Dispatch, SetStateAction } from 'react';
 
-import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
 import { Modal } from '@/components/ui/modal';
-import { Icons, IconType } from '@/components/shared/icons';
-import { Logo } from '@/components/shared/Logo';
+import { SignInForm, SignInFormHeader, TSignInProvider } from '@/components/forms/SignInForm';
 import { isDev } from '@/constants';
 
-type TSignInParameters = Parameters<typeof signIn>;
-type TProvider = TSignInParameters[0];
-
-interface OAuthSignInButtonProps {
-  currentProvider?: TProvider;
-  setSignInClicked: Dispatch<SetStateAction<TProvider>>;
-  setShowSignInModal: Dispatch<SetStateAction<boolean>>;
-  provider: TProvider;
-  ProviderIcon: IconType; // React.FC;
-  text: string;
-}
-
-function OAuthSignInButton(props: OAuthSignInButtonProps) {
-  const {
-    // prettier-ignore
-    currentProvider,
-    setSignInClicked,
-    setShowSignInModal,
-    provider,
-    ProviderIcon,
-    text,
-  } = props;
-  const isClicked = !!currentProvider;
-  const isThisClicked = currentProvider == provider;
-  return (
-    <Button
-      className={cn(
-        // prettier-ignore
-        isDev && '__sign-in-modal-button',
-      )}
-      variant="primary"
-      rounded="full"
-      disabled={isClicked}
-      onClick={() => {
-        setSignInClicked(provider);
-        // @see https://next-auth.js.org/getting-started/client#specifying-a-callbackurl
-        signIn(provider /* , { redirect: false, callbackUrl: '/' } */).then(() => {
-          // Hide the modal
-          setTimeout(() => {
-            setShowSignInModal(false);
-          }, 400);
-        });
-      }}
-    >
-      {isThisClicked ? (
-        <Icons.spinner className="mr-2 size-4 animate-spin" />
-      ) : (
-        <ProviderIcon className="mr-2 size-4" />
-      )}{' '}
-      {text}
-    </Button>
-  );
-}
-
-function SignInModal({
-  showSignInModal,
-  setShowSignInModal,
-}: {
+interface TSignInModalProps {
   showSignInModal: boolean;
   setShowSignInModal: Dispatch<SetStateAction<boolean>>;
-}) {
-  const [currentProvider, setSignInClicked] = useState<TProvider>(undefined);
+}
+
+function SignInModal(props: TSignInModalProps) {
+  const { showSignInModal, setShowSignInModal } = props;
+  const handleSignInDone = React.useCallback(
+    (_provider: TSignInProvider) => {
+      setTimeout(() => {
+        setShowSignInModal(false);
+      }, 400);
+    },
+    [setShowSignInModal],
+  );
 
   return (
     <Modal
@@ -101,33 +50,8 @@ function SignInModal({
             'md:px-16',
           )}
         >
-          <a href={siteConfig.url}>
-            <Logo
-              // size="lg"
-              className="size-18"
-            />
-          </a>
-          <h3
-            className={cn(
-              // prettier-ignore
-              'font-urban',
-              'text-2xl',
-              'font-bold',
-              'text-app-orange',
-            )}
-          >
-            Sign In
-          </h3>
-          <p
-            className={cn(
-              // prettier-ignore
-              'text-sm',
-            )}
-          >
-            This is strictly for demo purposes - only your email and profile picture will be stored.
-          </p>
+          <SignInFormHeader />
         </div>
-
         <div
           className={cn(
             // prettier-ignore
@@ -140,30 +64,7 @@ function SignInModal({
             'md:px-16',
           )}
         >
-          <OAuthSignInButton
-            currentProvider={currentProvider}
-            setSignInClicked={setSignInClicked}
-            setShowSignInModal={setShowSignInModal}
-            provider="github"
-            ProviderIcon={Icons.github}
-            text="Sign In with Github"
-          />
-          <OAuthSignInButton
-            currentProvider={currentProvider}
-            setSignInClicked={setSignInClicked}
-            setShowSignInModal={setShowSignInModal}
-            provider="yandex"
-            ProviderIcon={Icons.yandex}
-            text="Sign In with Yandex"
-          />
-          <OAuthSignInButton
-            currentProvider={currentProvider}
-            setSignInClicked={setSignInClicked}
-            setShowSignInModal={setShowSignInModal}
-            provider="google"
-            ProviderIcon={Icons.google}
-            text="Sign In with Google"
-          />
+          <SignInForm onSignInDone={handleSignInDone} />
         </div>
       </div>
     </Modal>
@@ -171,15 +72,15 @@ function SignInModal({
 }
 
 export function useSignInModal() {
-  const [showSignInModal, setShowSignInModal] = useState(false);
+  const [showSignInModal, setShowSignInModal] = React.useState(false);
 
-  const SignInModalCallback = useCallback(() => {
+  const SignInModalCallback = React.useCallback(() => {
     return (
       <SignInModal showSignInModal={showSignInModal} setShowSignInModal={setShowSignInModal} />
     );
   }, [showSignInModal, setShowSignInModal]);
 
-  return useMemo(
+  return React.useMemo(
     () => ({
       setShowSignInModal,
       SignInModal: SignInModalCallback,

@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ModalContext } from '@/components/modals/providers';
 import { Icons } from '@/components/shared/icons';
+import { isDev } from '@/constants';
 
 import { NavUserAccount } from './NavUserAccount';
 
@@ -17,14 +18,14 @@ interface TNavAuthButtonProps extends TPropsWithClassName {
   onPrimary?: boolean;
 }
 
-export function NavAuthButton(props: TNavAuthButtonProps) {
+export function NavUserAuthButton(props: TNavAuthButtonProps) {
   const { onPrimary, className } = props;
   const { data: session, status } = useSession();
   const { setShowSignInModal } = useContext(ModalContext);
   const t = useTranslations('NavAuthButton');
 
   const rootClassName = cn(
-    '__NavAuthButton', // DEBUG
+    isDev && '__NavAuthButton', // DEBUG
     className,
     // isPending && 'transition-opacity [&:disabled]:opacity-30',
   );
