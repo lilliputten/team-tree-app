@@ -58,8 +58,8 @@ export function NavUserAccount(props: TNavUserAccountProps) {
             isDev && '__NavUserAccount:UserAvatar', // DEBUG
             className,
             'rounded-full',
+            'bg-primary-300/25',
             'size-8',
-            // 'border',
           )}
         />
       </DropdownMenuTrigger>

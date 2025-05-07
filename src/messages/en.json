@@ -75,6 +75,13 @@
     "delete": "Delete",
     "delete-the-record": "Delete the record"
   },
+  "SignInForm": {
+    "sign-in": "Sign In",
+    "sign-in-with-github": "Sign In with GitHub",
+    "sign-in-with-google": "Sign In with Google",
+    "sign-in-with-yandex": "Sign In with Yandex",
+    "intro": "Login to be able editibg your own data."
+  },
   "ConfirmDeleteRecordModal": {
     "delete-record": "Delete record",
     "delete-record-dialog": "Delete record dialog"
@@ -90,5 +97,9 @@
     "create-record-dialog": "Create record dialog",
     "edit-record": "Edit record",
     "edit-record-dialog": "Edit record dialog"
-  }
+  },
+  "sign-in-with-github": "Sign In with Github",
+  "sign-in-with-google": "Sign In with Google",
+  "sign-in-with-yandex": "Sign In with Yandex",
+  "intro": "Log in to be able to edit your own data."
 }

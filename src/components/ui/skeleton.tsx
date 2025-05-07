@@ -1,13 +1,15 @@
 import { cn } from '@/lib/utils';
+import { isDev } from '@/constants';
 
 function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
         // prettier-ignore
-        '__Skeleton',
+        isDev && '__Skeleton',
         className,
-        'animate-pulse rounded-md bg-muted',
+        'animate-pulse rounded-md',
+        'bg-muted',
       )}
       {...props}
     />

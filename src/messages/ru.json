@@ -75,6 +75,13 @@
     "delete": "Удалить",
     "delete-the-record": "Удалить запись"
   },
+  "SignInForm": {
+    "sign-in": "Войти",
+    "sign-in-with-github": "Войти с GitHub",
+    "sign-in-with-google": "Войти с Google",
+    "sign-in-with-yandex": "Войти с Yandex",
+    "intro": "Войдите, чтобы иметь возможность редактировать свои собственные данные."
+  },
   "ConfirmDeleteRecordModal": {
     "delete-record": "Удалить запись",
     "delete-record-dialog": "Диалог удаления записи"

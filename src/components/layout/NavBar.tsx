@@ -7,7 +7,7 @@ import { siteMenu } from '@/config/siteMenu';
 import { commonXPaddingTwStyle } from '@/config/ui';
 import { getAllRouteSynonyms } from '@/lib/routes';
 import { cn } from '@/lib/utils';
-import { NavAuthButton } from '@/components/layout/NavAuthButton';
+import { NavUserAuthButton } from '@/components/layout/NavAuthButton';
 import { NavBarBrand } from '@/components/layout/NavBarBrand';
 import { NavLocaleSwitcher } from '@/components/layout/NavLocaleSwitcher';
 import { NavModeToggle } from '@/components/layout/NavModeToggle';
@@ -120,7 +120,7 @@ export function NavBar(props: NavBarProps) {
           */}
           <NavModeToggle onPrimary />
           <NavLocaleSwitcher onPrimary />
-          <NavAuthButton onPrimary />
+          <NavUserAuthButton onPrimary />
         </div>
       </MaxWidthWrapper>
     </header>
