@@ -9,7 +9,7 @@ export function DemoList(props: TPropsWithClassName & { count?: number }) {
     return <li key={key}>Item {no + 1}</li>;
   });
   return (
-    <ScrollArea
+    <div
       className={cn(
         '__RootPage_DemoList', // DEBUG
         className,
@@ -20,6 +20,6 @@ export function DemoList(props: TPropsWithClassName & { count?: number }) {
     >
       <h3>List:</h3>
       <ul>{items}</ul>
-    </ScrollArea>
+    </div>
   );
 }

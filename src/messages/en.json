@@ -6,6 +6,9 @@
   "DataPage": {
     "title": "Data editor - Team Tree"
   },
+  "TestPage": {
+    "title": "Test - Team Tree"
+  },
   "WelcomePage": {
     "title": "Welcome - Team Tree"
   },

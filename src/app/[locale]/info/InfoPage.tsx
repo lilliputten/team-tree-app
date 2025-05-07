@@ -22,7 +22,7 @@ function SampleContent() {
     <>
       {t.rich('description', {
         p: (chunks) => <p className="mt-4">{chunks}</p>,
-        code: (chunks) => <code className="font-mono text-white">{chunks}</code>,
+        code: (chunks) => <code className="font-mono">{chunks}</code>,
       })}
     </>
   );

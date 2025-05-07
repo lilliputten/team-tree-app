@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
@@ -68,12 +70,17 @@ function OAuthSignInButton(props: OAuthSignInButtonProps) {
   );
 }
 
-export function SignInFormHeader() {
+interface TSignInFormHeaderProps {
+  dark?: boolean;
+}
+
+export function SignInFormHeader(props: TSignInFormHeaderProps) {
+  const { dark } = props;
   const t = useTranslations('SignInForm');
   return (
     <>
       <a href={siteConfig.url}>
-        <Logo className="size-18" />
+        <Logo className="size-18" dark={dark} />
       </a>
       <h3
         className={cn(
@@ -89,6 +96,7 @@ export function SignInFormHeader() {
       <p
         className={cn(
           // prettier-ignore
+          'text-center',
           'text-sm',
         )}
       >

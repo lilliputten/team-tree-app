@@ -5,13 +5,13 @@ import { Modal } from '@/components/ui/modal';
 import { SignInForm, SignInFormHeader, TSignInProvider } from '@/components/forms/SignInForm';
 import { isDev } from '@/constants';
 
-function SignInModal({
-  showSignInModal,
-  setShowSignInModal,
-}: {
+interface TSignInModalProps {
   showSignInModal: boolean;
   setShowSignInModal: Dispatch<SetStateAction<boolean>>;
-}) {
+}
+
+function SignInModal(props: TSignInModalProps) {
+  const { showSignInModal, setShowSignInModal } = props;
   const handleSignInDone = React.useCallback(
     (_provider: TSignInProvider) => {
       setTimeout(() => {

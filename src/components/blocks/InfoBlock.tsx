@@ -1,0 +1,25 @@
+import { TPropsWithClassName } from '@/shared/types/generic';
+import { cn } from '@/lib/utils';
+import { DemoList } from '@/components/debug/DemoList';
+import { isDev } from '@/constants';
+
+export function InfoBlock(props: TPropsWithClassName) {
+  const { className } = props;
+  return (
+    <div
+      className={cn(
+        isDev && '__InfoBlock', // DEBUG
+        className,
+        'flex flex-1 flex-col',
+        'items-center',
+        'justify-center', // Content in the middle of the page
+        // 'layout-follow',
+      )}
+    >
+      Info Block
+      {/*
+      <DemoList count={50} />
+       */}
+    </div>
+  );
+}
