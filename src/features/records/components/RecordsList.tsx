@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import { Icons } from '@/components/shared/icons';
 import { MaxWidthWrapper } from '@/components/shared/MaxWidthWrapper';
+import { isDev } from '@/constants';
 import { TRecordWithChildrenOrCount, TRecordWithoutIds } from '@/features/records/types';
 
 import { addRecord, fetchRecordsByParentWithChildrenCount } from '../actions';
@@ -114,7 +115,7 @@ export function RecordsList(props: TRecordsListProps) {
   return (
     <div
       className={cn(
-        '__RecordsList', // DEBUG
+        isDev && '__RecordsList', // DEBUG
         className,
         'flex flex-col items-center',
         'layout-follow',
@@ -122,7 +123,7 @@ export function RecordsList(props: TRecordsListProps) {
     >
       <div
         className={cn(
-          '__RecordsList_HeaderWrapper', // DEBUG
+          isDev && '__RecordsList_HeaderWrapper', // DEBUG
           'flex w-full flex-col',
           'm-auto',
           'bg-gray-400/20',
@@ -131,7 +132,7 @@ export function RecordsList(props: TRecordsListProps) {
       >
         <MaxWidthWrapper
           className={cn(
-            '__RecordsList_HeaderContainer', // DEBUG
+            isDev && '__RecordsList_HeaderContainer', // DEBUG
             'flex flex-col',
             'layout-follow',
             'm-auto',
@@ -146,17 +147,17 @@ export function RecordsList(props: TRecordsListProps) {
       </div>
       <ScrollArea
         className={cn(
-          '__RecordsList_Scroll', // DEBUG
+          isDev && '__RecordsList_Scroll', // DEBUG
           className,
           'flex flex-col items-center',
-          'justify-center', // Content in the middle of the page
+          'justify-center',
           'layout-follow',
           commonXPaddingTwStyle,
         )}
       >
         <MaxWidthWrapper
           className={cn(
-            '__RecordsList_Container', // DEBUG
+            isDev && '__RecordsList_Container', // DEBUG
             'flex flex-col',
             'layout-follow',
             'm-auto',
@@ -170,7 +171,7 @@ export function RecordsList(props: TRecordsListProps) {
           {hasRecords ? (
             <RecordChildren
               className={cn(
-                '__RecordsList_ContainerChildren', // DEBUG
+                isDev && '__RecordsList_ContainerChildren', // DEBUG
               )}
               childrenRecords={childrenRecords}
               handleUpdatedRecords={handleUpdatedRecords}
@@ -179,7 +180,7 @@ export function RecordsList(props: TRecordsListProps) {
           ) : (
             <div
               className={cn(
-                '__RecordsList_ContainerChildrenEmpty', // DEBUG
+                isDev && '__RecordsList_ContainerChildrenEmpty', // DEBUG
                 'm-auto',
                 'p-4',
                 'flex flex-col items-center gap-4',

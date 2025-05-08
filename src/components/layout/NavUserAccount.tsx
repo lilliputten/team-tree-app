@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { LayoutDashboard, Lock, LogOut, Settings } from 'lucide-react';
+import { LayoutDashboard, LogOut, Settings } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
@@ -17,6 +16,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { UserAvatar } from '@/components/shared/user-avatar';
 import { isDev } from '@/constants';
+import { Link } from '@/i18n/routing';
 
 interface TNavUserAccountProps extends TPropsWithClassName {
   onPrimary?: boolean;
@@ -37,7 +37,7 @@ export function NavUserAccount(props: TNavUserAccountProps) {
     return <div className="size-8 animate-pulse rounded-full border bg-muted" />;
   }
 
-  const isAdmin = user.role === 'ADMIN';
+  // const isAdmin = user.role === 'ADMIN';
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -76,7 +76,7 @@ export function NavUserAccount(props: TNavUserAccountProps) {
 
         <DropdownMenuSeparator />
 
-        {isAdmin && (
+        {/*isAdmin && (
           <DropdownMenuItem asChild>
             <Link
               href="/admin"
@@ -90,11 +90,11 @@ export function NavUserAccount(props: TNavUserAccountProps) {
               <p className="text-sm">{t('Admin')}</p>
             </Link>
           </DropdownMenuItem>
-        )}
+          )*/}
 
         <DropdownMenuItem asChild>
           <Link
-            href="/dashboard"
+            href="/" // dashboard
             className={cn(
               // prettier-ignore
               'flex items-center space-x-2.5',
@@ -108,7 +108,7 @@ export function NavUserAccount(props: TNavUserAccountProps) {
 
         <DropdownMenuItem asChild>
           <Link
-            href="/dashboard/settings"
+            href="/" // "/dashboard/settings"
             className={cn(
               // prettier-ignore
               'flex items-center space-x-2.5',

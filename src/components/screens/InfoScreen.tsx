@@ -19,7 +19,7 @@ export function InfoScreen(props: TPropsWithClassName) {
         isDev && '__InfoScreen', // DEBUG
         className,
         'flex flex-1 flex-col items-center',
-        'justify-center', // Content in the middle of the page
+        'justify-center',
         'layout-follow',
       )}
     >
@@ -28,7 +28,7 @@ export function InfoScreen(props: TPropsWithClassName) {
         className={cn(
           isDev && '__InfoScreen:Container', // DEBUG
           'flex flex-col items-center',
-          'justify-center', // Content in the middle of the page
+          'justify-center',
           'layout-follow',
           commonXPaddingTwStyle,
         )}

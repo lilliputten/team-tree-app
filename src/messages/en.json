@@ -20,7 +20,7 @@
     "title": "Welcome!",
     "content": "<p>This is just a small hierarchical data editor.</p>\n\n<p>Here will be some description and help for the application, a bit later.</p>"
   },
-  "SmallIntroText": {
+  "SmallWelcomeText": {
     "content": "<p>This is a small hierarchical data editor. Take a look at a small <infolink>instruction manual</infolink>.</p>",
     "title": "Welcome!"
   },

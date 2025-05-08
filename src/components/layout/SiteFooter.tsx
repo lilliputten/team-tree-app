@@ -2,6 +2,7 @@ import { siteConfig } from '@/config/site';
 import { commonXPaddingTwStyle } from '@/config/ui';
 import { cn } from '@/lib/utils';
 import { MaxWidthWrapper } from '@/components/shared/MaxWidthWrapper';
+import { isDev } from '@/constants';
 
 interface SiteFooterProps {
   large?: boolean;
@@ -11,7 +12,7 @@ export function SiteFooter(props: SiteFooterProps) {
   return (
     <div
       className={cn(
-        '__SiteFooter', // DEBUG
+        isDev && '__SiteFooter', // DEBUG
         'flex',
         'w-full',
         'bg-muted',

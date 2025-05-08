@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Icons } from '@/components/shared/icons';
+import { isDev } from '@/constants';
 
 import { TNewOrExistingRecord, TRecordWithChildrenOrCount } from '../../types';
 
@@ -103,7 +104,7 @@ export function EditRecordBlock(props: TEditRecordBlockProps) {
         onSubmit={handleSubmit(doSubmit)}
         className={cn(
           className,
-          '__EditRecordBlock',
+          isDev && '__EditRecordBlock',
           'flex w-full flex-1 flex-col gap-4',
           // isPending && 'pointer-events-none opacity-50',
           'relative',

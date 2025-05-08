@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { Modal } from '@/components/ui/modal';
+import { isDev } from '@/constants';
 import { TNewOrExistingRecord } from '@/features/records/types';
 
 import { EditRecordBlock, TEditRecordFormData } from './EditRecordBlock';
@@ -32,7 +33,7 @@ export function EditRecordModal(props: TEditRecordModalProps) {
       showModal={show}
       setShowModal={toggle}
       className={cn(
-        '__EditRecordModal', // DEBUG
+        isDev && '__EditRecordModal', // DEBUG
         !isMobile && 'max-h-[90vh]',
         'flex flex-col gap-0',
         isPending && '[&>*]:pointer-events-none [&>*]:opacity-50',
@@ -40,7 +41,7 @@ export function EditRecordModal(props: TEditRecordModalProps) {
     >
       <div
         className={cn(
-          '__EditRecordModal_Header', // DEBUG
+          isDev && '__EditRecordModal_Header', // DEBUG
           'flex flex-col border-b bg-accent px-8 py-4',
         )}
       >
@@ -53,13 +54,13 @@ export function EditRecordModal(props: TEditRecordModalProps) {
       </div>
       <div
         className={cn(
-          '__EditRecordModal__Content', // DEBUG
+          isDev && '__EditRecordModal__Content', // DEBUG
           'flex flex-1 flex-col',
         )}
       >
         <EditRecordBlock
           className={cn(
-            '__EditRecordModal__ContentBlock', // DEBUG
+            isDev && '__EditRecordModal__ContentBlock', // DEBUG
             'p-8',
           )}
           {...restProps}

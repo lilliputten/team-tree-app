@@ -2,6 +2,7 @@ import { useTheme } from 'next-themes';
 
 import { TPropsWithChildren } from '@/shared/types/generic';
 import { cn } from '@/lib/utils';
+import { isDev } from '@/constants';
 
 interface TWaitingWrapperProps extends TPropsWithChildren {
   show?: boolean;
@@ -23,8 +24,8 @@ export function WaitingWrapper(props: TWaitingWrapperProps) {
   return (
     <div
       className={cn(
-        '__WaitingWrapper',
-        hidden ? '__WaitingWrapper_Hidden' : '__WaitingWrapper_Visible',
+        isDev && '__WaitingWrapper',
+        isDev && (hidden ? '__WaitingWrapper_Hidden' : '__WaitingWrapper_Visible'),
         'absolute',
         'inset-0',
         'flex',

@@ -15,7 +15,7 @@ export function TestScreen(props: TPropsWithClassName) {
         isDev && '__TestScreen', // DEBUG
         className,
         'flex flex-1 flex-col items-center',
-        'justify-center', // Content in the middle of the page
+        'justify-center',
         'layout-follow',
       )}
     >
@@ -24,7 +24,7 @@ export function TestScreen(props: TPropsWithClassName) {
         className={cn(
           isDev && '__TestScreen:Container', // DEBUG
           'flex flex-col items-center',
-          'justify-center', // Content in the middle of the page
+          'justify-center',
           'layout-follow',
           commonXPaddingTwStyle,
         )}

@@ -1,6 +1,6 @@
 <!--
  @since 2025.05.02
- @changed 2025.05.07, 23:58
+ @changed 2025.05.08, 17:47
 -->
 
 # CHANGELOG
@@ -10,10 +10,12 @@
 - Refactored sign-in modal, extracted sign-in form component (`SignInForm`).
 - Adjusted welcome page layout added info and sign-in blocks.
 - Added content blocks for welcome and info pages, added visual arts, added rich content sections.
+- Fixed misc minor issues: Using localized links. Fixed adaptive layouts: fixed a bug with a middle centering on small screens. All debug class in a form of `__*` became conditional (only with `isDev`). Removed wrong colors from svg arts. Moved all used svgs to `src/assets/arts`. Updated opengraph image.
 
 See also:
 
 - [Issue #32: Create welcome/info pages](https://github.com/lilliputten/team-tree-app/issues/32)
+- [Issue #35: Fix misc issues](https://github.com/lilliputten/team-tree-app/issues/35)
 - [Compare with the previous version](https://github.com/lilliputten/team-tree-app/compare/v.0.0.8...v.0.0.9)
 
 ## [v.0.0.8](https://github.com/lilliputten/team-tree-app/releases/tag/v.0.0.8) - 2025.05.07

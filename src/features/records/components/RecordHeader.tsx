@@ -79,7 +79,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
       return (
         <div
           className={cn(
-            '__RecordHeader_Toggle', // DEBUG
+            isDev && '__RecordHeader_Toggle', // DEBUG
             'transition-all duration-500',
             'relative',
             // 'size-8',
@@ -93,7 +93,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
         >
           <div
             className={cn(
-              '__RecordHeader_IconWrapper', // DEBUG
+              isDev && '__RecordHeader_IconWrapper', // DEBUG
               'transition-all',
               'size-6',
               'm-2',
@@ -114,7 +114,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
           >
             <Icon
               className={cn(
-                '__RecordHeader_TogleIcon', // DEBUG
+                isDev && '__RecordHeader_TogleIcon', // DEBUG
                 'size-4',
                 'overflow-hidden',
                 isUpdating && 'animate-spin',
@@ -131,7 +131,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
     return (
       <Icons.dot
         className={cn(
-          '__RecordHeader_LoadedIcon', // DEBUG
+          isDev && '__RecordHeader_LoadedIcon', // DEBUG
           'size-8',
           'transition-all duration-1000',
           'text-gray-500/10',
@@ -182,7 +182,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
   return (
     <div
       className={cn(
-        '__RecordHeader', // DEBUG
+        isDev && '__RecordHeader', // DEBUG
         'flex flex-row items-start gap-2 gap-y-0',
         'max-sm:flex-col-reverse',
         'rounded',
@@ -198,13 +198,13 @@ export function RecordHeader(props: TRecordHeaderProps) {
     >
       <div
         className={cn(
-          '__RecordHeader_LeftTextAndIcons', // DEBUG
+          isDev && '__RecordHeader_LeftTextAndIcons', // DEBUG
           'flex flex-1 flex-row items-start gap-2',
         )}
       >
         <div
           className={cn(
-            '__RecordHeader_LeftIcons', // DEBUG
+            isDev && '__RecordHeader_LeftIcons', // DEBUG
             'flex flex-row items-center gap-0',
             'min-h-10',
           )}
@@ -214,7 +214,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
         </div>
         <div
           className={cn(
-            '__RecordHeader_Text', // DEBUG
+            isDev && '__RecordHeader_Text', // DEBUG
             'flex flex-1 flex-row items-center gap-2 py-2',
             'overflow-hidden',
             'select-none',
@@ -224,7 +224,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
         >
           <span
             className={cn(
-              '__RecordHeader_TextContent', // DEBUG
+              isDev && '__RecordHeader_TextContent', // DEBUG
               'overflow-hidden text-ellipsis',
               // 'whitespace-nowrap', // NOTE: It's possible to use one-line mode
             )}
@@ -235,7 +235,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
       </div>
       <div
         className={cn(
-          '__RecordHeader_RightIcons', // DEBUG
+          isDev && '__RecordHeader_RightIcons', // DEBUG
           'flex flex-row items-center gap-0 py-0',
           isUpdating && 'opacity-50',
           isUpdating && 'cursor-not-allowed',

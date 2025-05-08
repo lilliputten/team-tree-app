@@ -50,7 +50,7 @@ export async function DataPage({ params }: TDataPageProps) {
       className={cn(
         isDev && '__DataPage', // DEBUG
         'flex flex-1 flex-col items-center',
-        // 'justify-center', // Content in the middle of the page
+        // 'justify-center',
         'layout-follow',
       )}
     >

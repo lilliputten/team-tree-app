@@ -42,13 +42,6 @@ export function NavUserAuthButton(props: TNavAuthButtonProps) {
       {session ? (
         <>
           <NavUserAccount onPrimary={onPrimary} />
-          {/*
-          <Link href={session.user.role === 'ADMIN' ? '/admin' : '/dashboard'} className="md:block">
-            <Button className="gap-2 px-5" variant={onPrimary ? 'ghostOnPrimary' : 'ghost'} size="sm">
-              <span>{t('Dashboard')}</span>
-            </Button>
-          </Link>
-          */}
         </>
       ) : status === 'unauthenticated' ? (
         <Button

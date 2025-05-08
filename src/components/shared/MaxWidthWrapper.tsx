@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import { cn } from '@/lib/utils';
+import { isDev } from '@/constants';
 
 export function MaxWidthWrapper({
   className,
@@ -14,7 +15,7 @@ export function MaxWidthWrapper({
   return (
     <div
       className={cn(
-        '__MaxWidthWrapper', // DEBUG
+        isDev && '__MaxWidthWrapper', // DEBUG
         className,
         'container',
         large ? 'max-w-screen-2xl' : 'max-w-6xl',

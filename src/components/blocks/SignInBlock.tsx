@@ -13,7 +13,7 @@ export function SignInBlock(props: TPropsWithClassName) {
         'w-full',
         'flex flex-1 flex-col',
         'items-stretch',
-        'justify-center', // Content in the middle of the page
+        'justify-center',
         'max-w-md',
         'm-auto',
       )}

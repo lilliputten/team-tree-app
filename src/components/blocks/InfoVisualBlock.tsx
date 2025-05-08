@@ -2,9 +2,8 @@ import Image from 'next/image';
 
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { cn } from '@/lib/utils';
+import svgArt from '@/assets/arts/data-blue.svg';
 import { isDev } from '@/constants';
-
-import svgArt from './assets/data-blue.svg';
 
 export function InfoVisualBlock(props: TPropsWithClassName) {
   const { className } = props;
@@ -17,7 +16,7 @@ export function InfoVisualBlock(props: TPropsWithClassName) {
         'gap-4',
         'flex flex-1 flex-col',
         'items-stretch',
-        'justify-center', // Content in the middle of the page
+        'justify-center',
       )}
     >
       <Image
@@ -32,7 +31,7 @@ export function InfoVisualBlock(props: TPropsWithClassName) {
           className,
           'flex flex-col',
           'items-center',
-          'justify-center', // Content in the middle of the page
+          'justify-center',
           'bg-contain',
           'bg-center',
           'bg-no-repeat',
@@ -49,7 +48,7 @@ export function InfoVisualBlock(props: TPropsWithClassName) {
           className,
           'flex flex-col',
           'items-center',
-          'justify-center', // Content in the middle of the page
+          'justify-center',
         )}
       >
         Info Info Block
