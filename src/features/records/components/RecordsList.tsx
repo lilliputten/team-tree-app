@@ -149,7 +149,7 @@ export function RecordsList(props: TRecordsListProps) {
           '__RecordsList_Scroll', // DEBUG
           className,
           'flex flex-col items-center',
-          'justify-center', // Content in the middle of the page
+          'justify-center',
           'layout-follow',
           commonXPaddingTwStyle,
         )}

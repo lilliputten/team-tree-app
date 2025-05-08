@@ -17,7 +17,7 @@ export function InfoVisualBlock(props: TPropsWithClassName) {
         'gap-4',
         'flex flex-1 flex-col',
         'items-stretch',
-        'justify-center', // Content in the middle of the page
+        'justify-center',
       )}
     >
       <Image
@@ -32,7 +32,7 @@ export function InfoVisualBlock(props: TPropsWithClassName) {
           className,
           'flex flex-col',
           'items-center',
-          'justify-center', // Content in the middle of the page
+          'justify-center',
           'bg-contain',
           'bg-center',
           'bg-no-repeat',
@@ -49,7 +49,7 @@ export function InfoVisualBlock(props: TPropsWithClassName) {
           className,
           'flex flex-col',
           'items-center',
-          'justify-center', // Content in the middle of the page
+          'justify-center',
         )}
       >
         Info Info Block

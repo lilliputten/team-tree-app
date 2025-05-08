@@ -2,7 +2,6 @@ import Image from 'next/image';
 
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { cn } from '@/lib/utils';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { SmallWelcomeText } from '@/components/screens/SmallWelcomeText';
 import { isDev } from '@/constants';
 
@@ -10,7 +9,6 @@ import svgArt from './assets/login-blue.svg';
 
 export function WelcomeVisualBlock(props: TPropsWithClassName) {
   const { className } = props;
-  const { isSm } = useMediaQuery();
   return (
     <div
       className={cn(
@@ -30,12 +28,11 @@ export function WelcomeVisualBlock(props: TPropsWithClassName) {
         className={cn(
           isDev && '__WelcomeVisualBlock:Art', // DEBUG
           'mx-auto mt-4',
-          isSm && 'max-w-xs',
-          // isBelowMd && 'max-h-64 w-auto',
+          'sm:max-w-xs',
         )}
       />
 
-      {/* // XXX: Alt render, as a background
+      {/* // XXX: Alternate layout: the art as a background
       <div
         className={cn(
           isDev && '__WelcomeVisualBlock:Art', // DEBUG
