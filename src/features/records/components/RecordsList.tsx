@@ -44,7 +44,9 @@ export function RecordsList(props: TRecordsListProps) {
     return new Promise<TRecordWithChildrenOrCount[]>((resolve, reject) => {
       startUpdating(async () => {
         try {
-          const records = await fetchRecordsByParentWithChildrenCount();
+          const records = await fetchRecordsByParentWithChildrenCount({
+            userId: user?.id || null,
+          });
           setChildren(records);
           toast.success(t('records-data-has-been-successfully-reloaded'));
           resolve(records);
@@ -65,7 +67,7 @@ export function RecordsList(props: TRecordsListProps) {
         }
       });
     });
-  }, [t]);
+  }, [t, user]);
 
   const onAddRootRecord = React.useCallback(
     (newRecord: TRecordWithoutIds) => {
