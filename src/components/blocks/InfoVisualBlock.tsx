@@ -2,9 +2,8 @@ import Image from 'next/image';
 
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { cn } from '@/lib/utils';
+import svgArt from '@/assets/arts/data-blue.svg';
 import { isDev } from '@/constants';
-
-import svgArt from './assets/data-blue.svg';
 
 export function InfoVisualBlock(props: TPropsWithClassName) {
   const { className } = props;

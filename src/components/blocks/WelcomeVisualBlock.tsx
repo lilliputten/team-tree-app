@@ -3,9 +3,8 @@ import Image from 'next/image';
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { cn } from '@/lib/utils';
 import { SmallWelcomeText } from '@/components/screens/SmallWelcomeText';
+import svgArt from '@/assets/arts/login-blue.svg';
 import { isDev } from '@/constants';
-
-import svgArt from './assets/login-blue.svg';
 
 export function WelcomeVisualBlock(props: TPropsWithClassName) {
   const { className } = props;
