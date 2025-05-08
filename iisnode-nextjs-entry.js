@@ -1,5 +1,6 @@
 /* eslint-disable */
 // NOTE: This file should be excluded from linters
+// @see README.iisnode.md
 
 /**
  * @desc Script to launch the nodejs server for iisnode extension.
