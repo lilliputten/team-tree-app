@@ -9,7 +9,7 @@ The minmal nextjs setup for IIS iisnode produciton environment
 
 ## Build info (auto-generated)
 
-- Project info: v.0.0.9 / 2025.05.07 23:57:27 +0300
+- Project info: v.0.0.9 / 2025.05.08 17:46:08 +0300
 
 - Vercel deployment: https://team-tree-app.vercel.app/
 
