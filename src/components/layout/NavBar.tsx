@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { siteMenu } from '@/config/siteMenu';
@@ -13,7 +12,7 @@ import { NavLocaleSwitcher } from '@/components/layout/NavLocaleSwitcher';
 import { NavModeToggle } from '@/components/layout/NavModeToggle';
 import { MaxWidthWrapper } from '@/components/shared/MaxWidthWrapper';
 import { isDev } from '@/constants';
-import { usePathname } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import { TLocale } from '@/i18n/types';
 
 interface NavBarProps {
@@ -68,7 +67,7 @@ export function NavBar(props: NavBarProps) {
                   return (
                     <Link
                       key={'navbar-' + item.href}
-                      href={isDisabled ? '#' : item.href}
+                      href={item.href}
                       prefetch
                       className={cn(
                         'flex',

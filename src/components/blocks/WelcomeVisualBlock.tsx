@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { cn } from '@/lib/utils';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { SmallIntroText } from '@/components/screens/SmallIntroText';
+import { SmallWelcomeText } from '@/components/screens/SmallWelcomeText';
 import { isDev } from '@/constants';
 
 import svgArt from './assets/login-blue.svg';
@@ -51,7 +51,7 @@ export function WelcomeVisualBlock(props: TPropsWithClassName) {
       />
       */}
 
-      <SmallIntroText />
+      <SmallWelcomeText />
     </div>
   );
 }

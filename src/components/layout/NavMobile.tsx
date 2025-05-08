@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
@@ -15,7 +14,7 @@ import { NavUserAuthButton } from '@/components/layout/NavAuthButton';
 import { NavLocaleSwitcher } from '@/components/layout/NavLocaleSwitcher';
 import { NavModeToggle } from '@/components/layout/NavModeToggle';
 import { isDev } from '@/constants';
-import { usePathname } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import { TLocale } from '@/i18n/types';
 
 interface NavMobileProps {
@@ -101,7 +100,7 @@ export function NavMobile(props: NavMobileProps) {
                 return (
                   <li key={'navbar-' + item.href} className="py-3">
                     <Link
-                      href={isDisabled ? '#' : item.href}
+                      href={item.href}
                       onClick={() => setOpen(false)}
                       className={cn(
                         // prettier-ignore

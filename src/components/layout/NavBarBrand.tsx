@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLocale } from 'next-intl';
 
@@ -11,6 +10,7 @@ import { cn } from '@/lib/utils';
 import { Logo } from '@/components/shared/Logo';
 import { isDev } from '@/constants';
 import { infoRoute, welcomeRoute } from '@/constants/routes';
+import { Link } from '@/i18n/routing';
 import { TLocale } from '@/i18n/types';
 
 interface NavBarBrandProps {

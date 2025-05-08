@@ -9,6 +9,7 @@ export const pathnames = {
   '/': '/',
 
   '/welcome': '/welcome',
+  '/data': '/data',
 
   // Localized path example (for peoduction mode)
   '/info': isDev
@@ -30,7 +31,7 @@ export const routing = defineRouting({
   pathnames,
 });
 
-export type Pathnames = keyof typeof routing.pathnames;
+export type TRoutePath = keyof typeof routing.pathnames;
 
 export const {
   // Lightweight wrappers around Next.js' navigation APIs that will consider the routing configuration

@@ -1,14 +1,14 @@
 'use client';
 
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { cn } from '@/lib/utils';
 import { isDev } from '@/constants';
+import { Link } from '@/i18n/routing';
 
-export function SmallIntroText(props: TPropsWithClassName) {
-  const t = useTranslations('SmallIntroText');
+export function SmallWelcomeText(props: TPropsWithClassName) {
+  const t = useTranslations('SmallWelcomeText');
   const { className } = props;
   return (
     <div
