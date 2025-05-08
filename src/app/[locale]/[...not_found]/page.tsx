@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { isDev } from '@/constants';
 
 // TODO: Force 404 status code for the response
 
@@ -12,7 +13,7 @@ export default function NotFound() {
   return (
     <div
       className={cn(
-        '__NotFoundPage', // DEBUG
+        isDev && '__NotFoundPage', // DEBUG
         'layout-follow',
         'gap-6',
         'flex-1',

@@ -3,6 +3,7 @@ import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/shared/icons';
 import { secondaryColor } from '@/styles/cssVariables';
+import { isDev } from '@/constants';
 
 interface TWaitingSplashProps {
   show?: boolean;
@@ -23,8 +24,8 @@ export function WaitingSplash(props: TWaitingSplashProps) {
   return (
     <div
       className={cn(
-        '__WaitingSplash',
-        hidden ? '__WaitingSplash_Hidden' : '__WaitingSplash_Visible',
+        isDev && '__WaitingSplash',
+        isDev && (hidden ? '__WaitingSplash_Hidden' : '__WaitingSplash_Visible'),
         'absolute',
         'inset-0',
         'flex',
@@ -40,7 +41,7 @@ export function WaitingSplash(props: TWaitingSplashProps) {
     >
       <div
         className={cn(
-          '__WaitingSplash_Backdrop',
+          isDev && '__WaitingSplash_Backdrop',
           'absolute',
           'inset-0',
           'opacity-80',

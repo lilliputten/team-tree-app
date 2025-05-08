@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { TPropsWithClassName } from '@/shared/types/generic';
 import { getErrorText } from '@/lib/helpers/strings';
 import { cn } from '@/lib/utils';
+import { isDev } from '@/constants';
 import { TRecordId, TRecordWithChildrenOrCount } from '@/features/records/types';
 
 import { deleteRecordWithChidren } from '../actions/deleteRecordWithChidren';
@@ -108,14 +109,14 @@ export function RecordChildren(props: TRecordChildrenProps) {
   return (
     <div
       className={cn(
-        '__RecordChildren', // DEBUG
+        isDev && '__RecordChildren', // DEBUG
         className,
       )}
       data-record-id={parentId || 'root'}
     >
       <div
         className={cn(
-          '__RecordChildren_Content', // DEBUG
+          isDev && '__RecordChildren_Content', // DEBUG
           'pt-2',
           !isRoot && 'pl-7',
           !showContent && 'hidden',

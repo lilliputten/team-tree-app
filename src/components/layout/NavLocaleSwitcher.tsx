@@ -13,6 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { isDev } from '@/constants';
 import { routing, usePathname, useRouter } from '@/i18n/routing';
 import { TLocale } from '@/i18n/types';
 
@@ -55,7 +56,7 @@ export function NavLocaleSwitcher(props: TNavLocaleSwitcherProps) {
           variant={onPrimary ? 'ghostOnPrimary' : 'ghost'}
           size="sm"
           className={cn(
-            '__NavLocaleSwitcher', // DEBUG
+            isDev && '__NavLocaleSwitcher', // DEBUG
             className,
             isPending && 'transition-opacity [&:disabled]:opacity-30',
           )}

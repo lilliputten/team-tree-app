@@ -5,6 +5,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
+import { isDev } from '@/constants';
 
 const Dialog = DialogPrimitive.Root;
 
@@ -21,7 +22,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      '__DialogPrimitive_Overlay',
+      isDev && '__DialogPrimitive_Overlay',
       'fixed inset-0 z-50',
       // 'bg-background/80', // Original backdrop color
       'bg-black/30', // Dark background (should be synced in both dialog and modal)

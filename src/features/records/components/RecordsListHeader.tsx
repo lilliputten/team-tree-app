@@ -7,6 +7,7 @@ import { TPropsWithClassName } from '@/shared/types/generic';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/shared/icons';
+import { isDev } from '@/constants';
 
 interface TRecordsListHeaderProps extends TPropsWithClassName {
   handleReloadRecords: () => void;
@@ -46,7 +47,7 @@ export function RecordsListHeader(props: TRecordsListHeaderProps) {
   return (
     <div
       className={cn(
-        '__RecordsListHeader', // DEBUG
+        isDev && '__RecordsListHeader', // DEBUG
         className,
         'flex flex-row items-center gap-0',
         'p-2',
@@ -54,7 +55,7 @@ export function RecordsListHeader(props: TRecordsListHeaderProps) {
     >
       <div
         className={cn(
-          '__RecordsListHeader_Text', // DEBUG
+          isDev && '__RecordsListHeader_Text', // DEBUG
           'flex-1',
           'opacity-20',
           'select-none',
@@ -64,7 +65,7 @@ export function RecordsListHeader(props: TRecordsListHeaderProps) {
       </div>
       <div
         className={cn(
-          '__RecordsListHeader_RightIcons', // DEBUG
+          isDev && '__RecordsListHeader_RightIcons', // DEBUG
           'flex flex-row items-center gap-0 py-0',
           isUpdating && 'opacity-50',
           isUpdating && 'cursor-not-allowed',

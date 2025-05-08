@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 import { getErrorText } from '@/lib/helpers/strings';
 import { cn } from '@/lib/utils';
 import { useSessionUser } from '@/hooks/useSessionUser';
+import { isDev } from '@/constants';
 
 import { addRecord, fetchRecordsByParentWithChildrenCount, updateRecord } from '../actions';
 import { TFetchParentId, TNewRecord, TRecord, TRecordWithChildrenOrCount } from '../types';
@@ -173,7 +174,7 @@ export function RecordItem(props: TRecordItemProps) {
     <div
       // ...
       className={cn(
-        '__RecordItem', // DEBUG
+        isDev && '__RecordItem', // DEBUG
         'transition-all',
         'rounded p-2 pr-0',
         'active:bg-blue-400/10',
