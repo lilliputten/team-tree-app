@@ -1,9 +1,10 @@
 /* eslint-disable */
-// NOTE: This file should be excluded from linters
-// @see README.iisnode.md
 
 /**
  * @desc Script to launch the nodejs server for iisnode extension.
+ * @see README.iisnode.md
+ *
+ * NOTE: This file should be excluded from linters
  */
 
 const { createServer } = require('http');
@@ -24,7 +25,7 @@ app.prepare().then(() => {
       // This tells it to parse the query portion of the URL.
       const parsedUrl = parse(req.url, true);
       const { pathname, query } = parsedUrl;
-      // TODO?
+      // NOTE: Examples of specific processing of particular pages (not required in the current configuration)
       if (pathname === '/a') {
         await app.render(req, res, '/a', query);
       } else if (pathname === '/b') {
