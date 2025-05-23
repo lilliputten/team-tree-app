@@ -1,9 +1,18 @@
 <!--
  @since 2025.05.02
- @changed 2025.05.08, 17:47
+ @changed 2025.05.23, 23:27
 -->
 
 # CHANGELOG
+
+## [v.0.0.10](https://github.com/lilliputten/team-tree-app/releases/tag/v.0.0.10) - 2025.05.23
+
+- Added telegram authorization.
+
+See also:
+
+- [Issue #37: Add telegram authentication](https://github.com/lilliputten/team-tree-app/issues/37)
+- [Compare with the previous version](https://github.com/lilliputten/team-tree-app/compare/v.0.0.9...v.0.0.10)
 
 ## [v.0.0.9](https://github.com/lilliputten/team-tree-app/releases/tag/v.0.0.9) - 2025.05.07
 
