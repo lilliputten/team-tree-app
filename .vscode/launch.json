@@ -1,5 +1,5 @@
-// ex: set ft=jsonc :
-// @changed 2024.10.06, 23:23
+// ex: set ft=jsonc:sw=2:ts=4:
+// @changed 2025.05.22, 16:08
 {
   // Use IntelliSense to learn about possible attributes.
   // Hover to view descriptions of existing attributes.
@@ -7,6 +7,57 @@
   // https://code.visualstudio.com/docs/editor/debugging#_launch-configurations
   "version": "0.2.0",
   "configurations": [
+    {
+      "type": "node-terminal",
+      "name": "xtunnel",
+      "request": "launch",
+      "command": "xtunnel http 3000"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Run local dev server",
+      "request": "launch",
+      "command": "pnpm run dev",
+      "cwd": "${workspaceFolder}",
+      "skipFiles": ["!${workspaceRoot}/node_modules/**/*.js"],
+      "runtimeArgs": ["--preserve-symlinks"]
+    },
+    {
+      "type": "node-terminal",
+      "name": "Run https dev server",
+      "request": "launch",
+      "command": "pnpm run dev:https",
+      "cwd": "${workspaceFolder}",
+      "skipFiles": ["!${workspaceRoot}/node_modules/**/*.js"],
+      "runtimeArgs": ["--preserve-symlinks"],
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**",
+        "node_modules/@telegram-auth/**/*.js",
+        "node_modules/@telegram-auth/**/*.ts"
+      ]
+    },
+    {
+      "name": "Next.js: debug client-side",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000"
+    },
+    {
+      "name": "Next.js: debug full stack",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/next",
+      "runtimeArgs": ["--inspect"],
+      "skipFiles": ["<node_internals>/**"],
+      "serverReadyAction": {
+        "action": "debugWithEdge",
+        "killOnServerStop": true,
+        "pattern": "- Local:.+(https?://.+)",
+        "uriFormat": "%s",
+        "webRoot": "${workspaceFolder}"
+      }
+    },
     {
       "name": "Launch Chrome",
       "request": "launch",
@@ -68,33 +119,6 @@
       "type": "node-terminal",
       "request": "launch",
       "command": "pnpm exec jest --no-watch --testTimeout=60000 deleteUser.test"
-    },
-    {
-      "name": "Next.js: debug server-side",
-      "type": "node-terminal",
-      "request": "launch",
-      "command": "pnpm run dev"
-    },
-    {
-      "name": "Next.js: debug client-side",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://localhost:3000"
-    },
-    {
-      "name": "Next.js: debug full stack",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceFolder}/node_modules/.bin/next",
-      "runtimeArgs": ["--inspect"],
-      "skipFiles": ["<node_internals>/**"],
-      "serverReadyAction": {
-        "action": "debugWithEdge",
-        "killOnServerStop": true,
-        "pattern": "- Local:.+(https?://.+)",
-        "uriFormat": "%s",
-        "webRoot": "${workspaceFolder}"
-      }
     }
   ]
 }

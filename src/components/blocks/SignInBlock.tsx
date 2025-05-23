@@ -46,7 +46,7 @@ export function SignInBlock(props: TPropsWithClassName) {
           'md:px-16',
         )}
       >
-        <SignInForm />
+        <SignInForm inBody />
       </div>
     </div>
   );

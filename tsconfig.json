@@ -22,6 +22,9 @@
       }
     ],
     "paths": {
+      // "@/next-auth/*": ["./next-auth/*"],
+      // "@/telegram-auth/*": ["./telegram-auth/*"],
+      // "@auth/core/*": ["./auth-core/*"],
       "@/*": ["./src/*"]
     }
   },
