@@ -2,21 +2,24 @@
 
 import React from 'react';
 
-import { useSignInModal } from '@/components/modals/sign-in-modal';
+import { useSignInModal } from '@/components/modals/SignInModal';
 
 export const ModalContext = React.createContext<{
   setShowSignInModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showSignInModal: boolean;
 }>({
   setShowSignInModal: () => {},
+  showSignInModal: false,
 });
 
 export default function ModalProvider({ children }: { children: React.ReactNode }) {
-  const { SignInModal, setShowSignInModal } = useSignInModal();
+  const { showSignInModal, SignInModal, setShowSignInModal } = useSignInModal();
 
   return (
     <ModalContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
+        showSignInModal,
         setShowSignInModal,
       }}
     >

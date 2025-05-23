@@ -10,7 +10,10 @@ export type TDefinedUserId = TUser['id'];
 export type TOptionalUserId = TDefinedUserId | null;
 
 export type TExtendedUser = {
+  // @see src/@types/next-auth.d.ts
   role: UserRole;
+  // provider?: string; // XXX: In addition to Account?
+  // providerAccountId?: string; // XXX: In addition to Account?
 } & TSessionUser;
 
 export type TOptionalExtendedUser = TExtendedUser | undefined;

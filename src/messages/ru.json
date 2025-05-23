@@ -91,6 +91,7 @@
     "sign-in-with-github": "Войти с GitHub",
     "sign-in-with-google": "Войти с Google",
     "sign-in-with-yandex": "Войти с Yandex",
+    "sign-in-with-telegram": "Войти с Telegram",
     "intro": "Войдите, чтобы иметь возможность редактировать свои собственные данные."
   },
   "ConfirmDeleteRecordModal": {

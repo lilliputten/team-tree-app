@@ -91,6 +91,7 @@
     "sign-in-with-github": "Sign In with GitHub",
     "sign-in-with-google": "Sign In with Google",
     "sign-in-with-yandex": "Sign In with Yandex",
+    "sign-in-with-telegram": "Sign In with Telegram",
     "intro": "Login to be able editibg your own data."
   },
   "ConfirmDeleteRecordModal": {

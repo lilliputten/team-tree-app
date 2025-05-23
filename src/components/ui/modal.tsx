@@ -1,6 +1,6 @@
 'use client';
 
-import { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { X } from 'lucide-react';
@@ -15,7 +15,7 @@ interface ModalProps {
   children: React.ReactNode;
   className?: string;
   showModal?: boolean;
-  setShowModal?: Dispatch<SetStateAction<boolean>>;
+  setShowModal?: (v: boolean) => void; // Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
   desktopOnly?: boolean;
   preventDefaultClose?: boolean;
@@ -37,6 +37,12 @@ export function Modal({
   description,
 }: ModalProps) {
   // const router = useRouter();
+
+  React.useEffect(() => {
+    console.log('[XXX:modal:Effect:showModal]', {
+      showModal,
+    });
+  }, [showModal]);
 
   const closeModal = ({ dragged }: { dragged?: boolean } = {}) => {
     if (preventDefaultClose && !dragged) {

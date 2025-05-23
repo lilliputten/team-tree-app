@@ -116,6 +116,7 @@ export function NavBar(props: NavBarProps) {
             <Icons.github className="size-6" />
             <span className="sr-only">GitHub</span>
           </Link>
+          <NavTgSignInButton />
           */}
           <NavModeToggle onPrimary />
           <NavLocaleSwitcher onPrimary />
