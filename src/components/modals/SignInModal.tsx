@@ -7,11 +7,12 @@ import { isDev } from '@/constants';
 
 interface TSignInModalProps {
   showSignInModal: boolean;
-  setShowSignInModal: Dispatch<SetStateAction<boolean>>;
+  setShowSignInModal: (v: boolean) => void; // Dispatch<SetStateAction<boolean>>;
 }
 
 function SignInModal(props: TSignInModalProps) {
   const { showSignInModal, setShowSignInModal } = props;
+
   const handleSignInDone = React.useCallback(
     (_provider: TSignInProvider) => {
       setTimeout(() => {
@@ -27,7 +28,7 @@ function SignInModal(props: TSignInModalProps) {
       setShowModal={setShowSignInModal}
       className={cn(
         // prettier-ignore
-        isDev && '__sign-in-modal',
+        isDev && '__SignInModal',
         'text-center',
         'text-primary-foreground',
       )}
@@ -74,6 +75,12 @@ function SignInModal(props: TSignInModalProps) {
 export function useSignInModal() {
   const [showSignInModal, setShowSignInModal] = React.useState(false);
 
+  React.useEffect(() => {
+    console.log('[XXX:SignInModal:Effect:showSignInModal]', {
+      showSignInModal,
+    });
+  }, [showSignInModal]);
+
   const SignInModalCallback = React.useCallback(() => {
     return (
       <SignInModal showSignInModal={showSignInModal} setShowSignInModal={setShowSignInModal} />
@@ -82,9 +89,10 @@ export function useSignInModal() {
 
   return React.useMemo(
     () => ({
+      showSignInModal,
       setShowSignInModal,
       SignInModal: SignInModalCallback,
     }),
-    [setShowSignInModal, SignInModalCallback],
+    [showSignInModal, setShowSignInModal, SignInModalCallback],
   );
 }

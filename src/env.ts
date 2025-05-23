@@ -6,6 +6,7 @@ export const env = createEnv({
   server: {
     // This is optional because it's only used in development.
     // See https://next-auth.js.org/deployment.
+    // BOT_USERNAME: z.string().min(1),
     AUTH_SECRET: z.string().min(1),
     USER_REQUIRED: z.enum(['true', 'false']).transform((v) => v === 'true'), // z.boolean(),
     DATABASE_URL: z.string().min(1),
@@ -21,10 +22,12 @@ export const env = createEnv({
   },
   // Clent types
   client: {
+    NEXT_PUBLIC_BOT_USERNAME: z.string().min(1),
     NEXT_PUBLIC_APP_URL: z.string().min(1),
   },
   // Runtime values
   runtimeEnv: {
+    NEXT_PUBLIC_BOT_USERNAME: process.env.NEXT_PUBLIC_BOT_USERNAME,
     AUTH_SECRET: process.env.AUTH_SECRET,
     USER_REQUIRED: process.env.USER_REQUIRED,
     DATABASE_URL: process.env.DATABASE_URL,
