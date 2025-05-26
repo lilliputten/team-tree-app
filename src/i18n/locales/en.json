@@ -1,4 +1,16 @@
 {
+  "BotMenu": {
+    "start": "Start",
+    "language": "Change language",
+    "help": "Help"
+  },
+  "Bot": {
+    "openApp": "Open App",
+    "start": "👋 Hi, how can I /help you?",
+    "selectLanguage": "Select language",
+    "languageChangedFor": "Language has been changed for",
+    "help": "Send me some text, and I can make it bold for you.\n\nYou can change my language using the /language command."
+  },
   "RootPage": {
     "title": "Team Tree",
     "about": "Go to the about page"
@@ -30,7 +42,7 @@
   },
   "NavLocaleSwitcher": {
     "label": "Change language",
-    "locale": "{locale, select, ru {ʀᴜ Russian} en {🇺🇸 English} other {Unknown}}"
+    "locale": "{locale, select, ru {🇷🇺 Русский} en {🇺🇸 English} other {Unknown}}"
   },
   "NavModeToggle": {
     "label": "Toggle theme",
@@ -113,5 +125,6 @@
   "sign-in-with-github": "Sign In with Github",
   "sign-in-with-google": "Sign In with Google",
   "sign-in-with-yandex": "Sign In with Yandex",
-  "intro": "Log in to be able to edit your own data."
+  "intro": "Log in to be able to edit your own data.",
+  "help": "📖 Help text!"
 }
