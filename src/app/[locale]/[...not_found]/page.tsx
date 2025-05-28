@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,7 @@ import { isDev } from '@/constants';
 
 export default function NotFound() {
   const router = useRouter();
+  const pathname = usePathname();
   return (
     <div
       className={cn(
@@ -22,7 +23,9 @@ export default function NotFound() {
         'items-center',
       )}
     >
-      <h1 className="text-2xl font-normal">Error: Page not found!</h1>
+      <h1 className="text-2xl font-normal">
+        Error: Page <u>{pathname}</u> not found!
+      </h1>
       <div className="flex flex-row gap-2 text-base text-muted-foreground">
         <Button onClick={() => router.back()}>Go back</Button>
         <Button onClick={() => router.push('/')}>Go home</Button>
