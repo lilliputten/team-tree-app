@@ -60,9 +60,10 @@ export function NavTgSignInButton() {
       // redirect: false,
     };
     const params = data as unknown as SignInAuthorizationParams;
-    console.log('[NavTgSignInButton:onAuthCallback]', {
-      data,
-    });
+    /* console.log('[NavTgSignInButton:onAuthCallback]', {
+     *   data,
+     * });
+     */
     /* Sample data (from `telegram-auth-nextjs-try`)
      * auth_date: 1747950723
      * first_name: "Ig"
@@ -71,7 +72,6 @@ export function NavTgSignInButton() {
      * photo_url: "https://t.me/i/userpic/320/3meBKT_rsGqbt3HOAqNHdAIWEQYHGeW3m86yeYhZiUo.jpg"
      * username: "lilliputten"
      */
-    debugger;
     signIn('telegram', options, params);
   }
 

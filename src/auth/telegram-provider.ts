@@ -7,8 +7,7 @@ export const telegramProvider = CredentialsProvider({
   id: 'telegram',
   name: 'Telegram Login',
   credentials: {},
-  async authorize(credentials, req) {
-    const text = await req.text(); // Unpacked credentials
+  async authorize(_credentials, req) {
     const validator = new AuthDataValidator({
       botToken: `${process.env.BOT_TOKEN}`,
     });
@@ -16,27 +15,28 @@ export const telegramProvider = CredentialsProvider({
     const sp = new URLSearchParams(queryStr);
     const queryParams = Object.fromEntries(sp);
     const data = objectToAuthDataMap(queryParams);
-    console.log('[telegram-provider:authorize] Got data', {
-      data,
-      text,
-      credentials,
-      queryStr,
-      sp,
-      queryParams,
-      req,
-      validator,
-    });
-    // debugger;
+    /* const text = await req.text(); // Unpacked credentials
+     * console.log('[telegram-provider:authorize] Got data', {
+     *   data,
+     *   text,
+     *   _credentials,
+     *   queryStr,
+     *   sp,
+     *   queryParams,
+     *   req,
+     *   validator,
+     * });
+     */
 
     const user = await validator.validate(data);
 
     const isOk = user.id && user.first_name;
 
-    console.log('[telegram-provider:authorize] Got user', {
-      user,
-      data,
-    });
-    // debugger;
+    /* console.log('[telegram-provider:authorize] Got user', {
+     *   user,
+     *   data,
+     * });
+     */
 
     if (isOk) {
       const returned = {
@@ -46,16 +46,17 @@ export const telegramProvider = CredentialsProvider({
         image: user.photo_url,
       };
       try {
-        console.log('[telegram-provider:authorize] Create user', {
-          user,
-          data,
-        });
-        // debugger;
+        /* console.log('[telegram-provider:authorize] Create user', {
+         *   user,
+         *   data,
+         * });
+         */
         await createUserOrUpdateTelegramUser(user);
         // TODO: Create account?
       } catch {
+        // eslint-disable-next-line no-console
         console.error('Something went wrong while creating the user.');
-        debugger;
+        debugger; // eslint-disable-line no-debugger
       }
       return returned;
     }

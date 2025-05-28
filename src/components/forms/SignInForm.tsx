@@ -64,15 +64,16 @@ function OAuthSignInButton(props: OAuthSignInButtonProps) {
         redirectTo: dataRoute,
       };
       const params = data ? (data as unknown as SignInAuthorizationParams) : undefined;
-      console.log('[SignInForm:onSignIn]', provider, {
-        data,
-        provider,
-        dataRoute,
-        params,
-        options,
-        onSignInStart,
-        onSignInDone,
-      });
+      /* console.log('[SignInForm:onSignIn]', provider, {
+       *   data,
+       *   provider,
+       *   dataRoute,
+       *   params,
+       *   options,
+       *   onSignInStart,
+       *   onSignInDone,
+       * });
+       */
       if (onSignInStart) {
         onSignInStart(provider);
       }

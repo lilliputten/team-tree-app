@@ -19,7 +19,7 @@ export const nextAuthApp = NextAuth({
     // error: "/auth/error",
   },
   callbacks: {
-    async signIn(params) {
+    async signIn(_params) {
       /* // Got params for 'telegram` here:
        * {
        *   "user": {
@@ -39,25 +39,26 @@ export const nextAuthApp = NextAuth({
        *   }
        * }
        */
-      const { user, account, profile, email, credentials } = params;
-      console.log('[auth:callbacks:signIn]', {
-        user,
-        account,
-        profile,
-        email,
-        credentials,
-      });
-      // debugger;
+      /*
+       * const { user, account, profile, email, credentials } = _params;
+       * console.log('[auth:callbacks:signIn]', {
+       *   user,
+       *   account,
+       *   profile,
+       *   email,
+       *   credentials,
+       * });
+       */
       return true;
     },
     async session(params) {
       const { token, session } = params;
-      console.log('[auth:callbacks:session]', {
-        token,
-        session,
-        params,
-      });
-      // debugger;
+      /* console.log('[auth:callbacks:session]', {
+       *   token,
+       *   session,
+       *   params,
+       * });
+       */
       const user = session.user as unknown as TExtendedUser;
       if (user) {
         if (token.sub) {
@@ -102,11 +103,11 @@ export const nextAuthApp = NextAuth({
        *   "trigger": "signIn"
        * }
        */
-      console.log('[auth:callbacks:jwt]', {
-        token,
-        params,
-      });
-      // debugger;
+      /* console.log('[auth:callbacks:jwt]', {
+       *   token,
+       *   params,
+       * });
+       */
       if (!token.sub) {
         return token;
       }
@@ -118,11 +119,11 @@ export const nextAuthApp = NextAuth({
       token.email = dbUser.email;
       token.picture = dbUser.image;
       token.role = dbUser.role;
-      // token.provider = 'bbb';
-      console.log('[auth:callbacks:jwt] Updated token', {
-        token,
-        params,
-      });
+      /* console.log('[auth:callbacks:jwt] Updated token', {
+       *   token,
+       *   params,
+       * });
+       */
       return token;
     },
   } satisfies AuthConfig['callbacks'],

@@ -15,7 +15,8 @@ interface ModalProps {
   children: React.ReactNode;
   className?: string;
   showModal?: boolean;
-  setShowModal?: (v: boolean) => void; // Dispatch<SetStateAction<boolean>>;
+  // setShowModal?: (v: boolean) => void; // Dispatch<SetStateAction<boolean>>;
+  setShowModal?: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
   desktopOnly?: boolean;
   preventDefaultClose?: boolean;
@@ -37,12 +38,6 @@ export function Modal({
   description,
 }: ModalProps) {
   // const router = useRouter();
-
-  React.useEffect(() => {
-    console.log('[XXX:modal:Effect:showModal]', {
-      showModal,
-    });
-  }, [showModal]);
 
   const closeModal = ({ dragged }: { dragged?: boolean } = {}) => {
     if (preventDefaultClose && !dragged) {

@@ -59,7 +59,7 @@ export async function createUserOrUpdateTelegramUser(user: TelegramUserData) {
   });
   if (foundUser) {
     // Update if found
-    const newUser = await prisma.user.update({
+    await prisma.user.update({
       where: {
         id: foundUser.id,
       },
@@ -71,12 +71,13 @@ export async function createUserOrUpdateTelegramUser(user: TelegramUserData) {
         },
       },
     });
-    console.log('[src/lib/user.ts:createUserOrUpdateTelegramUser] Created new user', {
-      newUser,
-    });
+    /* console.log('[src/lib/user.ts:createUserOrUpdateTelegramUser] Created new user', {
+     *   // newUser,
+     * });
+     */
   } else {
     // Create, otherwise
-    const newUser = await prisma.user.create({
+    await prisma.user.create({
       data: {
         id: userId,
         ...userData,
@@ -85,9 +86,10 @@ export async function createUserOrUpdateTelegramUser(user: TelegramUserData) {
         },
       },
     });
-    console.log('[src/lib/user.ts:createUserOrUpdateTelegramUser] Created new user', {
-      newUser,
-    });
+    /* console.log('[src/lib/user.ts:createUserOrUpdateTelegramUser] Created new user', {
+     *   // newUser,
+     * });
+     */
   }
   /* // Old approach
   await tx.account.upsert({
