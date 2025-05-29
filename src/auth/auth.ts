@@ -4,8 +4,8 @@ import NextAuth from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 
 import { prisma } from '@/lib/db';
-import { getUserById } from '@/lib/user';
 import { isDev } from '@/constants';
+import { getUserById } from '@/features/users/actions/';
 import { TExtendedUser } from '@/features/users/types/TUser';
 
 import authConfig from './auth.config';
@@ -31,7 +31,7 @@ export const nextAuthApp = NextAuth({
        *   "account": {
        *     "providerAccountId": "490398083",
        *     "type": "credentials",
-       *     "provider": "telegram"
+       *     "provider": "telegram-auth"
        *   },
        *   "credentials": {
        *     "csrfToken": "ac76870b50b256c123f85ff1a5bf46dac39f9c2b74c1a57cfa9bc852d3740688",
@@ -97,7 +97,7 @@ export const nextAuthApp = NextAuth({
        *   "account": {
        *     "providerAccountId": "490398083",
        *     "type": "credentials",
-       *     "provider": "telegram"
+       *     "provider": "telegram-auth"
        *   },
        *   "isNewUser": false,
        *   "trigger": "signIn"

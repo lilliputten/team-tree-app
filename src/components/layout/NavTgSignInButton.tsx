@@ -72,7 +72,7 @@ export function NavTgSignInButton() {
      * photo_url: "https://t.me/i/userpic/320/3meBKT_rsGqbt3HOAqNHdAIWEQYHGeW3m86yeYhZiUo.jpg"
      * username: "lilliputten"
      */
-    signIn('telegram', options, params);
+    signIn('telegram-auth', options, params);
   }
 
   /* // Possible LoginButton params:

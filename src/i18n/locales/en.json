@@ -1,10 +1,22 @@
 {
   "BotMenu": {
+    "status": "Check your status",
     "start": "Start",
     "language": "Change language",
     "help": "Help"
   },
   "Bot": {
+    "haveRecordsInfo": "You have registered at {createdAt}.\n\nYou have created records: {recordsCount}.",
+    "noRecordsInfo": "You have registered at {createdAt}.\n\nou do not have any records yet.",
+    "gettingData": "Getting the data...",
+    "creatingAccount": "Creating an account...",
+    "accountCreated": "✅ Your account has been successfully created.",
+    "no": "No",
+    "yes": "Yes",
+    "canNotCreateAccount": "❌ Error creating account profile.",
+    "noUserData": "No user information found",
+    "statusNoUser": "Your data not found. Apparently, you have not registered on the site yet. Do you want to create an account?",
+    "checkingStatus": "Checking your application status...",
     "openApp": "Open App",
     "start": "👋 Hi, how can I /help you?",
     "selectLanguage": "Select language",

@@ -7,6 +7,15 @@ const isDev = process.env.NODE_ENV === 'development';
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
+  /* experimental: {
+   *   serverActions: {
+   *     allowedOrigins: [
+   *       // ...
+   *       'https://03ql4p7l-3000.euw.devtunnels.ms/',
+   *     ],
+   *   },
+   * },
+   */
   compress: !isDev, // In favor of xtunnel (it loses `gzip` header)
   reactStrictMode: true,
   sassOptions: {

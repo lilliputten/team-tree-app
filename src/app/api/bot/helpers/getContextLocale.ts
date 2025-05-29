@@ -1,10 +1,12 @@
-import { CommandContext } from 'grammy';
+import { CallbackQueryContext, CommandContext } from 'grammy';
 
 import { defaultLocale } from '@/i18n/types';
 
 import { BotContext } from '../core/botTypes';
 
-export function getContextLocale(ctx: CommandContext<BotContext>) {
+export function getContextLocale(
+  ctx: CommandContext<BotContext> | CallbackQueryContext<BotContext>,
+) {
   /* console.log('[getContextLocale]', {
    *   session: ctx.session,
    *   from: ctx.update.message?.from,

@@ -1,10 +1,10 @@
 import { AuthDataValidator, objectToAuthDataMap } from '@telegram-auth/server';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-import { createUserOrUpdateTelegramUser } from '@/lib/user';
+import { createUserOrUpdateTelegramUser } from '@/features/users/actions/';
 
 export const telegramProvider = CredentialsProvider({
-  id: 'telegram',
+  id: 'telegram-auth',
   name: 'Telegram Login',
   credentials: {},
   async authorize(_credentials, req) {

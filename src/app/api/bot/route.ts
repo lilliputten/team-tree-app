@@ -23,6 +23,7 @@ import { initBotCommands } from './helpers/initBotCommands';
 import './command-help';
 import './command-language';
 import './command-start';
+import './command-status';
 import './message-echo';
 
 export const dynamic = 'force-dynamic';

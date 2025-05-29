@@ -23,6 +23,7 @@ export async function initBotCommands(
   addCommand(botCommands, 'start');
   addCommand(botCommands, 'help');
   addCommand(botCommands, 'language');
+  addCommand(botCommands, 'status');
 
   await botCommands.setCommands(bot);
 
