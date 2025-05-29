@@ -1,9 +1,20 @@
 <!--
  @since 2025.05.02
- @changed 2025.05.23, 23:27
+ @changed 2025.05.29, 22:01
 -->
 
 # CHANGELOG
+
+## [v.0.0.11](https://github.com/lilliputten/team-tree-app/releases/tag/v.0.0.11) - 2025.05.29
+
+- Added minimal telegram bot api script, wiath minimal amount of bot commands (start, language).
+- Added status telegram command, which founds current user/account by telegram id and shows registration date and records count if user has been found. Otherwise, it offers to create an account profile from scratch.
+- Added record dropdown menu.
+
+See also:
+
+- [Issue #39: Add telegram bot](https://github.com/lilliputten/team-tree-app/issues/39)
+- [Compare v.0.0.10...v.0.0.11](https://github.com/lilliputten/team-tree-app/compare/v.0.0.10...v.0.0.11)
 
 ## [v.0.0.10](https://github.com/lilliputten/team-tree-app/releases/tag/v.0.0.10) - 2025.05.23
 
@@ -12,7 +23,7 @@
 See also:
 
 - [Issue #37: Add telegram authentication](https://github.com/lilliputten/team-tree-app/issues/37)
-- [Compare with the previous version](https://github.com/lilliputten/team-tree-app/compare/v.0.0.9...v.0.0.10)
+- [Compare v.0.0.9...v.0.0.10](https://github.com/lilliputten/team-tree-app/compare/v.0.0.9...v.0.0.10)
 
 ## [v.0.0.9](https://github.com/lilliputten/team-tree-app/releases/tag/v.0.0.9) - 2025.05.07
 
@@ -25,7 +36,7 @@ See also:
 
 - [Issue #32: Create welcome/info pages](https://github.com/lilliputten/team-tree-app/issues/32)
 - [Issue #35: Fix misc issues](https://github.com/lilliputten/team-tree-app/issues/35)
-- [Compare with the previous version](https://github.com/lilliputten/team-tree-app/compare/v.0.0.8...v.0.0.9)
+- [Compare v.0.0.8...v.0.0.9](https://github.com/lilliputten/team-tree-app/compare/v.0.0.8...v.0.0.9)
 
 ## [v.0.0.8](https://github.com/lilliputten/team-tree-app/releases/tag/v.0.0.8) - 2025.05.07
 
@@ -35,7 +46,7 @@ See also:
 See also:
 
 - [Issue #31: Create/edit records for the current user](https://github.com/lilliputten/team-tree-app/issues/31)
-- [Compare with the previous version](https://github.com/lilliputten/team-tree-app/compare/v.0.0.7...v.0.0.8)
+- [Compare v.0.0.7...v.0.0.8](https://github.com/lilliputten/team-tree-app/compare/v.0.0.7...v.0.0.8)
 
 ## [v.0.0.7](https://github.com/lilliputten/team-tree-app/releases/tag/v.0.0.7) - 2025.05.02
 
@@ -50,4 +61,4 @@ See also:
 See also:
 
 - [Issue #29: Add oauth authorization](https://github.com/lilliputten/team-tree-app/issues/29)
-- [Compare with the previous version](https://github.com/lilliputten/team-tree-app/compare/v.0.0.6...v.0.0.7)
+- [Compare v.0.0.6...v.0.0.7](https://github.com/lilliputten/team-tree-app/compare/v.0.0.6...v.0.0.7)
