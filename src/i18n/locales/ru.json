@@ -98,7 +98,8 @@
   "RecordHeader": {
     "edit-record-name": "Изменить имя записи",
     "add-new-record-under-this-one": "Добавить новую запись под этой",
-    "remove-the-record-and-all-its-children": "Удалить запись и все ее дочерние элементы"
+    "remove-the-record-and-all-its-children": "Удалить запись и все ее дочерние элементы",
+    "record-menu-label": "Меню записи"
   },
   "RecordChildren": {
     "error-removing-record": "Ошибка удаления записи",

@@ -98,7 +98,8 @@
   "RecordHeader": {
     "add-new-record-under-this-one": "Add new record under this one",
     "edit-record-name": "Edit record name",
-    "remove-the-record-and-all-its-children": "Remove the record and all its children"
+    "remove-the-record-and-all-its-children": "Remove the record and all its children",
+    "record-menu-label": "Record menu"
   },
   "RecordChildren": {
     "error-removing-record": "Error removing record",

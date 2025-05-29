@@ -1,11 +1,6 @@
 // NOTE: See stock icons at https://lucide.dev/icons/
 
 import {
-  // BookOpenText, // -> wordsList
-  // Languages,
-  // Puzzle,
-  // SquareLibrary, // -> wordsSets
-  // WholeWord, // -> wordsList
   AlertTriangle,
   ArrowRight,
   ArrowUpRight,
@@ -18,6 +13,7 @@ import {
   Copy,
   CreditCard,
   Dot,
+  EllipsisVertical,
   File,
   FileText,
   HelpCircle,
@@ -46,8 +42,6 @@ import {
   User,
   X,
 } from 'lucide-react';
-
-// import logo from '@/public/_static/logo/tr.svg';
 
 export type Icon = LucideIcon;
 
@@ -186,9 +180,11 @@ export const Icons = {
   help: HelpCircle,
   home: Home,
   laptop: Laptop,
-  logo: Puzzle,
   lineChart: LineChart,
+  logo: Puzzle,
+  logout: LogOut,
   media: Image,
+  menu: EllipsisVertical,
   messages: MessagesSquare,
   minus: Minus,
   moon: Moon,
@@ -198,16 +194,15 @@ export const Icons = {
   plus: Plus,
   post: FileText,
   refresh: RefreshCw,
-  logout: LogOut,
   remove: Minus,
   search: Search,
   settings: Settings,
   spinner: Loader2,
   sun: SunMedium,
+  telegram,
   trash: Trash,
   twitter,
   user: User,
   warning: AlertTriangle,
   yandex,
-  telegram,
 };

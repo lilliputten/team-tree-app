@@ -32,7 +32,7 @@ export function NavModeToggle(props: TNavModeToggleProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild aria-label={t('label')}>
         <Button
           variant={onPrimary ? 'ghostOnPrimary' : 'ghost'}
           size="sm"
@@ -62,6 +62,9 @@ export function NavModeToggle(props: TNavModeToggleProps) {
             </DropdownMenuItem>
           );
         })}
+        {/*
+        <DropdownMenuArrow />
+        */}
       </DropdownMenuContent>
     </DropdownMenu>
   );

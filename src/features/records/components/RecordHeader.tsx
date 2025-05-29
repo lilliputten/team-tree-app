@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@radix-ui/react-dropdown-menu';
 import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
@@ -145,6 +151,79 @@ export function RecordHeader(props: TRecordHeaderProps) {
   const rightIcons = React.useMemo(() => {
     return (
       <>
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            // ...
+            asChild
+            aria-label={t('record-menu-label')}
+          >
+            <Button
+              variant="ghost"
+              size="sm"
+              className={cn(
+                isDev && '__RecordHeader_MenuToggle', // DEBUG
+                'size-10',
+              )}
+              title={t('record-menu-label')}
+            >
+              <Icons.menu
+                className={cn(
+                  // 'size-4',
+                  // 'transition-all duration-1000',
+                  'text-gray-500',
+                  'scale-100 transition-all',
+                )}
+              />
+              <span className="sr-only">{t('record-menu-label')}</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            className={cn(
+              isDev && '__RecordHeader_DropdownMenuContent',
+              'z-50 min-w-32 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+              // 'size-4',
+              // 'text-gray-500',
+              // 'scale-100 transition-all',
+            )}
+          >
+            <DropdownMenuItem
+              title={t('edit-record-name')}
+              data-button-id="edit"
+              // variant="ghostBlue"
+              className="flex cursor-pointer items-center gap-3 p-2 text-blue-500 hover:bg-blue-400/10 hover:text-blue-700 active:bg-blue-500 active:text-blue-100"
+              // size="icon"
+              // disabled
+              onClick={() => handleEdit(record)}
+            >
+              <Icons.edit className="size-5" />
+              <span>{t('edit-record-name')}</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              title={t('add-new-record-under-this-one')}
+              data-button-id="add"
+              // variant="ghostBlue"
+              className="flex cursor-pointer items-center gap-3 p-2 text-green-500 hover:bg-green-400/10 hover:text-green-700 active:bg-green-500 active:text-green-100"
+              // size="icon"
+              onClick={() => handleAdd({ name: '', parentId: record.id })}
+            >
+              <Icons.add className="size-5" />
+              <span>{t('add-new-record-under-this-one')}</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              title={t('remove-the-record-and-all-its-children')}
+              data-button-id="remove"
+              // variant="ghostBlue"
+              className="flex cursor-pointer items-center gap-3 p-2 text-red-500 hover:bg-red-400/10 hover:text-red-700 active:bg-red-500 active:text-red-100"
+              // size="icon"
+              onClick={() => handleDelete(record)}
+            >
+              <Icons.trash className="size-5" />
+              <span>{t('remove-the-record-and-all-its-children')}</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        {/* // UNUSED: Old approach: inline icons
         <Button
           title={t('edit-record-name')}
           data-button-id="edit"
@@ -176,6 +255,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
         >
           <Icons.trash className="size-5" />
         </Button>
+        */}
       </>
     );
   }, [t, handleEdit, record, handleAdd, handleDelete]);
@@ -184,7 +264,7 @@ export function RecordHeader(props: TRecordHeaderProps) {
       className={cn(
         isDev && '__RecordHeader', // DEBUG
         'flex flex-row items-start gap-2 gap-y-0',
-        'max-sm:flex-col-reverse',
+        // 'max-sm:flex-col-reverse', // NOTE: Positions right icons above the main body (suitable for inline icons, not for dropdown menu)
         'rounded',
         'px-2',
         'py-1',

@@ -11,6 +11,7 @@ import { TExtendedUser } from '@/features/users/types/TUser';
 import authConfig from './auth.config';
 
 export const nextAuthApp = NextAuth({
+  debug: false && isDev,
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'jwt' },
   pages: {
@@ -128,7 +129,6 @@ export const nextAuthApp = NextAuth({
     },
   } satisfies AuthConfig['callbacks'],
   ...authConfig,
-  debug: isDev,
 });
 
 export const {
