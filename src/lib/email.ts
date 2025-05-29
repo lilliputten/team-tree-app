@@ -4,8 +4,7 @@ import { Resend } from 'resend';
 import { env } from '@/env';
 import { siteConfig } from '@/config/site';
 import { MagicLinkEmail } from '@/emails/magic-link-email';
-
-import { getUserByEmail } from './user';
+import { getUserByEmail } from '@/features/users/actions/';
 
 export const resend = new Resend(env.RESEND_API_KEY);
 

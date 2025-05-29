@@ -1,67 +1,34 @@
-import {
-  Bot,
-  CommandContext,
-  Context,
-  InlineKeyboard,
-  webhookCallback,
-  // WebAppButton,
-} from 'grammy';
-
-export const dynamic = 'force-dynamic';
-
-export const fetchCache = 'force-no-store';
-
-/*
- * Start bot via a template:
+/* See:
+ * Formatting:
+ * - https://grammy.dev/ref/types/parsemode
+ * - https://grammy.dev/guide/basics
+ *
+ * Initalize a telgram bot hook via a template:
+ *
+ * ```bash
  * curl https://api.telegram.org/bot{BOT_TOKEN}/setWebhook?url={APP_URL}/api/bot
+ * ```
+ *
+ * See scripts:
+ *
+ * - `.scripts/init-tg-bot.sh`
+ *
  */
 
-// const webAppExternalUrl = 'https://t.me/LlMiniAppBot/LlMiniApp';
-const appHost = process.env.VERCEL_URL
-  ? 'https://' + process.env.VERCEL_URL
-  : process.env.NEXT_PUBLIC_APP_URL;
-if (!appHost) {
-  throw new Error('No webapp host provided (NEXT_PUBLIC_APP_URL or VERCEL_URL)');
-}
-const webAppUrl = `${appHost}/miniapp`;
+import { webhookCallback } from 'grammy';
 
-const token = process.env.BOT_TOKEN;
-if (!token) {
-  throw new Error('BOT_TOKEN environment variable not found.');
-}
+import { bot } from './core/botSinglton';
+import { initBotCommands } from './helpers/initBotCommands';
 
-const bot = new Bot(token);
+import './command-help';
+import './command-language';
+import './command-start';
+import './command-status';
+import './message-echo';
 
-bot.api.setMyCommands([
-  { command: 'start', description: 'Start the bot' },
-  { command: 'help', description: 'Show help text' },
-  // { command: 'settings', description: 'Open settings' },
-]);
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 
-bot.command('start', async (ctx: CommandContext<Context>) => {
-  console.log('[bot:route:command:start]', {
-    webAppUrl,
-    ctx,
-  });
-  const keyboard = new InlineKeyboard().webApp('Open Web App', webAppUrl);
-  // return await ctx.reply('👋 Welcome!');
-  return await ctx.reply('👋 Welcome to the bot!', {
-    reply_markup: keyboard,
-  });
-});
-
-bot.command('help', async (ctx: CommandContext<Context>) => {
-  console.log('[bot:route:command:help]', ctx);
-  return await ctx.reply(`📖 Help text!`);
-  // await ctx.reply(ctx.message.text);
-});
-
-// DEBUG: Mirrot all the texts
-bot.on('message:text', async (ctx) => {
-  console.log('[bot:route:message:text]', {
-    ctx,
-  });
-  return await ctx.reply(ctx.message.text);
-});
+initBotCommands();
 
 export const POST = webhookCallback(bot, 'std/http');

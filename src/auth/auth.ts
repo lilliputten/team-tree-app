@@ -4,13 +4,14 @@ import NextAuth from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 
 import { prisma } from '@/lib/db';
-import { getUserById } from '@/lib/user';
 import { isDev } from '@/constants';
+import { getUserById } from '@/features/users/actions/';
 import { TExtendedUser } from '@/features/users/types/TUser';
 
 import authConfig from './auth.config';
 
 export const nextAuthApp = NextAuth({
+  debug: false && isDev,
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'jwt' },
   pages: {
@@ -19,7 +20,7 @@ export const nextAuthApp = NextAuth({
     // error: "/auth/error",
   },
   callbacks: {
-    async signIn(params) {
+    async signIn(_params) {
       /* // Got params for 'telegram` here:
        * {
        *   "user": {
@@ -31,7 +32,7 @@ export const nextAuthApp = NextAuth({
        *   "account": {
        *     "providerAccountId": "490398083",
        *     "type": "credentials",
-       *     "provider": "telegram"
+       *     "provider": "telegram-auth"
        *   },
        *   "credentials": {
        *     "csrfToken": "ac76870b50b256c123f85ff1a5bf46dac39f9c2b74c1a57cfa9bc852d3740688",
@@ -39,25 +40,26 @@ export const nextAuthApp = NextAuth({
        *   }
        * }
        */
-      const { user, account, profile, email, credentials } = params;
-      console.log('[auth:callbacks:signIn]', {
-        user,
-        account,
-        profile,
-        email,
-        credentials,
-      });
-      // debugger;
+      /*
+       * const { user, account, profile, email, credentials } = _params;
+       * console.log('[auth:callbacks:signIn]', {
+       *   user,
+       *   account,
+       *   profile,
+       *   email,
+       *   credentials,
+       * });
+       */
       return true;
     },
     async session(params) {
       const { token, session } = params;
-      console.log('[auth:callbacks:session]', {
-        token,
-        session,
-        params,
-      });
-      // debugger;
+      /* console.log('[auth:callbacks:session]', {
+       *   token,
+       *   session,
+       *   params,
+       * });
+       */
       const user = session.user as unknown as TExtendedUser;
       if (user) {
         if (token.sub) {
@@ -96,17 +98,17 @@ export const nextAuthApp = NextAuth({
        *   "account": {
        *     "providerAccountId": "490398083",
        *     "type": "credentials",
-       *     "provider": "telegram"
+       *     "provider": "telegram-auth"
        *   },
        *   "isNewUser": false,
        *   "trigger": "signIn"
        * }
        */
-      console.log('[auth:callbacks:jwt]', {
-        token,
-        params,
-      });
-      // debugger;
+      /* console.log('[auth:callbacks:jwt]', {
+       *   token,
+       *   params,
+       * });
+       */
       if (!token.sub) {
         return token;
       }
@@ -118,16 +120,15 @@ export const nextAuthApp = NextAuth({
       token.email = dbUser.email;
       token.picture = dbUser.image;
       token.role = dbUser.role;
-      // token.provider = 'bbb';
-      console.log('[auth:callbacks:jwt] Updated token', {
-        token,
-        params,
-      });
+      /* console.log('[auth:callbacks:jwt] Updated token', {
+       *   token,
+       *   params,
+       * });
+       */
       return token;
     },
   } satisfies AuthConfig['callbacks'],
   ...authConfig,
-  debug: isDev,
 });
 
 export const {

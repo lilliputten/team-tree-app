@@ -1,4 +1,28 @@
 {
+  "BotMenu": {
+    "status": "Check your status",
+    "start": "Start",
+    "language": "Change language",
+    "help": "Help"
+  },
+  "Bot": {
+    "haveRecordsInfo": "You have registered at {createdAt}.\n\nYou have created records: {recordsCount}.",
+    "noRecordsInfo": "You have registered at {createdAt}.\n\nou do not have any records yet.",
+    "gettingData": "Getting the data...",
+    "creatingAccount": "Creating an account...",
+    "accountCreated": "✅ Your account has been successfully created.",
+    "no": "No",
+    "yes": "Yes",
+    "canNotCreateAccount": "❌ Error creating account profile.",
+    "noUserData": "No user information found",
+    "statusNoUser": "Your data not found. Apparently, you have not registered on the site yet. Do you want to create an account?",
+    "checkingStatus": "Checking your application status...",
+    "openApp": "Open App",
+    "start": "👋 Hi, how can I /help you?",
+    "selectLanguage": "Select language",
+    "languageChangedFor": "Language has been changed for",
+    "help": "Send me some text, and I can make it bold for you.\n\nYou can change my language using the /language command."
+  },
   "RootPage": {
     "title": "Team Tree",
     "about": "Go to the about page"
@@ -30,7 +54,7 @@
   },
   "NavLocaleSwitcher": {
     "label": "Change language",
-    "locale": "{locale, select, ru {ʀᴜ Russian} en {🇺🇸 English} other {Unknown}}"
+    "locale": "{locale, select, ru {🇷🇺 Русский} en {🇺🇸 English} other {Unknown}}"
   },
   "NavModeToggle": {
     "label": "Toggle theme",
@@ -74,7 +98,8 @@
   "RecordHeader": {
     "add-new-record-under-this-one": "Add new record under this one",
     "edit-record-name": "Edit record name",
-    "remove-the-record-and-all-its-children": "Remove the record and all its children"
+    "remove-the-record-and-all-its-children": "Remove the record and all its children",
+    "record-menu-label": "Record menu"
   },
   "RecordChildren": {
     "error-removing-record": "Error removing record",
@@ -113,5 +138,6 @@
   "sign-in-with-github": "Sign In with Github",
   "sign-in-with-google": "Sign In with Google",
   "sign-in-with-yandex": "Sign In with Yandex",
-  "intro": "Log in to be able to edit your own data."
+  "intro": "Log in to be able to edit your own data.",
+  "help": "📖 Help text!"
 }

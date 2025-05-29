@@ -7,7 +7,8 @@ import { isDev } from '@/constants';
 
 interface TSignInModalProps {
   showSignInModal: boolean;
-  setShowSignInModal: (v: boolean) => void; // Dispatch<SetStateAction<boolean>>;
+  // setShowSignInModal: (v: boolean) => void; // Dispatch<SetStateAction<boolean>>;
+  setShowSignInModal: Dispatch<SetStateAction<boolean>>;
 }
 
 function SignInModal(props: TSignInModalProps) {
@@ -74,12 +75,6 @@ function SignInModal(props: TSignInModalProps) {
 
 export function useSignInModal() {
   const [showSignInModal, setShowSignInModal] = React.useState(false);
-
-  React.useEffect(() => {
-    console.log('[XXX:SignInModal:Effect:showSignInModal]', {
-      showSignInModal,
-    });
-  }, [showSignInModal]);
 
   const SignInModalCallback = React.useCallback(() => {
     return (

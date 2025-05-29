@@ -2,34 +2,8 @@ import { TelegramUserData } from '@telegram-auth/server';
 
 import { prisma } from '@/lib/db';
 
-export const getUserByEmail = async (email: string) => {
-  try {
-    const user = await prisma.user.findUnique({
-      where: {
-        email: email,
-      },
-      select: {
-        name: true,
-        emailVerified: true,
-      },
-    });
-    return user;
-  } catch {
-    return null;
-  }
-};
-
-export const getUserById = async (id: string) => {
-  try {
-    const user = await prisma.user.findUnique({ where: { id } });
-    return user;
-  } catch {
-    return null;
-  }
-};
-
 export async function createUserOrUpdateTelegramUser(user: TelegramUserData) {
-  const provider = 'telegram';
+  const provider = 'telegram-auth';
   const providerAccountId = user.id.toString();
   const userId = providerAccountId;
   const { first_name, photo_url } = user;
@@ -59,7 +33,7 @@ export async function createUserOrUpdateTelegramUser(user: TelegramUserData) {
   });
   if (foundUser) {
     // Update if found
-    const newUser = await prisma.user.update({
+    await prisma.user.update({
       where: {
         id: foundUser.id,
       },
@@ -71,12 +45,9 @@ export async function createUserOrUpdateTelegramUser(user: TelegramUserData) {
         },
       },
     });
-    console.log('[src/lib/user.ts:createUserOrUpdateTelegramUser] Created new user', {
-      newUser,
-    });
   } else {
     // Create, otherwise
-    const newUser = await prisma.user.create({
+    await prisma.user.create({
       data: {
         id: userId,
         ...userData,
@@ -84,9 +55,6 @@ export async function createUserOrUpdateTelegramUser(user: TelegramUserData) {
           create: [accountData],
         },
       },
-    });
-    console.log('[src/lib/user.ts:createUserOrUpdateTelegramUser] Created new user', {
-      newUser,
     });
   }
   /* // Old approach

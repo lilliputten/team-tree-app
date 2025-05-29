@@ -54,7 +54,7 @@ function OAuthSignInButton(props: OAuthSignInButtonProps) {
        * photo_url: "https://t.me/i/userpic/320/3meBKT_rsGqbt3HOAqNHdAIWEQYHGeW3m86yeYhZiUo.jpg"
        * username: "lilliputten"
        */
-      // TODO: Do smth another if provider === 'telegram'
+      // TODO: Do smth another if provider === 'telegram-auth'
       const options: SignInOptions = {
         /*
          * callbackUrl?: string (Deprecated)
@@ -64,15 +64,16 @@ function OAuthSignInButton(props: OAuthSignInButtonProps) {
         redirectTo: dataRoute,
       };
       const params = data ? (data as unknown as SignInAuthorizationParams) : undefined;
-      console.log('[SignInForm:onSignIn]', provider, {
-        data,
-        provider,
-        dataRoute,
-        params,
-        options,
-        onSignInStart,
-        onSignInDone,
-      });
+      /* console.log('[SignInForm:onSignIn]', provider, {
+       *   data,
+       *   provider,
+       *   dataRoute,
+       *   params,
+       *   options,
+       *   onSignInStart,
+       *   onSignInDone,
+       * });
+       */
       if (onSignInStart) {
         onSignInStart(provider);
       }
@@ -92,7 +93,7 @@ function OAuthSignInButton(props: OAuthSignInButtonProps) {
     <ProviderIcon className="mr-2 size-4" />
   );
 
-  if (provider === 'telegram') {
+  if (provider === 'telegram-auth') {
     // TODO: Check if SignIn modal not opened
     if (inBody && showSignInModal) {
       return null;
@@ -252,7 +253,7 @@ export function SignInForm(props: TSignInFormProps) {
         currentProvider={currentProvider}
         onSignInStart={handleSignInStart}
         onSignInDone={onSignInDone}
-        provider="telegram"
+        provider="telegram-auth"
         ProviderIcon={Icons.telegram}
         text={t('sign-in-with-telegram')}
         inBody={inBody}
