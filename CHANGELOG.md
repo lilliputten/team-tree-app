@@ -1,9 +1,18 @@
 <!--
  @since 2025.05.02
- @changed 2025.05.29, 22:01
+ @changed 2025.05.30, 15:18
 -->
 
 # CHANGELOG
+
+## [v.0.0.12](https://github.com/lilliputten/team-tree-app/releases/tag/v.0.0.12) - 2025.05.30
+
+- Added telegram session storage, updated bot commands.
+
+See also:
+
+- [Issue #43: Add a storage for Grammy telegram bit sessions](https://github.com/lilliputten/team-tree-app/issues/43)
+- [Compare v.0.0.11...v.0.0.12](https://github.com/lilliputten/team-tree-app/compare/v.0.0.11...v.0.0.12)
 
 ## [v.0.0.11](https://github.com/lilliputten/team-tree-app/releases/tag/v.0.0.11) - 2025.05.29
 
