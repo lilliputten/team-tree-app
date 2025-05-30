@@ -6,7 +6,6 @@ import { defaultLocale, localesList } from '@/i18n/types';
 import { bot } from './core/botSinglton';
 import { BotContext } from './core/botTypes';
 import { getContextLocale } from './helpers/getContextLocale';
-import { initBotCommands } from './helpers/initBotCommands';
 
 bot.command('language', async (ctx: CommandContext<BotContext>) => {
   const locale = getContextLocale(ctx);
@@ -30,12 +29,12 @@ localesList.forEach(async (locale) => {
     const t = await getTranslations({ locale, namespace: 'Bot' });
     const localeText = tNav('locale', { locale });
     const text = t('languageChangedFor') + ' ' + localeText;
-    session.__language_code = locale;
+    session.language_code = locale;
     await ctx.answerCallbackQuery({
       text,
     });
     await ctx.editMessageReplyMarkup();
-    await initBotCommands(locale, ctx);
+    // await initBotCommands(locale, ctx);
     await ctx.reply(text);
   });
 });

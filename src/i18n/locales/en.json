@@ -6,8 +6,10 @@
     "help": "Help"
   },
   "Bot": {
-    "haveRecordsInfo": "You have registered at {createdAt}.\n\nYou have created records: {recordsCount}.",
-    "noRecordsInfo": "You have registered at {createdAt}.\n\nou do not have any records yet.",
+    "localeInfo": "Bot language: {localeText}",
+    "registeredAtInfo": "You've registered at {createdAt}",
+    "haveRecordsInfo": "You've created records: {recordsCount}",
+    "noRecordsInfo": "You do not have any records yet",
     "gettingData": "Getting the data...",
     "creatingAccount": "Creating an account...",
     "accountCreated": "✅ Your account has been successfully created.",

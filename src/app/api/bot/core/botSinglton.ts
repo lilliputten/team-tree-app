@@ -1,5 +1,8 @@
 import { CommandGroup, commands } from '@grammyjs/commands';
+import { PrismaAdapter } from '@grammyjs/storage-prisma';
 import { Bot, session } from 'grammy';
+
+import { prisma } from '@/lib/db';
 
 import { token } from './botConstants';
 import { BotContext, SessionData } from './botTypes';
@@ -17,7 +20,8 @@ bot.use(
   session({
     initial: (): SessionData => ({
       // Default sesion contents...
-      __language_code: undefined,
+      language_code: undefined,
     }),
+    storage: new PrismaAdapter<SessionData>(prisma.telegramSession),
   }),
 );

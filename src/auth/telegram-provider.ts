@@ -1,6 +1,8 @@
 import { AuthDataValidator, objectToAuthDataMap } from '@telegram-auth/server';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { toast } from 'sonner';
 
+import { getErrorText } from '@/lib/helpers/strings';
 import { createUserOrUpdateTelegramUser } from '@/features/users/actions/';
 
 export const telegramProvider = CredentialsProvider({
@@ -53,10 +55,18 @@ export const telegramProvider = CredentialsProvider({
          */
         await createUserOrUpdateTelegramUser(user);
         // TODO: Create account?
-      } catch {
+      } catch (error) {
+        const description = getErrorText(error);
+        const title = 'Something went wrong while creating the user.';
         // eslint-disable-next-line no-console
-        console.error('Something went wrong while creating the user.');
+        console.error(title, {
+          error,
+          description,
+        });
         debugger; // eslint-disable-line no-debugger
+        toast.error(title, {
+          description,
+        });
       }
       return returned;
     }

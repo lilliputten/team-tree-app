@@ -13,8 +13,8 @@ export function getContextLocale(
    * });
    */
   const session = ctx.session;
-  if (session?.__language_code) {
-    return session.__language_code;
+  if (session?.language_code) {
+    return session.language_code;
   }
   const from = ctx.from; // ctx.update.message?.from;
   if (from?.language_code) {
