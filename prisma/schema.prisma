@@ -21,7 +21,7 @@ model Record {
 
   // Belonged to user (optional)
   userId String?
-  user   User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // Custom name
   name String
@@ -95,6 +95,13 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("VerificationTokens")
+}
+
+// Telegram user session
+model TelegramSession {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String // Session data in json string
 }
 
 // enum UserRole {

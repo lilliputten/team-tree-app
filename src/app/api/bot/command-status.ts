@@ -12,6 +12,7 @@ import { getTelegramUserThumbnailUrl } from './helpers/getTelegramUserThumbnailU
 
 bot.command('status', async (ctx: CommandContext<BotContext>) => {
   const locale = getContextLocale(ctx);
+  const tNav = await getTranslations({ locale: locale, namespace: 'NavLocaleSwitcher' });
   const t = await getTranslations({ namespace: 'Bot', locale });
   const ctxUser = ctx.from;
   if (!ctxUser) {
@@ -34,13 +35,10 @@ bot.command('status', async (ctx: CommandContext<BotContext>) => {
         },
       },
     },
-    // include: { accounts: true },
+    /* // Do we need account info?
+     * include: { accounts: true },
+     */
   });
-  /* console.log('[bot:command-status] Got user?', {
-   *   ctxUser,
-   *   user,
-   * });
-   */
   if (!user) {
     await bot.api.deleteMessage(msg.chat.id, msg.message_id);
     // Ask for creating a user/account record
@@ -60,26 +58,28 @@ bot.command('status', async (ctx: CommandContext<BotContext>) => {
     },
   });
   const format = await getFormatter({ locale });
+  const localeText = tNav('locale', { locale });
   const showData = {
-    recordsCount: records.length || 0,
+    locale,
+    localeText,
+    recordsCount: records.length,
     createdAt: format.dateTime(user.createdAt, {
-      // year: 'numeric',
-      // month: 'long',
-      // day: 'numeric',
-      dateStyle: 'short',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      // dateStyle: 'short',
     }),
   };
-  /* console.log('[bot:command-status] Got records?', {
-   *   showData,
-   *   records,
-   *   user,
-   * });
-   */
-  if (!records.length) {
-    await bot.api.editMessageText(msg.chat.id, msg.message_id, t('noRecordsInfo', showData));
-  } else {
-    await bot.api.editMessageText(msg.chat.id, msg.message_id, t('haveRecordsInfo', showData));
-  }
+  const hasRecords = !!records.length;
+  const text = [
+    t('registeredAtInfo', showData),
+    t('localeInfo', showData),
+    hasRecords && t('haveRecordsInfo', showData),
+    !hasRecords && t('noRecordsInfo', showData),
+  ]
+    .filter(Boolean)
+    .join('\n\n');
+  await bot.api.editMessageText(msg.chat.id, msg.message_id, text);
 });
 
 async function createAccountQueryCallback(

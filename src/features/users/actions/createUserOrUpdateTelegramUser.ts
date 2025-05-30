@@ -5,6 +5,7 @@ import { prisma } from '@/lib/db';
 export async function createUserOrUpdateTelegramUser(user: TelegramUserData) {
   const provider = 'telegram-auth';
   const providerAccountId = user.id.toString();
+  // User id is a telegram id
   const userId = providerAccountId;
   const { first_name, photo_url } = user;
   const userData = {
@@ -18,64 +19,85 @@ export async function createUserOrUpdateTelegramUser(user: TelegramUserData) {
     providerAccountId,
   };
 
-  const foundUser = await prisma.user.findFirst({
-    where: {
-      id: userId,
-      /* // Try to find by linked account?
-       * accounts: {
-       *   some: {
-       *     provider,
-       *     providerAccountId,
-       *   },
-       * },
-       */
-    },
-  });
-  if (foundUser) {
-    // Update if found
-    await prisma.user.update({
+  try {
+    // New approach
+    const foundAccount = await prisma.account.findFirst({
       where: {
-        id: foundUser.id,
-      },
-      data: {
-        ...userData,
-        accounts: {
-          // TODO: Use upsert or other create-or-update approach?
-          create: [accountData],
-        },
+        provider,
+        providerAccountId,
       },
     });
-  } else {
-    // Create, otherwise
-    await prisma.user.create({
-      data: {
+    const foundUser = await prisma.user.findFirst({
+      where: {
         id: userId,
-        ...userData,
+        // Try to find by linked account?
         accounts: {
-          create: [accountData],
+          some: {
+            provider,
+            providerAccountId,
+          },
         },
       },
     });
+
+    return await prisma.$transaction(async (tx) => {
+      let finalUser = foundUser;
+      if (!finalUser) {
+        finalUser = await tx.user.create({
+          data: {
+            id: userId,
+            ...userData,
+          },
+        });
+      } else {
+        finalUser = await tx.user.update({
+          where: {
+            id: userId,
+          },
+          data: {
+            ...userData,
+          },
+        });
+      }
+      let finalAccount = foundAccount;
+      if (!finalAccount) {
+        finalAccount = await tx.account.create({
+          data: {
+            userId,
+            ...accountData,
+          },
+        });
+      }
+      return finalUser;
+    });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('[createUserOrUpdateTelegramUser:transaction] catch', {
+      error,
+    });
+    // debugger; // eslint-disable-line no-debugger
+    throw error;
   }
-  /* // Old approach
-  await tx.account.upsert({
-    where: {
-      // userId: userId,
-      provider,
-      providerAccountId,
-    },
-    create: {
-      userId: userId,
-      type: 'credentials',
-      provider,
-      providerAccountId,
-    },
-    update: {
-      userId: userId,
-      type: 'credentials',
-      provider,
-      providerAccountId,
-    },
-  });
-  */
+  /*
+   * // Old approach
+   * await prisma.account.upsert({
+   *   where: {
+   *     userId: userId,
+   *     provider,
+   *     providerAccountId,
+   *   },
+   *   create: {
+   *     userId: userId,
+   *     type: 'credentials',
+   *     provider,
+   *     providerAccountId,
+   *   },
+   *   update: {
+   *     userId: userId,
+   *     type: 'credentials',
+   *     provider,
+   *     providerAccountId,
+   *   },
+   * });
+   */
 }

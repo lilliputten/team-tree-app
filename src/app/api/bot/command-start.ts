@@ -11,7 +11,7 @@ bot.command('start', async (ctx: CommandContext<BotContext>) => {
   const t = await getTranslations({ locale, namespace: 'Bot' });
   const keyboard = new InlineKeyboard().webApp(t('openApp'), webAppUrl);
   await ctx.reply(t('start'), {
-    parse_mode: 'MarkdownV2',
+    // parse_mode: 'MarkdownV2',
     reply_markup: keyboard,
   });
 });
