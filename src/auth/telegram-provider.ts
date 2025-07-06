@@ -1,6 +1,5 @@
 import { AuthDataValidator, objectToAuthDataMap } from '@telegram-auth/server';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { toast } from 'sonner';
 
 import { getErrorText } from '@/lib/helpers/strings';
 import { createUserOrUpdateTelegramUser } from '@/features/users/actions/';
@@ -48,11 +47,6 @@ export const telegramProvider = CredentialsProvider({
         image: user.photo_url,
       };
       try {
-        /* console.log('[telegram-provider:authorize] Create user', {
-         *   user,
-         *   data,
-         * });
-         */
         await createUserOrUpdateTelegramUser(user);
         // TODO: Create account?
       } catch (error) {
@@ -64,9 +58,6 @@ export const telegramProvider = CredentialsProvider({
           description,
         });
         debugger; // eslint-disable-line no-debugger
-        toast.error(title, {
-          description,
-        });
       }
       return returned;
     }

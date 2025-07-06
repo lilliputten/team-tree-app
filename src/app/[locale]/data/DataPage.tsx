@@ -45,19 +45,11 @@ export async function DataPage({ params }: TDataPageProps) {
   const rootRecords: TRecordWithChildrenOrCount[] =
     await fetchRecordsByParentWithChildrenCount(fetchParams);
 
-  /* console.log('[DataPage]', {
-   *   user,
-   *   userId: user?.id,
-   *   rootRecords,
-   * });
-   */
-
   return (
     <div
       className={cn(
         isDev && '__DataPage', // DEBUG
         'flex flex-1 flex-col items-center',
-        // 'justify-center',
         'layout-follow',
       )}
     >
