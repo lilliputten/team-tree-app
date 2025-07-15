@@ -6,6 +6,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* NOTE: Fix for unsupported `@media (hover:hover)` media queries: it's possible to happen on a touch-able laptop screens. */
+/* stylelint-disable-next-line scss/at-rule-no-unknown, at-rule-no-unknown */
+/* @custom-variant hover (&:hover); */
+
 /*
  * NOTE: On modern tailwind configuration most of colors come are in the HSL color model.
  *
