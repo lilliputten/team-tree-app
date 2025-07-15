@@ -161,6 +161,7 @@
     "test-update-snapshots": "jest --updateSnapshot",
     "test-watch": "jest --watch",
     "test:ci": "jest --ci",
+    "vercel-clean": "vercel remove --safe --yes team-tree-app",
     "scripts-help": "echo --List all available script commands-- && npm-package-user-scripts-list"
   }
 }

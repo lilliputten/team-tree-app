@@ -3,7 +3,7 @@
  @changed 2025.05.09, 22:41
 -->
 
-## Installation and setup of working withj iisnode IIS extension
+## Installation and setup of working with iisnode IIS extension
 
 To add the team-tree iss web server just create a new IIS web site with default settings and point it to the application folder.
 
